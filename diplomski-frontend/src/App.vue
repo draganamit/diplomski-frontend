@@ -1,7 +1,9 @@
 <template>
   <div id="app">
      <TitleView></TitleView>
-    <router-view/>
+     <div class="content">
+       <router-view/>
+     </div>
   </div>
 </template>
 <script>
@@ -21,7 +23,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 nav {
@@ -39,5 +43,20 @@ nav a.router-link-exact-active {
 body
 {
   margin: 0;
+}
+
+input{
+  box-sizing: border-box;
+}
+
+</style>
+
+<style scoped>
+.content
+{
+  height: calc(100vh - 65.65px);
+  width: 100vw;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 </style>

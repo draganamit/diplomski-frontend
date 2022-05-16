@@ -1,120 +1,105 @@
 <template>
-<div>
-<div class="title_div">
-  <div class="title_line">
-      <div class="title">Naslov</div>
+  <div>
+    <div class="title_line">
+      <div class="title" @click="$router.push('/')">Naslov</div>
       <div class="buttons">
         <button class="btnPrijava" @click="loginOpen()">Prijavi se</button>
-        <button class="btnRegistracija" @click="registrationOpen()">Registruj se</button>
+        <button class="btnRegistracija" @click="registrationOpen()">
+          Registruj se
+        </button>
       </div>
-  </div>
-</div>
-  <div class="prijava" v-if="log">
-      <div class="clsWindow">
-          <div class="empty"></div>
-          <div class="cls" @click="closeWindowLogin()">X</div>
-      </div>
-      <div class="container">
-        <div class="label">
-            <label>Email:</label>
-        </div>
-        <div class="input">
-            <input type="text" v-model="model.username">
-        </div>
-        <div class="label">
-            <label>Lozinka:</label>
-        </div>
-        <div class="input">
-            <input type="password" v-model="model.password">
-        </div>
-        <div v-if="errorLogin" class="error">
-            Pogrešan email ili lozinka.
-        </div>
-        <div class="btnPrijaviSe">
-            <button>Prijavi se</button>
-        </div>
-      </div>
-  </div>
-  <div class="prijava" v-if="registration">
-      <div class="clsWindow">
-          <div class="empty"></div>
-          <div class="cls" @click="closeWindowRegistration()">X</div>
+    </div>
+    <div class="prijava" v-if="log">
+      <div class="cls">
+        <div @click="closeWindowLogin()">X</div>
       </div>
       <div class="container">
         <div class="label">
-            <label>Ime:</label>
+          <label>Email:</label>
         </div>
         <div class="input">
-            <input type="text" v-model="name">
-        </div>
-        <div v-if="errorRegister" class="error">
-            Polje mora biti popunjeno.
+          <input type="text" v-model="model.username" />
         </div>
         <div class="label">
-            <label>Prezime:</label>
+          <label>Lozinka:</label>
         </div>
         <div class="input">
-            <input type="password" v-model="surname">
+          <input type="password" v-model="model.password" />
         </div>
-        <div v-if="errorRegister" class="error">
-            Polje mora biti popunjeno.
-        </div>
-        <div class="label">
-            <label>Lokacija:</label>
-        </div>
-        <div class="input">
-            <input type="password" v-model="location">
-        </div>
-        <div v-if="errorRegister" class="error">
-            Polje mora biti popunjeno.
-        </div>
-        <div class="label">
-            <label>Email:</label>
-        </div>
-        <div class="input">
-            <input type="password" v-model="model.username">
-        </div>
-        <div v-if="errorRegister" class="error">
-            Polje mora biti popunjeno.
-        </div>
-        <div class="label">
-            <label>Lozinka:</label>
-        </div>
-        <div class="input">
-            <input type="password" v-model="model.password">
-        </div>
-        <div v-if="errorRegister" class="error">
-            Polje mora biti popunjeno.
-        </div>
-        <div class="label">
-            <label>Potvrdi lozinku:</label>
-        </div>
-        <div class="input">
-            <input type="password" v-model="confirmPasswordd">
-        </div>
-        <div v-if="errorRegister" class="error">
-            Polje mora biti popunjeno.
-        </div>
+        <div v-if="errorLogin" class="error">Pogrešan email ili lozinka.</div>
         <div class="btnPrijaviSe">
-            <button>Registruj se</button>
+          <button>Prijavi se</button>
         </div>
       </div>
+    </div>
+    <div class="prijava top-1" v-if="registration">
+      <div class="cls">
+        <div @click="closeWindowRegistration()">X</div>
+      </div>
+      <div class="container">
+        <div class="label">
+          <label>Ime:</label>
+        </div>
+        <div class="input">
+          <input type="text" v-model="name" />
+        </div>
+        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
+        <div class="label">
+          <label>Prezime:</label>
+        </div>
+        <div class="input">
+          <input type="password" v-model="surname" />
+        </div>
+        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
+        <div class="label">
+          <label>Lokacija:</label>
+        </div>
+        <div class="input">
+          <input type="password" v-model="location" />
+        </div>
+        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
+        <div class="label">
+          <label>Email:</label>
+        </div>
+        <div class="input">
+          <input type="password" v-model="model.username" />
+        </div>
+        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
+        <div class="label">
+          <label>Lozinka:</label>
+        </div>
+        <div class="input">
+          <input type="password" v-model="model.password" />
+        </div>
+        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
+        <div class="label">
+          <label>Potvrdi lozinku:</label>
+        </div>
+        <div class="input">
+          <input type="password" v-model="confirmPasswordd" />
+        </div>
+        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
+        <div class="btnPrijaviSe">
+          <button>Registruj se</button>
+        </div>
+      </div>
+    </div>
+    <div v-if="registration || log" class="mask" @click.self="away()"></div>
   </div>
-</div>
 </template>
 
 <script>
 export default {
-    name:'TitleView',
-    data() {
+  name: "TitleView",
+  data() {
     return {
       model: {
         username: "",
         password: "",
       },
-      name:"",
-      surname:"",
-      location:"",
+      name: "",
+      surname: "",
+      location: "",
       confirmPasswordd: "",
       log: false,
       registration: false,
@@ -122,131 +107,143 @@ export default {
       errorRegister: true,
     };
   },
-   methods: {
-       loginOpen()
-       {
-           this.log=true;
-       },
-       closeWindowLogin()
-       {
-           this.log=false;
-       },
-       registrationOpen()
-       {
-           this.registration=true;
-       },
-       closeWindowRegistration()
-       {
-           this.registration=false;
-       }
-   } 
-}
+  methods: {
+    loginOpen() {
+      this.log = true;
+    },
+    closeWindowLogin() {
+      this.log = false;
+    },
+    registrationOpen() {
+      this.registration = true;
+    },
+    closeWindowRegistration() {
+      this.registration = false;
+    },
+    away() {
+      this.registration = false;
+      this.log = false;
+    },
+  },
+};
 </script>
 
-<style>
-.title_line
-{
-    display: flex;
-    padding: 1%;
-    line-height: 3;
+<style scoped>
+.mask {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
 }
-.title
-{
-    flex: 12;
-    text-align: start;
+.prijava {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 20%;
+  margin: auto;
+  z-index: 2;
 }
-.buttons
-{
-    flex: 4; 
-    display: flex;
-    padding: 0.5%;
+@media (max-width: 1024px) {
+  .prijava {
+    width: 80%;
+  }
 }
-.btnPrijava
-{
-    margin-right: 2%;
-    flex: 5;
+.top-1 {
+  top: 1rem;
 }
-.btnRegistracija
-{
-    flex: 5;
+
+.title_line {
+  display: flex;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  background-color: blanchedalmond;
+  align-items: center;
 }
-.title_div
-{
-    padding-left: 5%;
-    padding-right: 5%;
-    background-color: blanchedalmond;
+.buttons {
+  margin-left: auto;
+  display: flex;
+  padding: 0.5rem;
 }
-.prijava
-{
-    position: absolute;
-    top:3%;
-    left:37%;
-    padding-top: 0%;
-    background: white;
-    border: 1px solid black;
-    border-radius: 5px;
-    width: 20%;
+.btnPrijava {
+  background-color: rgb(230, 91, 40);
+  color: rgb(241, 241, 226);
+  border: 1px solid gray;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+  width: 8rem;
 }
-.container
-{
-    margin: 10%;
+.btnRegistracija {
+  background-color: rgb(230, 91, 40);
+  color: rgb(241, 241, 226);
+  border: 1px solid gray;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  width: 8rem;
 }
-.label
-{
-    text-align: left;
-    padding:0.5rem;
-    padding-left: 0;
-    margin-top: 5%;
+
+.container {
+  margin-bottom: 1rem;
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
-.input
-{
-    text-align: left;
-    
+.label {
+  text-align: left;
+  padding: 0.4rem;
+  padding-left: 0;
+  margin-top: 1rem;
 }
-input
-{
-    width: 100%;
-    display: flex;
-    height: 30px;
-    background-color: rgb(213, 210, 210);
-    border-color: transparent;
-    border-radius: 0.2rem;
+.input {
+  text-align: left;
 }
-.btnPrijaviSe
-{
-    text-align: right;
+input {
+  width: 100%;
+  display: flex;
+  background-color: rgb(213, 210, 210);
+  border-color: transparent;
+  border-radius: 0.2rem;
+  padding: 0.5rem 1rem;
+  outline: none;
 }
-button
-{
-width: 40%;
-    height: 35px;
+.btnPrijaviSe {
+  text-align: right;
+  margin: auto 0.5rem 0.5rem auto;
 }
-.clsWindow
-{
-    display: flex;
+.btnPrijaviSe > button {
+  padding: 0.5rem 1rem;
+  background-color: rgb(230, 91, 40);
+  color: white;
+  outline: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
 }
-.empty
-{
-    flex: 10;
+.cls {
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
-.cls
-{
+.cls > div {
   color: white;
   border: 1px solid white;
   background: red;
-  align-items: center;
-  justify-content: center;
-  height: 25px;
-  display: flex;
-  flex: 2;
   cursor: pointer;
-  border-radius: 10%;
+  border-radius: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  padding: 0.3rem 0;
 }
 .error {
   margin: auto;
   padding: 0.2rem;
   text-align: left;
   color: red;
-  background: white;
+  background: transparent;
 }
 </style>
