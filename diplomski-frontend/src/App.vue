@@ -1,20 +1,20 @@
 <template>
   <div id="app">
-     <TitleView></TitleView>
-     <div class="content">
-       <router-view/>
-     </div>
+    <TitleView></TitleView>
+    <div class="content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 <script>
 // @ is an alias to /src
 
-import TitleView from './components/TitleView.vue'
+import TitleView from "./components/Header/TitleContainer.vue";
 export default {
   components: {
     TitleView,
-}
-}
+  },
+};
 </script>
 <style>
 #app {
@@ -40,20 +40,17 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
-body
-{
+body {
   margin: 0;
 }
 
-input{
+input {
   box-sizing: border-box;
 }
-
 </style>
 
 <style scoped>
-.content
-{
+.content {
   height: calc(100vh - 65.65px);
   width: 100vw;
   overflow: scroll;

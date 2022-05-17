@@ -2,15 +2,14 @@
   <div class="container">
     <div class="content">
       <SearchContainer></SearchContainer>
-      <div class="content-product">
-        <ProductContainer v-for="n in 20" :key="n"></ProductContainer>
-      </div>
+
+      <ProductContainer></ProductContainer>
     </div>
   </div>
 </template>
 
 <script>
-import SearchContainer from "./SearchContainer.vue";
+import SearchContainer from "../SearchContainer.vue";
 import ProductContainer from "./ProductContainer.vue";
 export default {
   components: { SearchContainer, ProductContainer },
@@ -34,7 +33,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.content-product {
+/* .content-product { 
   border: 1px solid grey;
   margin: 0.5rem 1rem;
   padding: 0.5rem;
@@ -42,4 +41,5 @@ export default {
   gap: 3rem 3rem;
   grid-template-columns: repeat(4, 1fr);
 }
+*/
 </style>

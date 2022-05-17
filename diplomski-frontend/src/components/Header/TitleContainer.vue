@@ -2,11 +2,14 @@
   <div>
     <div class="title_line">
       <div class="title" @click="$router.push('/')">Naslov</div>
-      <div class="buttons">
+      <div class="buttons" v-if="!prijaviSe">
         <button class="btnPrijava" @click="loginOpen()">Prijavi se</button>
         <button class="btnRegistracija" @click="registrationOpen()">
           Registruj se
         </button>
+      </div>
+      <div style="display: flex; margin-left: auto" v-if="prijaviSe">
+        <UserName></UserName>
       </div>
     </div>
     <div class="prijava" v-if="log">
@@ -28,7 +31,7 @@
         </div>
         <div v-if="errorLogin" class="error">Pogrešan email ili lozinka.</div>
         <div class="btnPrijaviSe">
-          <button>Prijavi se</button>
+          <button @click="Login()">Prijavi se</button>
         </div>
       </div>
     </div>
@@ -89,6 +92,7 @@
 </template>
 
 <script>
+import UserName from "./UserName.vue";
 export default {
   name: "TitleView",
   data() {
@@ -105,6 +109,7 @@ export default {
       registration: false,
       errorLogin: true,
       errorRegister: true,
+      prijaviSe: false,
     };
   },
   methods: {
@@ -124,7 +129,12 @@ export default {
       this.registration = false;
       this.log = false;
     },
+    Login() {
+      this.prijaviSe = true;
+      this.log = false;
+    },
   },
+  components: { UserName },
 };
 </script>
 
@@ -159,7 +169,7 @@ export default {
 
 .title_line {
   display: flex;
-  padding: 1rem 2rem;
+  padding: 1rem 10rem;
   font-size: 1.5rem;
   background-color: blanchedalmond;
   align-items: center;
