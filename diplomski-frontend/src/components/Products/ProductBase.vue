@@ -1,5 +1,5 @@
 <template>
-  <div class="container-product">
+  <div class="container-product" @click="$router.push('/productdescription')">
     <div class="image"></div>
     <div class="name"></div>
     <div class="price"></div>

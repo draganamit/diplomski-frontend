@@ -6,8 +6,8 @@
       </div>
       <div class="dropdown-content">
         <a href="/product">Proizvodi</a>
-        <a href="#">Kategorije</a>
-        <a href="#">Korisnici</a>
+        <a href="/category">Kategorije</a>
+        <a href="/users">Korisnici</a>
         <a href="#">Odjavi se</a>
       </div>
     </div>
