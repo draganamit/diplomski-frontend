@@ -1,5 +1,8 @@
 <template>
   <div class="description-div">
+    <div v-if="order" class="order-form">
+      <OrderProduct @closed="away()"></OrderProduct>
+    </div>
     <div class="image-div"></div>
     <div class="description-button">
       <div class="description">
@@ -10,14 +13,33 @@
         <div class="text-div">Cijena</div>
       </div>
       <div class="button-div">
-        <button>Naruči</button>
+        <button @click="openOrderWindov()">Naruči</button>
       </div>
     </div>
+    <div v-if="order" class="mask" @click.self="away()"></div>
   </div>
 </template>
 
 <script>
-export default {};
+import OrderProduct from "@/components/OrderProduct.vue";
+export default {
+  components: {
+    OrderProduct,
+  },
+  data() {
+    return {
+      order: false,
+    };
+  },
+  methods: {
+    openOrderWindov() {
+      this.order = true;
+    },
+    away() {
+      this.order = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -54,6 +76,8 @@ button {
   font-size: 1rem;
   width: 10rem;
   border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
 }
 .description-button {
   display: flex;
@@ -61,5 +85,24 @@ button {
   width: 100%;
   text-align: start;
   background-color: blanchedalmond;
+}
+.order-form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 50%;
+  margin: auto;
+  z-index: 2;
+}
+.mask {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
 }
 </style>
