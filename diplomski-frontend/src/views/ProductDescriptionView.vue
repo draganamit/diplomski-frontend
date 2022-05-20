@@ -1,5 +1,6 @@
 <template>
   <div class="description-div">
+    <i class="icon-bin"></i>
     <div v-if="order" class="order-form">
       <OrderProduct @closed="away()"></OrderProduct>
     </div>
