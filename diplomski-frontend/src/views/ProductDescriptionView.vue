@@ -93,9 +93,10 @@ button {
   background-color: white;
   border: 1px solid black;
   border-radius: 5px;
-  width: 50%;
+  width: 60%;
   margin: auto;
   z-index: 2;
+  top: 1rem;
 }
 .mask {
   position: absolute;
