@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height: 4.5rem; display: flex; align-items: center">
     <div class="title_line">
       <div class="title" @click="$router.push('/')">Naslov</div>
       <div class="buttons" v-if="!prijaviSe">
@@ -183,6 +183,7 @@ export default {
   font-size: 1.5rem;
   background-color: blanchedalmond;
   align-items: center;
+  width: 100%;
 }
 .buttons {
   margin-left: auto;

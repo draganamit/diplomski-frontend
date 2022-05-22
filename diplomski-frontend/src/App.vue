@@ -51,7 +51,7 @@ input {
 
 <style scoped>
 .content {
-  height: calc(100vh - 65.65px);
+  height: calc(100vh - 4.5rem);
   width: 100vw;
   overflow: scroll;
   overflow-x: hidden;

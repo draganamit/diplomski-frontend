@@ -2,18 +2,22 @@
   <div class="containerUsername">
     <div class="dropdown">
       <div class="namesurname">
-        <i class="icon-user"></i>
-        <div>Name Surname</div>
+        <i class="icon-user-circle-o" style="font-size: 1.5rem"></i>
+        <div style="display: flex; align-items: center; margin: 0 0.5rem">
+          Name Surname
+        </div>
       </div>
-      <div class="dropdown-content">
-        <a href="/product">Proizvodi</a>
-        <a href="/category">Kategorije</a>
-        <a href="/users">Korisnici</a>
-        <a href="#">Odjavi se</a>
+      <div class="relative">
+        <div class="dropdown-content">
+          <a href="/product">Proizvodi</a>
+          <a href="/category">Kategorije</a>
+          <a href="/users">Korisnici</a>
+          <a href="#">Odjavi se</a>
+        </div>
       </div>
     </div>
     <div class="iconNotification">
-      <i class="icon-notification"></i>
+      <i class="icon-notification" style="font-size: 1.5rem"></i>
     </div>
   </div>
 </template>
@@ -32,10 +36,8 @@ export default {};
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
   border: 1px solid gray;
-  padding: 0.5rem 1rem;
-
+  padding: 0.5rem;
   font-size: 1rem;
-  width: 8rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -47,13 +49,16 @@ export default {};
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
   border: 1px solid gray;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   margin-right: 0.5rem;
   font-size: 1rem;
+  display: flex;
+  align-items: center;
 }
 .dropdown {
   position: relative;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   margin-right: 1rem;
 }
 .dropdown:hover .dropdown-content {
@@ -77,5 +82,8 @@ export default {};
 }
 .dropdown-content a:hover {
   background-color: #f1f1f1;
+}
+.relative {
+  position: relative;
 }
 </style>
