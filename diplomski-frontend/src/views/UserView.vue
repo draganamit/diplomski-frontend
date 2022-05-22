@@ -17,7 +17,10 @@
           </td>
           <td>Admin</td>
           <td>Admin Admin</td>
-          <td style="text-align: right">Izmjeni Obrisi</td>
+          <td style="text-align: right">
+            <i class="icon-pencil"></i>
+            <i class="icon-bin"></i>
+          </td>
         </tr>
       </table>
     </div>

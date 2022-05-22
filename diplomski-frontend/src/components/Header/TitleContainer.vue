@@ -27,7 +27,16 @@
           <label>Lozinka:</label>
         </div>
         <div class="input">
-          <input type="password" v-model="model.password" />
+          <input
+            style="padding-right: 2rem"
+            :type="showPassword ? 'text' : 'password'"
+            v-model="model.password"
+          />
+          <i
+            class="eye-off"
+            @click="showPassword = !showPassword"
+            :class="showPassword ? 'icon-eye' : 'icon-eye-off'"
+          ></i>
         </div>
         <div v-if="errorLogin" class="error">Pogrešan email ili lozinka.</div>
         <div class="btnPrijaviSe">
@@ -110,6 +119,7 @@ export default {
       errorLogin: true,
       errorRegister: true,
       prijaviSe: false,
+      showPassword: false,
     };
   },
   methods: {
@@ -210,6 +220,7 @@ export default {
 }
 .input {
   text-align: left;
+  position: relative;
 }
 input {
   width: 100%;
@@ -255,5 +266,13 @@ input {
   text-align: left;
   color: red;
   background: transparent;
+}
+.eye-off {
+  position: absolute;
+  right: 0.5rem;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
 }
 </style>

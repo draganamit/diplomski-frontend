@@ -1,7 +1,10 @@
 <template>
   <div class="category-base">
     <div class="name-category">Naziv kategorije</div>
-    <div class="buttons">Ikonice</div>
+    <div class="buttons">
+      <i class="icon-pencil"></i>
+      <i class="icon-bin"></i>
+    </div>
   </div>
 </template>
 

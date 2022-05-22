@@ -2,6 +2,7 @@
   <div class="containerUsername">
     <div class="dropdown">
       <div class="namesurname">
+        <i class="icon-user"></i>
         <div>Name Surname</div>
       </div>
       <div class="dropdown-content">
@@ -11,7 +12,9 @@
         <a href="#">Odjavi se</a>
       </div>
     </div>
-    <div class="iconNotification">Icon</div>
+    <div class="iconNotification">
+      <i class="icon-notification"></i>
+    </div>
   </div>
 </template>
 
@@ -34,6 +37,8 @@ export default {};
   font-size: 1rem;
   width: 8rem;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
 }
 .namesurname > div:hover {
   text-decoration: underline;
