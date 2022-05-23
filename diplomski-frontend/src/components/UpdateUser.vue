@@ -67,18 +67,14 @@ export default {
   width: 2.5rem;
   padding: 0.3rem 0;
 }
-.form-container {
-  margin-bottom: 1rem;
-  margin-right: 2rem;
-  margin-left: 2rem;
-}
+
 form > div {
   display: flex;
-  padding: 1rem;
-  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
 }
 .update {
-  padding: 2rem 3rem;
+  padding-top: 2rem;
 }
 .text-div {
   width: 10rem;
@@ -97,13 +93,14 @@ input {
   font-size: 1rem;
 }
 button {
-  background-color: rgb(230, 91, 40);
+  background-color: rgb(19 187 35);
   color: rgb(241, 241, 226);
   border: transparent;
   padding: 1rem 1rem;
-  margin-bottom: 0.2rem;
   border-radius: 0.5rem;
   font-size: 1.2rem;
   margin-top: 2rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 </style>

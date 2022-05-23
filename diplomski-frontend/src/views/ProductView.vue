@@ -1,5 +1,8 @@
 <template>
   <div class="container-product">
+    <div v-if="update" class="update-product">
+      <UpdateProduct @closed="closeWindow()"></UpdateProduct>
+    </div>
     <div class="add">
       <div>Proizvodi</div>
       <div class="button-add">
@@ -7,16 +10,32 @@
       </div>
     </div>
     <div class="show-products">
-      <ProductContainer></ProductContainer>
+      <ProductContainer @openUpdate="openUpdateProduct()"></ProductContainer>
     </div>
+    <div v-if="update" class="mask" @click.self="closeWindow()"></div>
   </div>
 </template>
 
 <script>
 import ProductContainer from "@/components/Products/ProductContainer.vue";
+import UpdateProduct from "@/components/UpdateProduct.vue";
 export default {
   name: "ProductView",
-  components: { ProductContainer },
+  components: { ProductContainer, UpdateProduct },
+
+  data() {
+    return {
+      update: false,
+    };
+  },
+  methods: {
+    openUpdateProduct() {
+      this.update = true;
+    },
+    closeWindow() {
+      this.update = false;
+    },
+  },
 };
 </script>
 
@@ -51,5 +70,24 @@ button {
   font-size: 1rem;
   width: 10rem;
   border-radius: 0.5rem;
+}
+.update-product {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  width: 50%;
+  margin: auto;
+  z-index: 2;
+}
+.mask {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  background: rgba(0, 0, 0, 0.6);
 }
 </style>

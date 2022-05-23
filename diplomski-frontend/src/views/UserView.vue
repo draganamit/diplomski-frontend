@@ -11,10 +11,11 @@
           <th>Prezime</th>
           <th style="text-align: right">Opcije</th>
         </tr>
-        <tr style="background-color: blanchedalmond">
-          <td>
-            <a href="/userprofile">admin@gmail.com</a>
-          </td>
+        <tr
+          style="background-color: blanchedalmond"
+          @click="$router.push('/userprofile')"
+        >
+          <td>admin@gmail.com</td>
           <td>Admin</td>
           <td>Admin Admin</td>
           <td style="text-align: right">

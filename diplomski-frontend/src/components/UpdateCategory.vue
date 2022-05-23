@@ -1,24 +1,17 @@
 <template>
   <div>
     <div class="cls">
-      <div @click="closeWindow()">X</div>
+      <div @click="closeWindowUpdate()">X</div>
     </div>
     <div class="update">
       <div class="form-container">
         <form>
           <div>
-            <div class="text-div">Trenutna lozinka:</div>
-            <input type="text" v-model="oldPassword" />
+            <div class="text-div">Naziv:</div>
+            <input type="text" v-model="name" />
           </div>
-          <div>
-            <div class="text-div">Nova lozinka:</div>
-            <input type="text" v-model="newPassword" />
-          </div>
-          <div>
-            <div class="text-div">Potvrdite lozinku:</div>
-            <input type="text" v-model="confirmPassword" />
-          </div>
-          <button style="width: 100%">Sačuvaj izmjene</button>
+
+          <button style="width: 100%">{{ textButton }}</button>
         </form>
       </div>
     </div>
@@ -27,18 +20,21 @@
 
 <script>
 export default {
+  props: {
+    textButton: {
+      type: String,
+      default: "",
+    },
+  },
   data() {
     return {
       model: {
-        oldPassword: "",
-        newPassword: "",
-        confirmPassword: "",
+        naziv: "",
       },
-      close: false,
     };
   },
   methods: {
-    closeWindow() {
+    closeWindowUpdate() {
       this.$emit("closed");
     },
   },
@@ -63,7 +59,6 @@ export default {
   width: 2.5rem;
   padding: 0.3rem 0;
 }
-
 form > div {
   display: flex;
   padding: 1rem 2rem;
@@ -73,7 +68,7 @@ form > div {
   padding-top: 2rem;
 }
 .text-div {
-  width: 20rem;
+  width: 10rem;
   display: flex;
   align-items: center;
   justify-content: left;

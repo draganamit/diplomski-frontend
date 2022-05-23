@@ -109,7 +109,7 @@ button {
   right: 0;
   background-color: white;
   border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   width: 50%;
   margin: auto;
   z-index: 2;

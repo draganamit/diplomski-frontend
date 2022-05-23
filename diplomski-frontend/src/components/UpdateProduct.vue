@@ -1,22 +1,30 @@
 <template>
   <div>
     <div class="cls">
-      <div @click="closeWindow()">X</div>
+      <div @click="closeWindowUpdate()">X</div>
     </div>
     <div class="update">
       <div class="form-container">
         <form>
           <div>
-            <div class="text-div">Trenutna lozinka:</div>
-            <input type="text" v-model="oldPassword" />
+            <div class="text-div">Naziv:</div>
+            <input type="text" v-model="name" />
           </div>
           <div>
-            <div class="text-div">Nova lozinka:</div>
-            <input type="text" v-model="newPassword" />
+            <div class="text-div">Kategorija:</div>
+            <input type="text" v-model="surname" />
           </div>
           <div>
-            <div class="text-div">Potvrdite lozinku:</div>
-            <input type="text" v-model="confirmPassword" />
+            <div class="text-div">Opis:</div>
+            <input type="text" v-model="email" />
+          </div>
+          <div>
+            <div class="text-div">Stanje:</div>
+            <input type="text" v-model="location" />
+          </div>
+          <div>
+            <div class="text-div">Cijena:</div>
+            <input type="text" v-model="location" />
           </div>
           <button style="width: 100%">Sačuvaj izmjene</button>
         </form>
@@ -30,15 +38,16 @@ export default {
   data() {
     return {
       model: {
-        oldPassword: "",
-        newPassword: "",
-        confirmPassword: "",
+        naziv: "",
+        opis: "",
+        kategorija: "",
+        stanje: "",
+        cijena: "",
       },
-      close: false,
     };
   },
   methods: {
-    closeWindow() {
+    closeWindowUpdate() {
       this.$emit("closed");
     },
   },
@@ -66,14 +75,14 @@ export default {
 
 form > div {
   display: flex;
-  padding: 1rem 2rem;
+  padding: 1rem;
   font-size: 1.2rem;
 }
 .update {
   padding-top: 2rem;
 }
 .text-div {
-  width: 20rem;
+  width: 10rem;
   display: flex;
   align-items: center;
   justify-content: left;

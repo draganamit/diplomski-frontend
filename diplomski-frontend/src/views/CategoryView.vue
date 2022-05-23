@@ -1,22 +1,78 @@
 <template>
   <div class="container-category">
+    <div v-if="update" class="update-category">
+      <UpdateCategory
+        @closed="closeWindow()"
+        :textButton="idCategory ? 'Sačuvaj izmjene' : 'Dodaj kategoriju'"
+      ></UpdateCategory>
+    </div>
     <div class="add">
       <div>Kategorije</div>
       <div class="button-add">
-        <button>Dodaj kategoriju</button>
+        <button @click="openUpdateCategory()">Dodaj kategoriju</button>
       </div>
     </div>
     <div class="all-category">
-      <CategoryBase v-for="n in 10" :key="n"></CategoryBase>
+      <CategoryBase
+        v-for="(obj, key) in categories"
+        :key="key"
+        @open="openUpdateCategory(obj.id)"
+        :nameCategory="obj.name"
+      ></CategoryBase>
     </div>
+    <div v-if="update" class="mask" @click.self="closeWindow()"></div>
   </div>
 </template>
 
 <script>
+import UpdateCategory from "@/components/UpdateCategory.vue";
 import CategoryBase from "@/components/CategoryBase.vue";
+
 export default {
   components: {
     CategoryBase,
+    UpdateCategory,
+  },
+  data() {
+    return {
+      update: false,
+      idCategory: null,
+      categories: [
+        {
+          id: 1,
+          name: "Kategorija1",
+        },
+        {
+          id: 2,
+          name: "Kategorija2",
+        },
+        {
+          id: 3,
+          name: "Kategorija3",
+        },
+        {
+          id: 4,
+          name: "Kategorija4",
+        },
+        {
+          id: 5,
+          name: "Kategorija5",
+        },
+        {
+          id: 6,
+          name: "Kategorija6",
+        },
+      ],
+    };
+  },
+  methods: {
+    openUpdateCategory(id = null) {
+      this.idCategory = id;
+      this.update = true;
+    },
+    closeWindow() {
+      this.update = false;
+    },
   },
 };
 </script>
@@ -54,5 +110,24 @@ button {
   align-items: start;
   justify-content: center;
   flex-direction: column;
+}
+.update-category {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  width: 50%;
+  margin: auto;
+  z-index: 2;
+}
+.mask {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
 }
 </style>

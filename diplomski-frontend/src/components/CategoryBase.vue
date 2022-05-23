@@ -1,15 +1,47 @@
 <template>
   <div class="category-base">
-    <div class="name-category">Naziv kategorije</div>
+    <div class="name-category">{{ nameCategory }}</div>
     <div class="buttons">
-      <i class="icon-pencil"></i>
-      <i class="icon-bin"></i>
+      <div
+        @click="openWindow()"
+        style="
+          padding: 0 0.5rem;
+          font-size: 1.1rem;
+          border: 1px solid grey;
+          border-radius: 0.2rem;
+          margin-right: 0.3rem;
+        "
+      >
+        <i class="icon-pencil"></i>
+      </div>
+      <div
+        style="
+          padding: 0 0.5rem;
+          font-size: 1.1rem;
+          border: 1px solid grey;
+          border-radius: 0.2rem;
+        "
+      >
+        <i class="icon-bin"></i>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    nameCategory: {
+      type: String,
+      default: "",
+    },
+  },
+  methods: {
+    openWindow() {
+      this.$emit("open");
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -21,11 +53,13 @@ export default {};
   border-radius: 1rem;
   background-color: blanchedalmond;
   margin-top: 0.8rem;
+  width: 100%;
+  justify-content: space-between;
 }
 .name-category {
   font-size: 1.5rem;
 }
 .buttons {
-  margin-left: 20rem;
+  display: flex;
 }
 </style>

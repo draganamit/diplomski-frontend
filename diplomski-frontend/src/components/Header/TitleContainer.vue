@@ -12,7 +12,7 @@
         <UserName></UserName>
       </div>
     </div>
-    <div class="prijava" v-if="log">
+    <div class="prijava top-1" v-if="log">
       <div class="cls">
         <div @click="closeWindowLogin()">X</div>
       </div>
