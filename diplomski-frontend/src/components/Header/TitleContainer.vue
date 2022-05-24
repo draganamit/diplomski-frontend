@@ -21,7 +21,7 @@
           <label>Email:</label>
         </div>
         <div class="input">
-          <input type="text" v-model="model.username" />
+          <input type="text" v-model="modelLogin.username" />
         </div>
         <div class="label">
           <label>Lozinka:</label>
@@ -30,7 +30,7 @@
           <input
             style="padding-right: 2rem"
             :type="showPassword ? 'text' : 'password'"
-            v-model="model.password"
+            v-model="modelLogin.password"
           />
           <i
             class="eye-off"
@@ -44,85 +44,164 @@
         </div>
       </div>
     </div>
-    <div class="prijava top-1" v-if="registration">
-      <div class="cls">
-        <div @click="closeWindowRegistration()">X</div>
+    <ValidationObserver ref="observer">
+      <div class="prijava top-1" v-if="registration">
+        <div class="cls">
+          <div @click="closeWindowRegistration()">X</div>
+        </div>
+        <div class="container">
+          <div class="label">
+            <label>Ime:</label>
+          </div>
+          <div class="input">
+            <ValidationProvider
+              name="name"
+              rules="required"
+              v-slot="{ errors }"
+            >
+              <input name="name" type="text" v-model="modelRegistration.name" />
+              <span v-if="errors.length" class="error">greska</span>
+            </ValidationProvider>
+          </div>
+          <div class="label">
+            <label>Prezime:</label>
+          </div>
+          <div class="input">
+            <ValidationProvider
+              name="surname"
+              rules="required"
+              v-slot="{ errors }"
+            >
+              <input
+                name="surname"
+                type="text"
+                v-model="modelRegistration.surname"
+              />
+              <span v-if="errors.length" class="error">greska</span>
+            </ValidationProvider>
+          </div>
+          <div class="label">
+            <label>Lokacija:</label>
+          </div>
+          <div class="input">
+            <ValidationProvider
+              name="location"
+              rules="required"
+              v-slot="{ errors }"
+            >
+              <input
+                name="location"
+                type="text"
+                v-model="modelRegistration.location"
+              />
+              <span v-if="errors.length" class="error">greska</span>
+            </ValidationProvider>
+          </div>
+          <div class="label">
+            <label>Email:</label>
+          </div>
+          <div class="input">
+            <ValidationProvider
+              name="email"
+              rules="required"
+              v-slot="{ errors }"
+            >
+              <input
+                name="email"
+                type="text"
+                v-model="modelRegistration.email"
+              />
+              <span v-if="errors.length" class="error">greska</span>
+            </ValidationProvider>
+          </div>
+          <div class="label">
+            <label>Lozinka:</label>
+          </div>
+          <div class="input">
+            <ValidationProvider
+              name="password"
+              rules="required"
+              v-slot="{ errors }"
+            >
+              <input
+                name="password"
+                type="password"
+                v-model="modelRegistration.password"
+              />
+              <span v-if="errors.length" class="error">greska</span>
+            </ValidationProvider>
+          </div>
+          <div class="label">
+            <label>Potvrdi lozinku:</label>
+          </div>
+          <div class="input">
+            <ValidationProvider
+              name="comfirmPassword"
+              rules="required"
+              v-slot="{ errors }"
+            >
+              <input
+                name="comfirmPassword"
+                type="password"
+                v-model="confirmPassword"
+              />
+              <span v-if="errors.length" class="error">greska</span>
+            </ValidationProvider>
+          </div>
+          <div v-if="errorConfirm" class="error">
+            Password i ConfirmPassword nisu jednaki!
+          </div>
+          <div class="btnPrijaviSe">
+            <button @click="registrationUser()">Registruj se</button>
+          </div>
+        </div>
       </div>
-      <div class="container">
-        <div class="label">
-          <label>Ime:</label>
-        </div>
-        <div class="input">
-          <input type="text" v-model="name" />
-        </div>
-        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
-        <div class="label">
-          <label>Prezime:</label>
-        </div>
-        <div class="input">
-          <input type="password" v-model="surname" />
-        </div>
-        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
-        <div class="label">
-          <label>Lokacija:</label>
-        </div>
-        <div class="input">
-          <input type="password" v-model="location" />
-        </div>
-        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
-        <div class="label">
-          <label>Email:</label>
-        </div>
-        <div class="input">
-          <input type="password" v-model="model.username" />
-        </div>
-        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
-        <div class="label">
-          <label>Lozinka:</label>
-        </div>
-        <div class="input">
-          <input type="password" v-model="model.password" />
-        </div>
-        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
-        <div class="label">
-          <label>Potvrdi lozinku:</label>
-        </div>
-        <div class="input">
-          <input type="password" v-model="confirmPasswordd" />
-        </div>
-        <div v-if="errorRegister" class="error">Polje mora biti popunjeno.</div>
-        <div class="btnPrijaviSe">
-          <button>Registruj se</button>
-        </div>
-      </div>
-    </div>
+    </ValidationObserver>
     <div v-if="registration || log" class="mask" @click.self="away()"></div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
+import { extend } from "vee-validate";
+import { required } from "vee-validate/dist/rules";
+extend("required", {
+  ...required,
+  message: "This field is required",
+});
 import UserName from "./UserName.vue";
 export default {
   name: "TitleView",
+  components: { UserName, ValidationProvider, ValidationObserver },
+
   data() {
     return {
-      model: {
+      modelLogin: {
         username: "",
         password: "",
       },
-      name: "",
-      surname: "",
-      location: "",
-      confirmPasswordd: "",
+      modelRegistration: {
+        name: "",
+        surname: "",
+        location: "",
+        email: "",
+        password: "",
+      },
+      confirmPassword: "",
       log: false,
       registration: false,
-      errorLogin: true,
-      errorRegister: true,
+      errorLogin: false,
+      errorRegister: false,
+      errorConfirm: false,
       prijaviSe: false,
       showPassword: false,
+
+      errorRegisterConfirmPassword: false,
     };
   },
   methods: {
+    ...mapActions(["registerUser"]),
     loginOpen() {
       this.log = true;
     },
@@ -134,17 +213,73 @@ export default {
     },
     closeWindowRegistration() {
       this.registration = false;
+      this.modelRegistration = {
+        name: "",
+        surname: "",
+        location: "",
+        email: "",
+        password: "",
+      };
     },
     away() {
       this.registration = false;
       this.log = false;
+      this.modelRegistration = {
+        name: "",
+        surname: "",
+        location: "",
+        email: "",
+        password: "",
+      };
     },
     Login() {
       this.prijaviSe = true;
       this.log = false;
     },
+
+    async registrationUser() {
+      const validateResult = await this.$refs.observer.validate();
+      console.log("validateResult", validateResult);
+
+      if (this.modelRegistration.password == this.confirmPassword) {
+        try {
+          await this.registerUser(this.modelRegistration);
+          this.registration = false;
+          this.modelRegistration = {
+            name: "",
+            surname: "",
+            location: "",
+            email: "",
+            password: "",
+          };
+        } catch (error) {
+          console.log("error:", error);
+        }
+      } else {
+        this.errorConfirm = true;
+      }
+    },
   },
-  components: { UserName },
+  watch: {
+    modelRegistration: {
+      deep: true,
+      handler() {
+        this.errorRegisterConfirmPassword = false;
+      },
+    },
+    confirmPassword() {
+      this.errorRegisterConfirmPassword = false;
+    },
+  },
+  beforeDestroy() {
+    this.modelRegistration = {
+      name: "",
+      surname: "",
+      location: "",
+      email: "",
+      password: "",
+    };
+  },
 };
 </script>
 
@@ -243,6 +378,7 @@ input {
   outline: none;
   border: 1px solid transparent;
   border-radius: 5px;
+  margin-top: 0.5rem;
 }
 .cls {
   display: flex;

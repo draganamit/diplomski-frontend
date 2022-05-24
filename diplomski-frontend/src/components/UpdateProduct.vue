@@ -26,7 +26,7 @@
             <div class="text-div">Cijena:</div>
             <input type="text" v-model="location" />
           </div>
-          <button style="width: 100%">Sačuvaj izmjene</button>
+          <button style="width: 100%">{{ textButton }}</button>
         </form>
       </div>
     </div>
@@ -35,6 +35,12 @@
 
 <script>
 export default {
+  props: {
+    textButton: {
+      type: String,
+      default: "",
+    },
+  },
   data() {
     return {
       model: {

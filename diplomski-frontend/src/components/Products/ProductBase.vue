@@ -2,8 +2,8 @@
   <div class="container-product" @click="$router.push('/productdescription')">
     <div class="image"></div>
     <div style="display: flex">
-      <div class="name">Naziv</div>
-      <div class="price">Cijena</div>
+      <div class="name">{{ name }}</div>
+      <div class="price">{{ price }}</div>
     </div>
 
     <div class="icons">
@@ -35,6 +35,16 @@
 
 <script>
 export default {
+  props: {
+    name: {
+      type: String,
+      default: "",
+    },
+    price: {
+      type: String,
+      default: "",
+    },
+  },
   methods: {
     openWindow() {
       this.$emit("open");

@@ -1,16 +1,19 @@
 <template>
   <div class="container-product">
     <div v-if="update" class="update-product">
-      <UpdateProduct @closed="closeWindow()"></UpdateProduct>
+      <UpdateProduct
+        @closed="closeWindow()"
+        :textButton="idProduct ? 'Sačuvaj izmjene' : 'Dodaj proizvod'"
+      ></UpdateProduct>
     </div>
     <div class="add">
       <div>Proizvodi</div>
       <div class="button-add">
-        <button>Dodaj proizvod</button>
+        <button @click="openUpdateProduct()">Dodaj proizvod</button>
       </div>
     </div>
     <div class="show-products">
-      <ProductContainer @openUpdate="openUpdateProduct()"></ProductContainer>
+      <ProductContainer @openUpdate="openUpdateProduct"></ProductContainer>
     </div>
     <div v-if="update" class="mask" @click.self="closeWindow()"></div>
   </div>
@@ -26,10 +29,12 @@ export default {
   data() {
     return {
       update: false,
+      idProduct: null,
     };
   },
   methods: {
-    openUpdateProduct() {
+    openUpdateProduct(id = null) {
+      this.idProduct = id;
       this.update = true;
     },
     closeWindow() {

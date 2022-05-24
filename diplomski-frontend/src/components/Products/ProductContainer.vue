@@ -1,9 +1,11 @@
 <template>
   <div class="content-products">
     <ProductBase
-      v-for="n in 20"
-      :key="n"
-      @open="openWindowUpdate()"
+      v-for="(obj, key) in products"
+      :key="key"
+      @open="openWindowUpdate(obj.id)"
+      :name="obj.name"
+      :price="obj.price"
     ></ProductBase>
   </div>
 </template>
@@ -14,9 +16,41 @@ export default {
   components: {
     ProductBase,
   },
+  data() {
+    return {
+      products: [
+        {
+          id: 1,
+          name: "Product1",
+          price: "5",
+        },
+        {
+          id: 2,
+          name: "Product2",
+          price: "7",
+        },
+        {
+          id: 3,
+          name: "Product3",
+          price: "6",
+        },
+        {
+          id: 4,
+          name: "Product4",
+          price: "8",
+        },
+        {
+          id: 5,
+          name: "Product5",
+          price: "2",
+        },
+      ],
+    };
+  },
+
   methods: {
-    openWindowUpdate() {
-      this.$emit("openUpdate");
+    openWindowUpdate(id) {
+      this.$emit("openUpdate", id);
     },
   },
 };
