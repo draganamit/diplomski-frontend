@@ -4,7 +4,7 @@
       <div class="namesurname">
         <i class="icon-user-circle-o" style="font-size: 1.5rem"></i>
         <div style="display: flex; align-items: center; margin: 0 0.5rem">
-          Name Surname
+          {{ fullName }}
         </div>
       </div>
       <div class="relative">
@@ -12,7 +12,7 @@
           <a href="/product">Proizvodi</a>
           <a href="/category">Kategorije</a>
           <a href="/users">Korisnici</a>
-          <a href="#">Odjavi se</a>
+          <a @click="Logout()" href="/">Odjavi se</a>
         </div>
       </div>
     </div>
@@ -23,7 +23,22 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+
+export default {
+  computed: {
+    ...mapState({
+      fullName(state) {
+        return state.users.user.name + " " + state.users.user.surname;
+      },
+    }),
+  },
+  methods: {
+    Logout() {
+      this.$emit("logout");
+    },
+  },
+};
 </script>
 
 <style scoped>
