@@ -12,218 +12,31 @@
         <UserName @logout="LogOut()"></UserName>
       </div>
     </div>
-    <div class="prijava top-1" v-if="log">
-      <div class="cls">
-        <div @click="closeWindowLogin()">X</div>
-      </div>
-      <div class="container">
-        <div class="label">
-          <label>Email:</label>
-        </div>
-        <div class="input">
-          <input type="text" v-model="modelLogin.email" />
-        </div>
-        <div class="label">
-          <label>Lozinka:</label>
-        </div>
-        <div class="input">
-          <input
-            style="padding-right: 2rem"
-            :type="showPassword ? 'text' : 'password'"
-            v-model="modelLogin.password"
-          />
-          <i
-            class="eye-off"
-            @click="showPassword = !showPassword"
-            :class="showPassword ? 'icon-eye' : 'icon-eye-off'"
-          ></i>
-        </div>
-        <div v-if="errorLogin" class="error">Pogrešan email ili lozinka.</div>
-        <div class="btnPrijaviSe">
-          <button @click="logUser()">Prijavi se</button>
-        </div>
-      </div>
-    </div>
-    <ValidationObserver ref="observer">
-      <div class="prijava top-1" v-if="registration">
-        <div class="cls">
-          <div @click="closeWindowRegistration()">X</div>
-        </div>
-        <div class="container">
-          <div class="label">
-            <label>Ime:</label>
-          </div>
-          <div class="input">
-            <ValidationProvider
-              name="name"
-              rules="required"
-              v-slot="{ errors }"
-            >
-              <input name="name" type="text" v-model="modelRegistration.name" />
-              <span v-if="errors.length && showError" class="error"
-                >Polje mora biti popunjeno.</span
-              >
-            </ValidationProvider>
-          </div>
-          <div class="label">
-            <label>Prezime:</label>
-          </div>
-          <div class="input">
-            <ValidationProvider
-              name="surname"
-              rules="required"
-              v-slot="{ errors }"
-            >
-              <input
-                name="surname"
-                type="text"
-                v-model="modelRegistration.surname"
-              />
-              <span v-if="errors.length && showError" class="error"
-                >Polje mora biti popunjeno.</span
-              >
-            </ValidationProvider>
-          </div>
-          <div class="label">
-            <label>Lokacija:</label>
-          </div>
-          <div class="input">
-            <ValidationProvider
-              name="location"
-              rules="required"
-              v-slot="{ errors }"
-            >
-              <input
-                name="location"
-                type="text"
-                v-model="modelRegistration.location"
-              />
-              <span v-if="errors.length && showError" class="error"
-                >Polje mora biti popunjeno.</span
-              >
-            </ValidationProvider>
-          </div>
-          <div class="label">
-            <label>Email:</label>
-          </div>
-          <div class="input">
-            <ValidationProvider
-              name="email"
-              rules="required"
-              v-slot="{ errors }"
-            >
-              <input
-                name="email"
-                type="text"
-                v-model="modelRegistration.email"
-              />
-              <span v-if="errors.length && showError" class="error"
-                >Polje mora biti popunjeno.</span
-              >
-            </ValidationProvider>
-          </div>
-          <div class="label">
-            <label>Lozinka:</label>
-          </div>
-          <div class="input">
-            <ValidationProvider
-              name="password"
-              rules="required"
-              v-slot="{ errors }"
-            >
-              <div style="position: relative">
-                <input
-                  style="padding-right: 2rem"
-                  name="password"
-                  :type="showRegisterPassword ? 'text' : 'password'"
-                  v-model="modelRegistration.password"
-                />
-                <i
-                  class="eye-off"
-                  @click="showRegisterPassword = !showRegisterPassword"
-                  :class="showRegisterPassword ? 'icon-eye' : 'icon-eye-off'"
-                ></i>
-              </div>
+    <LoginUser v-if="log" @close="closeWindowLogin()"></LoginUser>
+    <RegistrationUser
+      v-if="registration"
+      @close="closeWindowRegistration()"
+    ></RegistrationUser>
 
-              <span v-if="errors.length && showError" class="error"
-                >Polje mora biti popunjeno.</span
-              >
-            </ValidationProvider>
-          </div>
-          <div class="label">
-            <label>Potvrdi lozinku:</label>
-          </div>
-          <div class="input">
-            <ValidationProvider
-              name="comfirmPassword"
-              rules="required"
-              v-slot="{ errors }"
-            >
-              <div style="position: relative">
-                <input
-                  style="padding-right: 2rem"
-                  name="comfirmPassword"
-                  :type="showConfirmPassword ? 'text' : 'password'"
-                  v-model="confirmPassword"
-                />
-                <i
-                  class="eye-off"
-                  @click="showConfirmPassword = !showConfirmPassword"
-                  :class="showConfirmPassword ? 'icon-eye' : 'icon-eye-off'"
-                ></i>
-              </div>
-
-              <span v-if="errors.length && showError" class="error"
-                >Polje mora biti popunjeno.</span
-              >
-            </ValidationProvider>
-          </div>
-          <div v-if="errorConfirm" class="error">
-            Password i ConfirmPassword nisu jednaki!
-          </div>
-          <div class="btnPrijaviSe">
-            <button @click="registrationUser()">Registruj se</button>
-          </div>
-        </div>
-      </div>
-    </ValidationObserver>
     <div v-if="registration || log" class="mask" @click.self="away()"></div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-
-import store from "@/store/index.js";
+import { mapActions, mapMutations, mapState } from "vuex";
 
 import UserName from "./UserName.vue";
+import RegistrationUser from "@/components/RegistrationUser.vue";
+import LoginUser from "@/components/LoginUser.vue";
+
 export default {
   name: "TitleView",
-  components: { UserName },
+  components: { UserName, RegistrationUser, LoginUser },
 
   data() {
     return {
-      modelLogin: {
-        email: "",
-        password: "",
-      },
-      modelRegistration: {
-        name: "",
-        surname: "",
-        location: "",
-        email: "",
-        password: "",
-      },
-      confirmPassword: "",
       log: false,
       registration: false,
-      errorLogin: false,
-      errorRegister: false,
-      errorConfirm: false,
-      showPassword: false,
-      showRegisterPassword: false,
-      showConfirmPassword: false,
-      errorRegisterConfirmPassword: false,
       showError: false,
     };
   },
@@ -236,11 +49,17 @@ export default {
 
   methods: {
     ...mapActions(["registerUser", "loginUser", "getUserByUser"]),
+    ...mapMutations(["setAuthAxiosHeader", "setUser"]),
+
     loginOpen() {
       this.log = true;
     },
     closeWindowLogin() {
       this.log = false;
+      this.modelLogin = {
+        email: "",
+        password: "",
+      };
     },
     registrationOpen() {
       this.registration = true;
@@ -268,75 +87,14 @@ export default {
     },
     LogOut() {
       localStorage.removeItem("token");
-      store.commit("users/setUser", null);
-      store.commit("setAuthAxiosHeader", null);
-    },
-    async registrationUser() {
-      await this.$refs.observer.validate();
-      this.showError = true;
-
-      if (this.modelRegistration.password == this.confirmPassword) {
-        try {
-          await this.registerUser(this.modelRegistration);
-          this.registration = false;
-          this.modelRegistration = {
-            name: "",
-            surname: "",
-            location: "",
-            email: "",
-            password: "",
-          };
-        } catch (error) {
-          console.log("error:", error);
-        }
-      } else {
-        this.errorConfirm = true;
-      }
-    },
-    async logUser() {
-      if (this.modelLogin.email != "" && this.modelLogin.password != "") {
-        try {
-          const response = await this.loginUser(this.modelLogin);
-          console.log("response", response);
-          localStorage.setItem("token", "Bearer " + response.data.data);
-          this.log = false;
-          this.modelLogin = {
-            email: "",
-            password: "",
-          };
-          await this.getUserByUser();
-        } catch (error) {
-          this.errorLogin = true;
-        }
-      } else {
-        console.log("The username and password must be present");
-      }
+      this.setUser(null);
+      this.setAuthAxiosHeader("setAuthAxiosHeader", null);
     },
   },
   computed: {
     ...mapState({
       user: (state) => state.users.user,
     }),
-  },
-  watch: {
-    modelRegistration: {
-      deep: true,
-      handler() {
-        this.errorRegisterConfirmPassword = false;
-      },
-    },
-    confirmPassword() {
-      this.errorRegisterConfirmPassword = false;
-    },
-  },
-  beforeDestroy() {
-    this.modelRegistration = {
-      name: "",
-      surname: "",
-      location: "",
-      email: "",
-      password: "",
-    };
   },
 };
 </script>
@@ -440,7 +198,7 @@ input {
 }
 .cls {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 .cls > div {

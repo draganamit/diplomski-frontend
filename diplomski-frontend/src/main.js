@@ -12,11 +12,20 @@ Vue.config.productionTip = false
 Vue.component("ValidationProvider", ValidationProvider)
 Vue.component("ValidationObserver", ValidationObserver)
 import { extend } from "vee-validate";
-import { required } from "vee-validate/dist/rules";
+import { required, confirmed, email } from "vee-validate/dist/rules";
 extend("required", {
   ...required,
-  message: "This field is required",
+  message: "Polje je obavezno",
 });
+extend("confirmed", {
+  ...confirmed,
+  message: "Lozinka i Potvrdjena lozinka nisu iste"
+});
+extend("email", {
+  ...email,
+  message: "Neispravan email"
+});
+
 
 new Vue({
   router,

@@ -65,7 +65,7 @@ export default {
 }
 .button-div {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin-left: auto;
 }
 button {

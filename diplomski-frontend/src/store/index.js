@@ -31,14 +31,4 @@ export default new Vuex.Store({
       users
   }
 })
-/*export default new Vuex.Store({
- 
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})*/
+

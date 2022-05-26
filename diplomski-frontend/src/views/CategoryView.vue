@@ -107,7 +107,7 @@ button {
   margin: 0.5rem 1rem;
   padding: 0.5rem;
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
 }

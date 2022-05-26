@@ -52,7 +52,7 @@ export default {
 <style scoped>
 .cls {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
 }
 .cls > div {

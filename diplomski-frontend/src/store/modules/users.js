@@ -5,7 +5,7 @@ const state = {
 const actions = {
     async registerUser({rootState}, model)
     {
-        const response = await rootState.authAxios.post("auth/register", model);
+        const response = await rootState.baseAxios.post("auth/register", model);
         return response;
     },
     async loginUser({rootState, commit}, model)

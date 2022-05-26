@@ -71,7 +71,7 @@ export default {
 <style scoped>
 .btn-update-password {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 button {
   background-color: rgb(230, 91, 40);
@@ -84,7 +84,7 @@ button {
 }
 .user-imformation {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   padding: 3rem 3rem;
 }
 .user-div {
