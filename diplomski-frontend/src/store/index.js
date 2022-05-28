@@ -1,6 +1,10 @@
 import Vue from "vue";
 import Vuex from 'vuex';
 import users from './modules/users.js';
+import categories from './modules/categories.js';
+import products from './modules/products.js';
+
+
 import axios from "axios";
 
 Vue.use(Vuex)
@@ -28,7 +32,9 @@ export default new Vuex.Store({
     setAuthAxiosHeader: (state, header) => state.authAxios.defaults.headers["Authorization"] = header
   },
   modules: {
-      users
+      users,
+      categories,
+      products
   }
 })
 

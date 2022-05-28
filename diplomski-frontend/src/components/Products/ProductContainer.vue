@@ -1,57 +1,44 @@
 <template>
   <div class="content-products">
     <ProductBase
-      v-for="(obj, key) in products"
+      v-for="(product, key) in products"
       :key="key"
-      @open="openWindowUpdate(obj.id)"
-      :name="obj.name"
-      :price="obj.price"
+      @open="openWindowUpdate(product.id)"
+      :name="product.name"
+      :price="product.price"
     ></ProductBase>
   </div>
 </template>
 
 <script>
 import ProductBase from "@/components/Products/ProductBase.vue";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   components: {
     ProductBase,
   },
-  data() {
-    return {
-      products: [
-        {
-          id: 1,
-          name: "Product1",
-          price: "5",
-        },
-        {
-          id: 2,
-          name: "Product2",
-          price: "7",
-        },
-        {
-          id: 3,
-          name: "Product3",
-          price: "6",
-        },
-        {
-          id: 4,
-          name: "Product4",
-          price: "8",
-        },
-        {
-          id: 5,
-          name: "Product5",
-          price: "2",
-        },
-      ],
-    };
+  props: {
+    searchModel: {
+      type: Object,
+      default: () => {
+        return { pageNum: 1, pageSize: 8 };
+      },
+    },
   },
-
   methods: {
+    ...mapActions(["GetProductsForIndex"]),
+    ...mapMutations(["setProducts"]),
     openWindowUpdate(id) {
       this.$emit("openUpdate", id);
     },
+  },
+  async created() {
+    await this.GetProductsForIndex(this.searchModel);
+  },
+  computed: {
+    ...mapState({
+      products: (state) => state.products.products,
+    }),
   },
 };
 </script>
