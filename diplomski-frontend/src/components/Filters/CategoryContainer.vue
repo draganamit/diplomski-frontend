@@ -1,11 +1,14 @@
 <template>
   <div class="container">
     <div class="header">Kategorije</div>
-    <div @click="dajSveProizvode" style="padding: 0.5rem">Svi proizvodi</div>
+    <div @click="getProductByCategory(null)" style="padding: 0.5rem">
+      Svi proizvodi
+    </div>
     <div
       v-for="(category, key) in categories"
       :key="key"
       style="padding: 0.5rem"
+      @click="getProductByCategory(category.id)"
     >
       {{ category.name }}
     </div>
@@ -16,14 +19,15 @@
 import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   data() {
-    return {
-      IdCategory: null,
-    };
+    return {};
   },
   async created() {
-    this.IdCategory = this.$route.query.cateogory;
-
     await this.getAllCategories();
+    this.setSearchModel({
+      pageNum: 1,
+      pageSize: 8,
+      categoryId: Number(this.$route.query.categoryId),
+    });
   },
   computed: {
     ...mapState({
@@ -32,12 +36,18 @@ export default {
   },
   methods: {
     ...mapActions(["getAllCategories"]),
-    ...mapMutations(["setCategories"]),
-    dajSveProizvode() {
-      this.IdCategory = "prosledjeni id";
+    ...mapMutations(["setCategories", "setSearchModel"]),
+
+    getProductByCategory(id) {
+      this.setSearchModel({
+        pageNum: 1,
+        pageSize: 8,
+        categoryId: id,
+      });
+
       this.$router.push({
         query: {
-          nazivGore: this.IdCategory,
+          categoryId: id,
         },
       });
     },

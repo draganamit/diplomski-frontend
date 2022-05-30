@@ -14,6 +14,7 @@ import PriceContainer from "./PriceContainer.vue";
 import LocationContainer from "./LocationContainer.vue";
 export default {
   components: { CategoryContainer, PriceContainer, LocationContainer },
+  methods: {},
 };
 </script>
 

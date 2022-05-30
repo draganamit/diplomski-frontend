@@ -10,6 +10,10 @@ import FiltersContainer from "./Filters/FiltersContainer.vue";
 import HomeProductsContainer from "./Products/HomeProductContainer.vue";
 export default {
   components: { FiltersContainer, HomeProductsContainer },
+  data() {
+    return {};
+  },
+  methods: {},
 };
 </script>
 

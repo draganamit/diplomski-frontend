@@ -17,11 +17,12 @@ export default {
   components: {
     ProductBase,
   },
-  props: {
+  props: {},
+  watch: {
     searchModel: {
-      type: Object,
-      default: () => {
-        return { pageNum: 1, pageSize: 8 };
+      deep: true,
+      async handler() {
+        await this.GetProductsForIndex(this.searchModel);
       },
     },
   },
@@ -38,6 +39,7 @@ export default {
   computed: {
     ...mapState({
       products: (state) => state.products.products,
+      searchModel: (state) => state.products.searchModel,
     }),
   },
 };

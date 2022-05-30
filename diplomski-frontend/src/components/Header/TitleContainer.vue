@@ -1,7 +1,7 @@
 <template>
   <div style="height: 4.5rem; display: flex; align-items: center">
     <div class="title_line">
-      <div class="title" @click="$router.push('/')">Naslov</div>
+      <div class="title" @click="goToHome()">Naslov</div>
       <div class="buttons" v-if="!user">
         <button class="btnPrijava" @click="loginOpen()">Prijavi se</button>
         <button class="btnRegistracija" @click="registrationOpen()">
@@ -49,7 +49,7 @@ export default {
 
   methods: {
     ...mapActions(["registerUser", "loginUser", "getUserByUser"]),
-    ...mapMutations(["setAuthAxiosHeader", "setUser"]),
+    ...mapMutations(["setAuthAxiosHeader", "setUser", "setSearchModel"]),
 
     loginOpen() {
       this.log = true;
@@ -90,10 +90,20 @@ export default {
       this.setUser(null);
       this.setAuthAxiosHeader("setAuthAxiosHeader", null);
     },
+    async goToHome() {
+      this.$router.push("/");
+      this.setSearchModel({
+        paageNum: 1,
+        pageSize: 8,
+        categoryId: null,
+      });
+      await this.GetProductsForIndex(this.searchModel);
+    },
   },
   computed: {
     ...mapState({
       user: (state) => state.users.user,
+      searchModel: (state) => state.products.searchModel,
     }),
   },
 };

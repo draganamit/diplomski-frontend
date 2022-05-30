@@ -3,7 +3,7 @@
     <div class="image"></div>
     <div style="display: flex">
       <div class="name">{{ name }}</div>
-      <div class="price">{{ price }}</div>
+      <div class="price">{{ price }} KM</div>
     </div>
 
     <div class="icons">
@@ -41,8 +41,8 @@ export default {
       default: "",
     },
     price: {
-      type: String,
-      default: "",
+      type: Number,
+      default: null,
     },
   },
   methods: {
