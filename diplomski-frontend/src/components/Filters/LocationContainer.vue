@@ -2,16 +2,31 @@
   <div name="lokacija" class="container">
     <div class="header">Lokacija</div>
     <div class="content">
-      <input class="location" type="text" />
+      <input class="location" type="text" v-model="location" />
     </div>
     <div class="search">
-      <button type="button">Pretraži</button>
+      <button type="button" @click="getProductByLocation()">Pretraži</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      location: this.$route.query.location ? this.$route.query.location : "",
+    };
+  },
+  methods: {
+    getProductByLocation() {
+      let query = Object.assign({}, this.$route.query);
+      query.location = this.location;
+      this.$router.push({
+        query: query,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>

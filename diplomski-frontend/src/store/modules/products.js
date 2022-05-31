@@ -2,9 +2,12 @@ const state ={
     products: [],
     searchModel:
     {
-        paageNum: 1,
+        pageNum: 1,
         pageSize: 8,
-        categoryId:null
+        categoryId:null,
+        priceFrom: null,
+        priceTo: null,
+        location: null
     },
 }
 const actions = {

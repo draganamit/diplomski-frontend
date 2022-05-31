@@ -91,13 +91,7 @@ export default {
       this.setAuthAxiosHeader("setAuthAxiosHeader", null);
     },
     async goToHome() {
-      this.$router.push("/");
-      this.setSearchModel({
-        paageNum: 1,
-        pageSize: 8,
-        categoryId: null,
-      });
-      await this.GetProductsForIndex(this.searchModel);
+      window.location = "/";
     },
   },
   computed: {

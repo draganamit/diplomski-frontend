@@ -16,18 +16,13 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {};
   },
   async created() {
     await this.getAllCategories();
-    this.setSearchModel({
-      pageNum: 1,
-      pageSize: 8,
-      categoryId: Number(this.$route.query.categoryId),
-    });
   },
   computed: {
     ...mapState({
@@ -36,19 +31,12 @@ export default {
   },
   methods: {
     ...mapActions(["getAllCategories"]),
-    ...mapMutations(["setCategories", "setSearchModel"]),
 
     getProductByCategory(id) {
-      this.setSearchModel({
-        pageNum: 1,
-        pageSize: 8,
-        categoryId: id,
-      });
-
+      let query = Object.assign({}, this.$route.query);
+      query.categoryId = id;
       this.$router.push({
-        query: {
-          categoryId: id,
-        },
+        query: query,
       });
     },
   },

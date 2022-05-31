@@ -4,21 +4,44 @@
     <div class="content justify-between">
       <div class="price">
         Od
-        <input type="text" placeholder="od" />
+        <input type="text" placeholder="od" v-model="priceModel.priceFrom" />
       </div>
       <div class="price">
         Do
-        <input type="text" placeholder="od" />
+        <input type="text" placeholder="do" v-model="priceModel.priceTo" />
       </div>
     </div>
     <div class="search">
-      <button type="button">Pretraži</button>
+      <button @click="getProductByPrice()" type="button">Pretraži</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      priceModel: {
+        priceFrom: this.$route.query.priceFrom
+          ? Number(this.$route.query.priceFrom)
+          : null,
+        priceTo: this.$route.query.priceTo
+          ? Number(this.$route.query.priceTo)
+          : null,
+      },
+    };
+  },
+  methods: {
+    getProductByPrice() {
+      let query = Object.assign({}, this.$route.query);
+      query.priceFrom = this.priceModel.priceFrom;
+      query.priceTo = this.priceModel.priceTo;
+      this.$router.push({
+        query: query,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>

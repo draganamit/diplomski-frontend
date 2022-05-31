@@ -18,6 +18,7 @@ export default {
     ProductBase,
   },
   props: {},
+
   watch: {
     searchModel: {
       deep: true,
@@ -25,15 +26,31 @@ export default {
         await this.GetProductsForIndex(this.searchModel);
       },
     },
+    "$route.query"(newVal) {
+      //newVal == this.$route.query
+      this.mapQueryToSearchModel(newVal);
+      // await this.GetProductsForIndex(this.searchModel);
+    },
   },
   methods: {
     ...mapActions(["GetProductsForIndex"]),
-    ...mapMutations(["setProducts"]),
+    ...mapMutations(["setProducts", "setSearchModel"]),
     openWindowUpdate(id) {
       this.$emit("openUpdate", id);
     },
+    mapQueryToSearchModel(query) {
+      this.setSearchModel({
+        pageNum: query.pageNum ? Number(query.pageNum) : 1,
+        pageSize: query.pageSize ? Number(query.pageSize) : 8,
+        categoryId: query.categoryId ? Number(query.categoryId) : null,
+        priceFrom: query.priceFrom ? Number(query.priceFrom) : null,
+        priceTo: query.priceTo ? Number(query.priceTo) : null,
+        location: query.location ? query.location : "",
+      });
+    },
   },
   async created() {
+    this.mapQueryToSearchModel(this.$route.query);
     await this.GetProductsForIndex(this.searchModel);
   },
   computed: {
