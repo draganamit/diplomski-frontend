@@ -9,7 +9,7 @@
       </div>
       <div class="relative">
         <div class="dropdown-content">
-          <a href="/product">Proizvodi</a>
+          <a @click="$router.push({ name: 'product' })">Proizvodi</a>
           <a href="/category">Kategorije</a>
           <a href="/users">Korisnici</a>
           <a @click="Logout()" href="/">Odjavi se</a>

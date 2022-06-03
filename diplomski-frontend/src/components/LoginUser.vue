@@ -65,6 +65,7 @@ export default {
           };
           this.closeWindowLogin();
           await this.getUserByUser();
+          window.location = "/";
         } catch (error) {
           this.errorLogin = true;
         }

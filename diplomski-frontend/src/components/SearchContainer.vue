@@ -1,12 +1,27 @@
 <template>
   <div class="contaner">
-    <input type="text" placeholder="Ukucaj proizvod" />
-    <button>Pretrazi</button>
+    <input type="text" placeholder="Ukucaj proizvod" v-model="nameProduct" />
+    <button @click="getProduct()">Pretrazi</button>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      nameProduct: this.$route.query.name ? this.$route.query.name : "",
+    };
+  },
+  methods: {
+    getProduct() {
+      let query = Object.assign({}, this.$route.query);
+      query.name = this.nameProduct;
+      this.$router.push({
+        query: query,
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>

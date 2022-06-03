@@ -1,5 +1,5 @@
 const state = {
-    user: null
+    user:{}
 }
 
 const actions = {

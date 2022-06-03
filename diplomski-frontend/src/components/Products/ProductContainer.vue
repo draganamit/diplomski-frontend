@@ -46,6 +46,8 @@ export default {
         priceFrom: query.priceFrom ? Number(query.priceFrom) : null,
         priceTo: query.priceTo ? Number(query.priceTo) : null,
         location: query.location ? query.location : "",
+        name: query.name ? query.name : "",
+        userId: query.userId ? Number(query.userId) : null,
       });
     },
   },

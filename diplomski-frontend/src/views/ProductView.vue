@@ -3,6 +3,7 @@
     <div v-if="update" class="update-product">
       <UpdateProduct
         @closed="closeWindow()"
+        @save="closeGetProduct()"
         :textButton="idProduct ? 'Sačuvaj izmjene' : 'Dodaj proizvod'"
       ></UpdateProduct>
     </div>
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 import ProductContainer from "@/components/Products/ProductContainer.vue";
 import UpdateProduct from "@/components/UpdateProduct.vue";
 export default {
@@ -32,14 +34,34 @@ export default {
       idProduct: null,
     };
   },
+  computed: {
+    ...mapState({
+      user: (state) => state.users.user,
+      searchModel: (state) => state.products.searchModel,
+    }),
+  },
   methods: {
-    openUpdateProduct(id = null) {
-      this.idProduct = id;
+    ...mapActions(["GetProductsForIndex"]),
+    openUpdateProduct(productId = null) {
+      this.idProduct = productId;
       this.update = true;
     },
     closeWindow() {
       this.update = false;
     },
+    async closeGetProduct() {
+      this.update = false;
+      await this.GetProductsForIndex(this.searchModel);
+    },
+  },
+  created() {
+    if (this.user.id) {
+      let query = Object.assign({}, this.$route.query);
+      query.userId = this.user.id;
+      this.$router.push({
+        query: query,
+      });
+    }
   },
 };
 </script>
