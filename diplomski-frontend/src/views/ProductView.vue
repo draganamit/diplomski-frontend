@@ -5,6 +5,7 @@
         @closed="closeWindow()"
         @save="closeGetProduct()"
         :textButton="idProduct ? 'Sačuvaj izmjene' : 'Dodaj proizvod'"
+        :idProduct="idProduct"
       ></UpdateProduct>
     </div>
     <div class="add">

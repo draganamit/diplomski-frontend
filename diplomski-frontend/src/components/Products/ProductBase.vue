@@ -1,5 +1,8 @@
 <template>
-  <div class="container-product" @click="$router.push('/productdescription')">
+  <div
+    class="container-product"
+    @click.stop="$router.push('/productdescription')"
+  >
     <div class="image"></div>
     <div style="display: flex">
       <div class="name">{{ name }}</div>
@@ -20,6 +23,7 @@
         <i class="icon-pencil"></i>
       </div>
       <div
+        @click.stop="remove()"
         style="
           padding: 0 0.5rem;
           font-size: 1.1rem;
@@ -48,6 +52,9 @@ export default {
   methods: {
     openWindow() {
       this.$emit("open");
+    },
+    remove() {
+      this.$emit("remove");
     },
   },
 };

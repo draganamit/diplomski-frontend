@@ -24,10 +24,21 @@ const actions = {
          await rootState.authAxios.post("ProductContorller", newProduct);
         // commit("setNewProduct", response.data.data);
     },
-    async updateProduct({rootState, commit},updatedProduct)
+    async updateProduct({rootState},updatedProduct)
     {
-        const response = await rootState.authAxios.put("ProductContorller", updatedProduct);
-        commit("setUpdatedProduct", response.data.data);
+        await rootState.authAxios.put("ProductContorller", updatedProduct);
+        
+    },
+    async deleteProduct({rootState},id)
+    {
+        await rootState.authAxios.delete("ProductContorller/"+id);
+        
+    },
+    async getProductById({rootState},id)
+    {
+       const  response = await rootState.authAxios.get("ProductContorller/"+id);
+       return response.data.data;
+        
     }
   
 }

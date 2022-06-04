@@ -28,13 +28,17 @@
           </div>
           <div>
             <div class="text-div">Stanje:</div>
-            <input type="text" v-model.number="model.state" />
+            <input type="number" v-model.number="model.state" />
           </div>
           <div>
             <div class="text-div">Cijena:</div>
-            <input type="text" v-model.number="model.price" />
+            <input type="number" v-model.number="model.price" />
           </div>
-          <button style="width: 100%" type="button" @click="addProducts()">
+          <button
+            style="width: 100%"
+            type="button"
+            @click="model.id ? updateProducts() : addProducts()"
+          >
             {{ textButton }}
           </button>
         </form>
@@ -51,10 +55,16 @@ export default {
       type: String,
       default: "",
     },
+    idProduct: {
+      type: Number,
+      default: null,
+    },
   },
+
   data() {
     return {
       model: {
+        id: null,
         name: "",
         description: "",
         categoryId: null,
@@ -63,11 +73,28 @@ export default {
       },
     };
   },
+
   async created() {
+    if (this.idProduct) {
+      const response = await this.getProductById(this.idProduct);
+
+      this.model.categoryId = response.category.id;
+      this.model.name = response.name;
+      this.model.description = response.description;
+      this.model.state = response.state;
+      this.model.price = response.price;
+      this.model.id = this.idProduct;
+    }
+
     await this.getAllCategories();
   },
   methods: {
-    ...mapActions(["getAllCategories", "addProduct"]),
+    ...mapActions([
+      "getAllCategories",
+      "addProduct",
+      "updateProduct",
+      "getProductById",
+    ]),
 
     closeWindowUpdate() {
       this.$emit("closed");
@@ -76,7 +103,10 @@ export default {
       await this.addProduct(this.model);
       this.$emit("save");
     },
-    updateProduct() {},
+    async updateProducts() {
+      await this.updateProduct(this.model);
+      this.$emit("save");
+    },
   },
   computed: {
     ...mapState({
