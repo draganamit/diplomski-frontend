@@ -89,6 +89,7 @@ export default {
       localStorage.removeItem("token");
       this.setUser(null);
       this.setAuthAxiosHeader("setAuthAxiosHeader", null);
+      window.location = "/";
     },
     async goToHome() {
       window.location = "/";

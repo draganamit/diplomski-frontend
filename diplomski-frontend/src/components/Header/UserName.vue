@@ -12,7 +12,7 @@
           <a @click="$router.push({ name: 'product' })">Proizvodi</a>
           <a href="/category">Kategorije</a>
           <a href="/users">Korisnici</a>
-          <a @click="Logout()" href="/">Odjavi se</a>
+          <a @click="Logout()">Odjavi se</a>
         </div>
       </div>
     </div>

@@ -14,10 +14,10 @@
     </div>
     <div class="all-category">
       <CategoryBase
-        v-for="(obj, key) in categories"
+        v-for="(category, key) in categories"
         :key="key"
-        @open="openUpdateCategory(obj.id)"
-        :nameCategory="obj.name"
+        @open="openUpdateCategory(category.id)"
+        :nameCategory="category.name"
       ></CategoryBase>
     </div>
     <div v-if="update" class="mask" @click.self="closeWindow()"></div>
@@ -27,6 +27,7 @@
 <script>
 import UpdateCategory from "@/components/UpdateCategory.vue";
 import CategoryBase from "@/components/CategoryBase.vue";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
@@ -37,35 +38,10 @@ export default {
     return {
       update: false,
       idCategory: null,
-      categories: [
-        {
-          id: 1,
-          name: "Kategorija1",
-        },
-        {
-          id: 2,
-          name: "Kategorija2",
-        },
-        {
-          id: 3,
-          name: "Kategorija3",
-        },
-        {
-          id: 4,
-          name: "Kategorija4",
-        },
-        {
-          id: 5,
-          name: "Kategorija5",
-        },
-        {
-          id: 6,
-          name: "Kategorija6",
-        },
-      ],
     };
   },
   methods: {
+    ...mapActions(["getAllCategories"]),
     openUpdateCategory(id = null) {
       this.idCategory = id;
       this.update = true;
@@ -73,6 +49,14 @@ export default {
     closeWindow() {
       this.update = false;
     },
+  },
+  async created() {
+    await this.getAllCategories();
+  },
+  computed: {
+    ...mapState({
+      categories: (state) => state.categories.categories,
+    }),
   },
 };
 </script>
