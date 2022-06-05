@@ -15,6 +15,7 @@
         <i class="icon-pencil"></i>
       </div>
       <div
+        @click="remove()"
         style="
           padding: 0 0.5rem;
           font-size: 1.1rem;
@@ -39,6 +40,9 @@ export default {
   methods: {
     openWindow() {
       this.$emit("open");
+    },
+    remove() {
+      this.$emit("remove");
     },
   },
 };

@@ -8,10 +8,16 @@
         <form>
           <div>
             <div class="text-div">Naziv:</div>
-            <input type="text" v-model="name" />
+            <input type="text" v-model="model.name" />
           </div>
 
-          <button style="width: 100%">{{ textButton }}</button>
+          <button
+            type="button"
+            @click="categoryId ? updateCategories() : addCategories()"
+            style="width: 100%"
+          >
+            {{ textButton }}
+          </button>
         </form>
       </div>
     </div>
@@ -19,24 +25,46 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   props: {
     textButton: {
       type: String,
       default: "",
     },
+    categoryId: {
+      type: Number,
+      default: null,
+    },
   },
   data() {
     return {
       model: {
-        naziv: "",
+        name: "",
+        id: null,
       },
     };
   },
   methods: {
+    ...mapActions(["addCategory", "getCategoryById", "updateCategory"]),
     closeWindowUpdate() {
       this.$emit("closed");
     },
+    async addCategories() {
+      await this.addCategory(this.model);
+      this.$emit("save");
+    },
+    async updateCategories() {
+      await this.updateCategory(this.model);
+      this.$emit("save");
+    },
+  },
+  async created() {
+    if (this.categoryId) {
+      const response = await this.getCategoryById(this.categoryId);
+      this.model.name = response.name;
+      this.model.id = response.id;
+    }
   },
 };
 </script>

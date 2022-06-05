@@ -3,7 +3,9 @@
     <div v-if="update" class="update-category">
       <UpdateCategory
         @closed="closeWindow()"
+        @save="closeGetCategories()"
         :textButton="idCategory ? 'Sačuvaj izmjene' : 'Dodaj kategoriju'"
+        :categoryId="idCategory"
       ></UpdateCategory>
     </div>
     <div class="add">
@@ -18,6 +20,7 @@
         :key="key"
         @open="openUpdateCategory(category.id)"
         :nameCategory="category.name"
+        @remove="removeProduct(category.id)"
       ></CategoryBase>
     </div>
     <div v-if="update" class="mask" @click.self="closeWindow()"></div>
@@ -41,13 +44,25 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getAllCategories"]),
+    ...mapActions(["getAllCategories", "deleteCategory"]),
     openUpdateCategory(id = null) {
       this.idCategory = id;
       this.update = true;
     },
     closeWindow() {
       this.update = false;
+    },
+    async closeGetCategories() {
+      this.update = false;
+      await this.getAllCategories();
+    },
+    async removeProduct(id) {
+      try {
+        await this.deleteCategory(id);
+        await this.getAllCategories();
+      } catch (error) {
+        console.log(error.response);
+      }
     },
   },
   async created() {
