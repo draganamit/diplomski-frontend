@@ -13,11 +13,13 @@
         </tr>
         <tr
           style="background-color: blanchedalmond"
-          @click="$router.push('/userprofile')"
+          v-for="(user, key) in users"
+          :key="key"
+          @click="setIdUser(user.id)"
         >
-          <td>admin@gmail.com</td>
-          <td>Admin</td>
-          <td>Admin Admin</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.surname }}</td>
           <td style="text-align: right">
             <i class="icon-pencil"></i>
             <i class="icon-bin"></i>
@@ -29,7 +31,30 @@
 </template>
 
 <script>
-export default {};
+import { mapActions, mapState } from "vuex";
+export default {
+  methods: {
+    ...mapActions(["getAllUsers"]),
+    setIdUser(id) {
+      // this.$router.push({ name: "userprofile" }),
+      this.$router.push({
+        name: "userprofile",
+        query: {
+          //idUser: id,
+          userId: id,
+        },
+      });
+    },
+  },
+  async created() {
+    await this.getAllUsers();
+  },
+  computed: {
+    ...mapState({
+      users: (state) => state.users.users,
+    }),
+  },
+};
 </script>
 
 <style scoped>
@@ -56,6 +81,7 @@ th {
 td {
   text-align: left;
   padding: 0.5rem 1rem;
+  border-bottom: 1px solid gray;
 }
 a {
   text-decoration: none;

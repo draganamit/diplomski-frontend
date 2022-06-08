@@ -6,9 +6,15 @@
     </div>
     <div class="user-imformation">
       <div class="user-div">
-        <div style="padding: 1rem; font-size: 2rem">Admin Admin</div>
-        <div style="padding: 1rem; font-size: 1.5rem">admin@gmail.com</div>
-        <div style="padding: 1rem; font-size: 1.5rem">Lokacija</div>
+        <div v-if="userById" style="padding: 1rem; font-size: 2rem">
+          {{ fullName }}
+        </div>
+        <div v-if="userById" style="padding: 1rem; font-size: 1.5rem">
+          {{ userById.email }}
+        </div>
+        <div v-if="userById" style="padding: 1rem; font-size: 1.5rem">
+          {{ userById.location }}
+        </div>
         <button style="width: 100%" @click="openUpdate()">
           Azuriraj lične podatke
         </button>
@@ -40,6 +46,7 @@
 import ProductContainer from "@/components/Products/ProductContainer.vue";
 import UpdateUser from "@/components/UpdateUser.vue";
 import UpdatePassword from "@/components/UpdatePassword.vue";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
@@ -47,13 +54,16 @@ export default {
     UpdateUser,
     UpdatePassword,
   },
+
   data() {
     return {
       update: false,
       updatePassword: false,
+      //id: null,
     };
   },
   methods: {
+    ...mapActions(["getUserById"]),
     openUpdate() {
       this.update = true;
     },
@@ -64,6 +74,18 @@ export default {
       this.update = false;
       this.updatePassword = false;
     },
+  },
+  async created() {
+    await this.getUserById(Number(this.$route.query.userId));
+  },
+  computed: {
+    ...mapState({
+      userById: (state) => state.users.userById,
+
+      fullName(state) {
+        return state.users.userById.name + " " + state.users.userById.surname;
+      },
+    }),
   },
 };
 </script>
