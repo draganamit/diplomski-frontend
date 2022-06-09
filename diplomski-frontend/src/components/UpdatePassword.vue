@@ -5,41 +5,110 @@
     </div>
     <div class="update">
       <div class="form-container">
-        <form>
-          <div>
-            <div class="text-div">Trenutna lozinka:</div>
-            <input type="text" v-model="oldPassword" />
-          </div>
-          <div>
-            <div class="text-div">Nova lozinka:</div>
-            <input type="text" v-model="newPassword" />
-          </div>
-          <div>
-            <div class="text-div">Potvrdite lozinku:</div>
-            <input type="text" v-model="confirmPassword" />
-          </div>
-          <button style="width: 100%">Sačuvaj izmjene</button>
-        </form>
+        <ValidationObserver ref="observer">
+          <form>
+            <div>
+              <ValidationProvider
+                class="validation-provider"
+                name="oldPassword"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <div class="text-div">
+                  <span> Trenutna lozinka: </span>
+                  <input
+                    name="oldPassword"
+                    type="text"
+                    v-model="model.oldPassword"
+                  />
+                </div>
+                <span v-if="errors.length" class="error">{{ errors[0] }}</span>
+                <span v-if="incorrectPassword" class="error">
+                  Pogrešna lozinka</span
+                >
+              </ValidationProvider>
+            </div>
+            <div>
+              <ValidationProvider
+                class="validation-provider"
+                vid="password"
+                name="password"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <div class="text-div">
+                  <span> Nova lozinka: </span>
+
+                  <input
+                    type="text"
+                    v-model="model.newPassword"
+                    name="password"
+                  />
+                </div>
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+            </div>
+            <div>
+              <ValidationProvider
+                class="validation-provider"
+                name="comfirmPassword"
+                rules="required|confirmed:password"
+                v-slot="{ errors }"
+              >
+                <div class="text-div">
+                  <span> Potvrdite lozinku: </span>
+                  <input
+                    name="comfirmPassword"
+                    type="text"
+                    v-model="confirmPassword"
+                  />
+                </div>
+
+                <span v-if="errors.length" class="error">{{ errors[0] }}</span>
+              </ValidationProvider>
+            </div>
+
+            <button type="button" @click="update()" style="width: 100%">
+              Sačuvaj izmjene
+            </button>
+          </form>
+        </ValidationObserver>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
       model: {
         oldPassword: "",
         newPassword: "",
-        confirmPassword: "",
       },
-      close: false,
+      confirmPassword: "",
+      incorrectPassword: false,
     };
   },
   methods: {
+    ...mapActions(["updatePassword"]),
     closeWindow() {
       this.$emit("closed");
+    },
+    async update() {
+      const valid = await this.$refs.observer.validate();
+      if (!valid) return;
+
+      const response = await this.updatePassword(this.model);
+      if (!response) {
+        this.incorrectPassword = true;
+        return;
+      }
+
+      this.$emit("save");
     },
   },
 };
@@ -73,10 +142,18 @@ form > div {
   padding-top: 2rem;
 }
 .text-div {
-  width: 20rem;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: left;
+}
+.text-div > span {
+  width: 20rem;
+}
+.validation-provider {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 input {
   width: 100%;
@@ -98,5 +175,12 @@ button {
   margin-top: 2rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.error {
+  margin: auto;
+  padding: 0.2rem;
+  text-align: left;
+  color: red;
+  background: transparent;
 }
 </style>

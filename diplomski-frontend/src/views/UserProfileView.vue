@@ -1,8 +1,12 @@
 <template>
   <div>
     <div v-if="update || updatePassword" class="update-form">
-      <UpdateUser v-if="update" @closed="away()"></UpdateUser>
-      <UpdatePassword v-if="updatePassword" @closed="away()"></UpdatePassword>
+      <UpdateUser @save="save()" v-if="update" @closed="away()"></UpdateUser>
+      <UpdatePassword
+        @save="savePassword()"
+        v-if="updatePassword"
+        @closed="away()"
+      ></UpdatePassword>
     </div>
     <div class="user-imformation">
       <div class="user-div">
@@ -59,7 +63,6 @@ export default {
     return {
       update: false,
       updatePassword: false,
-      //id: null,
     };
   },
   methods: {
@@ -74,9 +77,21 @@ export default {
       this.update = false;
       this.updatePassword = false;
     },
+    async save() {
+      this.update = false;
+      await this.getUserById(Number(this.$route.query.userId));
+    },
+    savePassword() {
+      this.updatePassword = false;
+    },
   },
   async created() {
     await this.getUserById(Number(this.$route.query.userId));
+  },
+  watch: {
+    "$route.query.userId"(newVal) {
+      this.getUserById(newVal);
+    },
   },
   computed: {
     ...mapState({

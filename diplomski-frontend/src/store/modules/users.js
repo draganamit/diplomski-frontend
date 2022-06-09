@@ -30,6 +30,16 @@ const actions = {
     {
         const response = await rootState.baseAxios.get('auth/'+id);
         commit('setUserById', response.data.data);
+    },
+    async updateUser({rootState},updatedUser)
+    {
+        await rootState.authAxios.put('auth/UpdateByUser',updatedUser);
+    
+    },
+    async updatePassword({rootState},updatedPassword)
+    {
+       const response = await rootState.authAxios.put('auth/UpdatePassword',updatedPassword);
+        return response.data;
     }
 }
 const mutations = {

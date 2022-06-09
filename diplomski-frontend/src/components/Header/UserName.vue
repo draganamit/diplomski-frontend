@@ -3,7 +3,10 @@
     <div class="dropdown">
       <div class="namesurname">
         <i class="icon-user-circle-o" style="font-size: 1.5rem"></i>
-        <div style="display: flex; align-items: center; margin: 0 0.5rem">
+        <div
+          @click="openUserProfile()"
+          style="display: flex; align-items: center; margin: 0 0.5rem"
+        >
           {{ fullName }}
         </div>
       </div>
@@ -28,6 +31,7 @@ import { mapState } from "vuex";
 export default {
   computed: {
     ...mapState({
+      user: (state) => state.users.user,
       fullName(state) {
         return state.users.user.name + " " + state.users.user.surname;
       },
@@ -36,6 +40,14 @@ export default {
   methods: {
     Logout() {
       this.$emit("logout");
+    },
+    openUserProfile() {
+      this.$router.push({
+        name: "userprofile",
+        query: {
+          userId: this.user.id,
+        },
+      });
     },
   },
 };

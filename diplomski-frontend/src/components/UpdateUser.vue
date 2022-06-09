@@ -8,21 +8,23 @@
         <form>
           <div>
             <div class="text-div">Ime:</div>
-            <input type="text" v-model="name" />
+            <input type="text" v-model="model.name" />
           </div>
           <div>
             <div class="text-div">Prezime:</div>
-            <input type="text" v-model="surname" />
+            <input type="text" v-model="model.surname" />
           </div>
           <div>
             <div class="text-div">Email:</div>
-            <input type="text" v-model="email" />
+            <input type="text" v-model="model.email" />
           </div>
           <div>
             <div class="text-div">Lokacija:</div>
-            <input type="text" v-model="location" />
+            <input type="text" v-model="model.location" />
           </div>
-          <button style="width: 100%">Sačuvaj izmjene</button>
+          <button @click="update()" type="button" style="width: 100%">
+            Sačuvaj izmjene
+          </button>
         </form>
       </div>
     </div>
@@ -30,10 +32,12 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
       model: {
+        id: null,
         name: "",
         surname: "",
         email: "",
@@ -41,10 +45,27 @@ export default {
       },
     };
   },
+  created() {
+    (this.model.name = this.userById.name),
+      (this.model.surname = this.userById.surname),
+      (this.model.email = this.userById.email),
+      (this.model.location = this.userById.location);
+    this.model.id = this.userById.id;
+  },
   methods: {
+    ...mapActions(["updateUser"]),
     closeWindowUpdate() {
       this.$emit("closed");
     },
+    async update() {
+      await this.updateUser(this.model);
+      this.$emit("save");
+    },
+  },
+  computed: {
+    ...mapState({
+      userById: (state) => state.users.userById,
+    }),
   },
 };
 </script>
