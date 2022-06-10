@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="container-product"
-    @click.stop="$router.push('/productdescription')"
-  >
+  <div class="container-product" @click.stop="setProductId()">
     <div class="image"></div>
     <div style="display: flex">
       <div class="name">{{ name }}</div>
@@ -48,6 +45,10 @@ export default {
       type: Number,
       default: null,
     },
+    id: {
+      type: Number,
+      default: null,
+    },
   },
   methods: {
     openWindow() {
@@ -55,6 +56,14 @@ export default {
     },
     remove() {
       this.$emit("remove");
+    },
+    setProductId() {
+      this.$router.push({
+        name: "productdescription",
+        query: {
+          productId: this.id,
+        },
+      });
     },
   },
 };

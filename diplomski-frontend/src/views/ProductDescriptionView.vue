@@ -1,16 +1,16 @@
 <template>
   <div class="description-div">
     <div v-if="order" class="order-form">
-      <OrderProduct @closed="away()"></OrderProduct>
+      <OrderProduct @closed="away()" :name="name" :price="price"></OrderProduct>
     </div>
     <div class="image-div"></div>
     <div class="description-button">
       <div class="description">
-        <div class="text-div">Naziv</div>
-        <div class="text-div">Kategorija</div>
-        <div class="text-div">Opis</div>
-        <div class="text-div">Stanje</div>
-        <div class="text-div">Cijena</div>
+        <div class="text-div">Naziv: {{ name }}</div>
+        <div class="text-div">Kategorija: {{ category }}</div>
+        <div class="text-div">Opis: {{ description }}</div>
+        <div class="text-div">Stanje: {{ state }}</div>
+        <div class="text-div">Cijena: {{ price }}</div>
       </div>
       <div class="button-div">
         <button @click="openOrderWindov()">Naruči</button>
@@ -22,6 +22,7 @@
 
 <script>
 import OrderProduct from "@/components/OrderProduct.vue";
+import { mapActions } from "vuex";
 export default {
   components: {
     OrderProduct,
@@ -29,9 +30,25 @@ export default {
   data() {
     return {
       order: false,
+      name: "",
+      category: "",
+      description: "",
+      state: null,
+      price: null,
     };
   },
+  async created() {
+    const response = await this.getProductById(
+      Number(this.$route.query.productId)
+    );
+    this.name = response.name;
+    this.category = response.category.name;
+    this.description = response.description;
+    this.state = response.state;
+    this.price = response.price;
+  },
   methods: {
+    ...mapActions(["getProductById"]),
     openOrderWindov() {
       this.order = true;
     },

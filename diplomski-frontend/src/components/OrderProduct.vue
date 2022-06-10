@@ -6,12 +6,36 @@
     <div class="order-div">
       <div class="oreder-product">
         <div class="image"></div>
-        <div product-information>
-          <div class="text">Naziv</div>
-          <div class="text">Cijena</div>
+        <div class="product-information">
+          <div class="text">Naziv: {{ name }}</div>
+          <div class="text">Cijena: {{ price }}KM</div>
         </div>
         <div class="quantity">
           <div>Izaberite kolicinu</div>
+          <div class="wrapper">
+            <button
+              class="btn btn--minus"
+              @click="changeCounter('-1')"
+              type="button"
+              name="button"
+            >
+              -
+            </button>
+            <input
+              class="quantityinput"
+              type="text"
+              name="name"
+              :value="counter"
+            />
+            <button
+              class="btn btn--plus"
+              @click="changeCounter('1')"
+              type="button"
+              name="button"
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
       <div class="user-div">
@@ -19,32 +43,32 @@
           <div>Lični podaci</div>
           <div>
             <div class="form-text">Ime*</div>
-            <input type="text" />
+            <input class="from-input" type="text" />
           </div>
           <div>
             <div class="form-text">Prezime*</div>
-            <input type="text" />
+            <input class="from-input" type="text" />
           </div>
           <div>
             <div class="form-text">Telefon*</div>
-            <input type="text" />
+            <input class="from-input" type="text" />
           </div>
           <div>
             <div class="form-text">Grad*</div>
-            <input type="text" />
+            <input class="from-input" type="text" />
           </div>
           <div>
             <div class="form-text">Adresa*</div>
-            <input type="text" />
+            <input class="from-input" type="text" />
           </div>
         </div>
       </div>
       <div class="sum-order">
         <div class="sum">
-          <div>Ukupno:</div>
+          <div>Ukupno: {{ sum }}KM</div>
         </div>
         <div class="order-button">
-          <button>Naruči</button>
+          <button class="btnOrder">Naruči</button>
         </div>
       </div>
     </div>
@@ -53,9 +77,37 @@
 
 <script>
 export default {
+  props: {
+    name: {
+      type: String,
+      default: "",
+    },
+    price: {
+      type: Number,
+      default: null,
+    },
+  },
+  data() {
+    return {
+      counter: 1,
+    };
+  },
+  computed: {
+    sum() {
+      return this.price * this.counter;
+    },
+  },
   methods: {
     closeWindowOrder() {
       this.$emit("closed");
+    },
+    changeCounter: function (num) {
+      this.counter += +num;
+      console.log(this.counter);
+      !isNaN(this.counter) && this.counter > 0
+        ? this.counter
+        : (this.counter = 0);
+      this.counter <= this.price ? this.counter : (this.counter = this.price);
     },
   },
 };
@@ -129,7 +181,7 @@ export default {
   justify-content: flex-start;
   align-items: center;
 }
-input {
+.from-input {
   display: flex;
   background-color: rgb(213, 210, 210);
   border-color: transparent;
@@ -154,7 +206,7 @@ input {
   justify-content: flex-end;
   margin-left: auto;
 }
-button {
+.btnOrder {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
   border: 1px solid gray;
@@ -164,5 +216,32 @@ button {
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   margin-right: 0.5rem;
+}
+.product-information {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.wrapper {
+  height: 30px;
+  display: flex;
+}
+.quantityinput {
+  -webkit-appearance: none;
+  border: none;
+  text-align: center;
+  width: 30px;
+
+  font-size: 16px;
+  color: #43484d;
+  font-weight: 300;
+  border: 1px solid #e1e8ee;
+}
+
+.btn {
+  border: 1px solid #e1e8ee;
+  width: 30px;
+  background-color: #e1e8ee;
+  cursor: pointer;
 }
 </style>

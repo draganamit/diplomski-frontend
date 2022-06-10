@@ -7,6 +7,7 @@
       @remove="removeProduct(product.id)"
       :name="product.name"
       :price="product.price"
+      :id="product.id"
     ></ProductBase>
   </div>
 </template>
