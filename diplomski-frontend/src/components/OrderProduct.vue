@@ -86,6 +86,10 @@ export default {
       type: Number,
       default: null,
     },
+    state: {
+      type: Number,
+      default: null,
+    },
   },
   data() {
     return {
@@ -107,7 +111,7 @@ export default {
       !isNaN(this.counter) && this.counter > 0
         ? this.counter
         : (this.counter = 0);
-      this.counter <= this.price ? this.counter : (this.counter = this.price);
+      this.counter <= this.state ? this.counter : (this.counter = this.state);
     },
   },
 };

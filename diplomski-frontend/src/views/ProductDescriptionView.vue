@@ -1,7 +1,12 @@
 <template>
   <div class="description-div">
     <div v-if="order" class="order-form">
-      <OrderProduct @closed="away()" :name="name" :price="price"></OrderProduct>
+      <OrderProduct
+        @closed="away()"
+        :name="name"
+        :price="price"
+        :state="state"
+      ></OrderProduct>
     </div>
     <div class="image-div"></div>
     <div class="description-button">
