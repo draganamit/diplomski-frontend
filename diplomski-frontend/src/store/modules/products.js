@@ -9,15 +9,18 @@ const state ={
         priceTo: null,
         location: null,
         name: null,
-        userId:null
+        userId:null,
     },
+    totalCount: null
 }
 const actions = {
     async GetProductsForIndex({rootState, commit}, searchModel)
     {
         const response = await rootState.baseAxios.post(`ProductContorller/GetProductsForIndex`, searchModel);
-
+       
         commit("setProducts", response.data.data)
+        commit("setTotalCount", response.data.totalCount)
+        
     },
     async addProduct({rootState},newProduct)
     {
@@ -47,7 +50,7 @@ const mutations = {
     setSearchModel:(state, model)=> {
         state.searchModel = model;
     },
-   // setNewProduct: (state,product) => (state.products=(product))
+    setTotalCount: (state,totalCount) => (state.totalCount=totalCount)
 }
 export default{
     state,

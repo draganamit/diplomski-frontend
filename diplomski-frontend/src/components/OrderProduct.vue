@@ -107,7 +107,6 @@ export default {
     },
     changeCounter: function (num) {
       this.counter += +num;
-      console.log(this.counter);
       !isNaN(this.counter) && this.counter > 0
         ? this.counter
         : (this.counter = 0);

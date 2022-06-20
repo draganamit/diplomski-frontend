@@ -59,9 +59,11 @@ export default {
     if (this.user.id) {
       let query = Object.assign({}, this.$route.query);
       query.userId = this.user.id;
-      this.$router.push({
-        query: query,
-      });
+      this.$router
+        .replace({
+          query: query,
+        })
+        .catch();
     }
   },
 };

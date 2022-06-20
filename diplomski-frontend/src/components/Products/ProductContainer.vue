@@ -1,14 +1,29 @@
 <template>
-  <div class="content-products">
-    <ProductBase
-      v-for="(product, key) in products"
-      :key="key"
-      @open="openWindowUpdate(product.id)"
-      @remove="removeProduct(product.id)"
-      :name="product.name"
-      :price="product.price"
-      :id="product.id"
-    ></ProductBase>
+  <div>
+    <div class="content-products">
+      <ProductBase
+        v-for="(product, key) in products"
+        :key="key"
+        @open="openWindowUpdate(product.id)"
+        @remove="removeProduct(product.id)"
+        :name="product.name"
+        :price="product.price"
+        :id="product.id"
+      ></ProductBase>
+      <div v-if="!products.length">Nema proizvoda na stanju.</div>
+    </div>
+    <div class="pagination">
+      <div class="page" @click="prevPage()">&#60;</div>
+      <div
+        class="page"
+        v-for="index in pageCount"
+        :key="index"
+        @click="setPageNum(index)"
+      >
+        {{ index }}
+      </div>
+      <div class="page" @click="nextPage()">></div>
+    </div>
   </div>
 </template>
 
@@ -28,8 +43,19 @@ export default {
         await this.GetProductsForIndex(this.searchModel);
       },
     },
-    "$route.query"(newVal) {
+    "$route.query"(newVal, oldVal) {
       //newVal == this.$route.query
+
+      if (newVal.pageNum == oldVal.pageNum && newVal.pageNum > 1) {
+        let query = Object.assign({}, newVal);
+        query.pageNum = 1;
+        this.$router
+          .push({
+            query: query,
+          })
+          .catch();
+        return;
+      }
       this.mapQueryToSearchModel(newVal);
       // await this.GetProductsForIndex(this.searchModel);
     },
@@ -56,6 +82,27 @@ export default {
         userId: query.userId ? Number(query.userId) : null,
       });
     },
+    setPageNum(index) {
+      let query = Object.assign({}, this.$route.query);
+      query.pageNum = index;
+      this.$router
+        .push({
+          query: query,
+        })
+        .catch();
+    },
+    prevPage() {
+      if (this.searchModel.pageNum == 1) {
+        return;
+      }
+      this.setPageNum(this.searchModel.pageNum - 1);
+    },
+    nextPage() {
+      if (this.searchModel.pageNum == this.pageCount) {
+        return;
+      }
+      this.setPageNum(this.searchModel.pageNum + 1);
+    },
   },
   async created() {
     this.mapQueryToSearchModel(this.$route.query);
@@ -65,6 +112,11 @@ export default {
     ...mapState({
       products: (state) => state.products.products,
       searchModel: (state) => state.products.searchModel,
+      pageCount(state) {
+        return Math.ceil(
+          state.products.totalCount / state.products.searchModel.pageSize
+        );
+      },
     }),
   },
 };
@@ -93,5 +145,18 @@ export default {
   .content-products {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.page {
+  border: 1px solid #e1e8ee;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-left: 0.5rem;
+  background: white;
+  font-size: 1rem;
 }
 </style>

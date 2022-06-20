@@ -42,12 +42,14 @@ export default {
       this.$emit("logout");
     },
     openUserProfile() {
-      this.$router.push({
-        name: "userprofile",
-        query: {
-          userId: this.user.id,
-        },
-      });
+      this.$router
+        .push({
+          name: "userprofile",
+          query: {
+            userId: this.user.id,
+          },
+        })
+        .catch();
     },
   },
 };
