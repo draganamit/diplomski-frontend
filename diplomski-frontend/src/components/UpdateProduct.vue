@@ -34,6 +34,13 @@
             <div class="text-div">Cijena:</div>
             <input type="number" v-model.number="model.price" />
           </div>
+          <div>
+            <div class="text-div">Tagovi:</div>
+            <input type="text" />
+          </div>
+          <div class="tags">
+            <div class="tag">sok</div>
+          </div>
           <button
             style="width: 100%"
             type="button"
@@ -177,8 +184,20 @@ button {
   padding: 1rem 1rem;
   border-radius: 0.5rem;
   font-size: 1.2rem;
-  margin-top: 2rem;
+
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.tag {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e1e8ee;
+  border-radius: 10px;
+  margin-left: 0.5rem;
+  background-color: rgb(213, 210, 210);
+  font-size: 1rem;
+}
+.tags {
+  display: flex;
+  align-content: center;
 }
 </style>

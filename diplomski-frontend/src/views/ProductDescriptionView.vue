@@ -16,6 +16,10 @@
         <div class="text-div">Opis: {{ description }}</div>
         <div class="text-div">Stanje: {{ state }}</div>
         <div class="text-div">Cijena: {{ price }}</div>
+        <div class="text-div">Tagovi:</div>
+        <div class="tags">
+          <div class="tag" v-for="tag in tags" :key="tag">{{ tag }}</div>
+        </div>
       </div>
       <div class="button-div">
         <button @click="openOrderWindov()">Naruči</button>
@@ -40,6 +44,7 @@ export default {
       description: "",
       state: null,
       price: null,
+      tags: [],
     };
   },
   async created() {
@@ -51,6 +56,7 @@ export default {
     this.description = response.description;
     this.state = response.state;
     this.price = response.price;
+    this.tags = response.tags;
   },
   methods: {
     ...mapActions(["getProductById"]),
@@ -127,5 +133,17 @@ button {
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 0;
+}
+.tag {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e1e8ee;
+  border-radius: 10px;
+  margin-left: 0.5rem;
+  background-color: rgb(213, 210, 210);
+  font-size: 1rem;
+}
+.tags {
+  display: flex;
+  align-content: center;
 }
 </style>
