@@ -1,6 +1,10 @@
 <template>
   <div class="container-product">
-    <div v-if="update" class="update-product">
+    <div
+      v-if="update"
+      class="update-product"
+      style="overflow: scroll; height: 80%; overflow-x: hidden"
+    >
       <UpdateProduct
         @closed="closeWindow()"
         @save="closeGetProduct()"

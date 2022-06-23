@@ -44,7 +44,7 @@
             </div>
           </div>
 
-          <div class="tags">
+          <div class="tags" v-if="model.tags.length">
             <div class="tag" v-for="(tag, index) in model.tags" :key="tag">
               {{ tag }}
               <button
@@ -56,7 +56,16 @@
               </button>
             </div>
           </div>
-
+          <div class="product-images">
+            <div class="add-image">niz</div>
+            <div class="add-image">
+              <i
+                class="icon-camera"
+                style="padding: 0.5rem 0rem; color: dodgerblu"
+              ></i>
+              <div>Dodaj sliku proizvoda</div>
+            </div>
+          </div>
           <button
             class="btn-add"
             type="button"
@@ -213,6 +222,7 @@ input {
   width: 100%;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .tag {
   padding: 0.5rem 1rem;
@@ -248,5 +258,22 @@ input {
   color: dimgray;
   border: transparent;
   border-radius: 2px;
+}
+.product-images {
+  display: flex;
+  width: 100%;
+  align-content: center;
+}
+.add-image {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  border: 1px solid gainsboro;
+  padding: 2rem 1rem;
+  width: 8rem;
+  font-size: 1rem;
+  color: dodgerblue;
+  cursor: pointer;
 }
 </style>
