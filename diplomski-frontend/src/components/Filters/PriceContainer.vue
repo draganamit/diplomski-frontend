@@ -36,9 +36,11 @@ export default {
       let query = Object.assign({}, this.$route.query);
       query.priceFrom = this.priceModel.priceFrom;
       query.priceTo = this.priceModel.priceTo;
-      this.$router.push({
-        query: query,
-      });
+      this.$router
+        .push({
+          query: query,
+        })
+        .catch();
     },
   },
 };

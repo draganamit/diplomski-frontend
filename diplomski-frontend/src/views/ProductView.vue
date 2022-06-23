@@ -55,16 +55,22 @@ export default {
       await this.GetProductsForIndex(this.searchModel);
     },
   },
-  created() {
-    if (this.user.id) {
-      let query = Object.assign({}, this.$route.query);
-      query.userId = this.user.id;
-      this.$router
-        .replace({
-          query: query,
-        })
-        .catch();
-    }
+
+  watch: {
+    user: {
+      immediate: true,
+      handler(newVal) {
+        if (newVal) {
+          let query = Object.assign({}, this.$route.query);
+          query.userId = newVal.id;
+          this.$router
+            .replace({
+              query: query,
+            })
+            .catch();
+        }
+      },
+    },
   },
 };
 </script>

@@ -21,9 +21,11 @@ export default {
     getProductByLocation() {
       let query = Object.assign({}, this.$route.query);
       query.location = this.location;
-      this.$router.push({
-        query: query,
-      });
+      this.$router
+        .push({
+          query: query,
+        })
+        .catch();
     },
   },
 };

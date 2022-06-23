@@ -58,12 +58,14 @@ export default {
       this.$emit("remove");
     },
     setProductId() {
-      this.$router.push({
-        name: "productdescription",
-        query: {
-          productId: this.id,
-        },
-      });
+      this.$router
+        .push({
+          name: "productdescription",
+          query: {
+            productId: this.id,
+          },
+        })
+        .catch();
     },
   },
 };

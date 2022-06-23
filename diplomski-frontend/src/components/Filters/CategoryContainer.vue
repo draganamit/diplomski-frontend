@@ -36,9 +36,11 @@ export default {
       let query = Object.assign({}, this.$route.query);
       query.categoryId = id;
       console.log("postavljamo query:", query);
-      this.$router.push({
-        query: query,
-      });
+      this.$router
+        .push({
+          query: query,
+        })
+        .catch();
     },
   },
 };

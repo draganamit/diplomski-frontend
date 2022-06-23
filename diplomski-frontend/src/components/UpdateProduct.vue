@@ -36,13 +36,29 @@
           </div>
           <div>
             <div class="text-div">Tagovi:</div>
-            <input type="text" />
+            <div class="addTag">
+              <input type="text" v-model="tag" @keydown.enter="addTags()" />
+              <button type="button" class="button-add-tag" @click="addTags()">
+                Dodaj
+              </button>
+            </div>
           </div>
+
           <div class="tags">
-            <div class="tag">sok</div>
+            <div class="tag" v-for="(tag, index) in model.tags" :key="tag">
+              {{ tag }}
+              <button
+                type="button"
+                class="delete-tag"
+                @click="deleteTag(index)"
+              >
+                x
+              </button>
+            </div>
           </div>
+
           <button
-            style="width: 100%"
+            class="btn-add"
             type="button"
             @click="model.id ? updateProducts() : addProducts()"
           >
@@ -77,7 +93,9 @@ export default {
         categoryId: null,
         state: null,
         price: null,
+        tags: [],
       },
+      tag: "",
     };
   },
 
@@ -91,6 +109,7 @@ export default {
       this.model.state = response.state;
       this.model.price = response.price;
       this.model.id = this.idProduct;
+      this.model.tags = response.tags;
     }
 
     await this.getAllCategories();
@@ -113,6 +132,13 @@ export default {
     async updateProducts() {
       await this.updateProduct(this.model);
       this.$emit("save");
+    },
+    addTags() {
+      this.model.tags.push(this.tag);
+      this.tag = "";
+    },
+    deleteTag(index) {
+      this.model.tags.splice(index, 1);
     },
   },
   computed: {
@@ -177,14 +203,14 @@ input {
   outline: none;
   font-size: 1rem;
 }
-button {
+.btn-add {
   background-color: rgb(19 187 35);
   color: rgb(241, 241, 226);
   border: transparent;
   padding: 1rem 1rem;
   border-radius: 0.5rem;
   font-size: 1.2rem;
-
+  width: 100%;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -195,9 +221,32 @@ button {
   margin-left: 0.5rem;
   background-color: rgb(213, 210, 210);
   font-size: 1rem;
+  display: flex;
+  align-items: center;
 }
 .tags {
   display: flex;
   align-content: center;
+}
+.addTag {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: 100%;
+}
+.button-add-tag {
+  background-color: rgb(19 187 35);
+  color: rgb(241, 241, 226);
+  border: transparent;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  height: 100%;
+}
+.delete-tag {
+  font-weight: bold;
+  margin-left: 0.5rem;
+  color: dimgray;
+  border: transparent;
+  border-radius: 2px;
 }
 </style>

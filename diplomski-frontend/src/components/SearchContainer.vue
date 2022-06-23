@@ -16,9 +16,11 @@ export default {
     getProduct() {
       let query = Object.assign({}, this.$route.query);
       query.name = this.nameProduct;
-      this.$router.push({
-        query: query,
-      });
+      this.$router
+        .push({
+          query: query,
+        })
+        .catch();
     },
   },
 };

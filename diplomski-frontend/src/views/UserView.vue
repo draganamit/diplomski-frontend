@@ -37,13 +37,15 @@ export default {
     ...mapActions(["getAllUsers"]),
     setIdUser(id) {
       // this.$router.push({ name: "userprofile" }),
-      this.$router.push({
-        name: "userprofile",
-        query: {
-          //idUser: id,
-          userId: id,
-        },
-      });
+      this.$router
+        .push({
+          name: "userprofile",
+          query: {
+            //idUser: id,
+            userId: id,
+          },
+        })
+        .catch();
     },
   },
   async created() {
