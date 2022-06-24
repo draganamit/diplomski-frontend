@@ -6,6 +6,8 @@ import CategoryView from '@/views/CategoryView.vue'
 import UserView from '@/views/UserView.vue'
 import UserProfileView from '@/views/UserProfileView.vue'
 import ProductDescriptionView from '@/views/ProductDescriptionView.vue'
+import OrderView from '@/views/OrderView.vue'
+
 
 Vue.use(VueRouter)
 
@@ -39,6 +41,11 @@ const routes = [
     path: '/productdescription',
     name: 'productdescription',
     component: ProductDescriptionView
+  },
+  {
+    path: '/orderproduct',
+    name: 'orderproduct',
+    component: OrderView
   },
   // {
   //   path: '/about',

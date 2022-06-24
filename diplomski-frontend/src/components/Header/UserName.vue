@@ -19,8 +19,11 @@
         </div>
       </div>
     </div>
-    <div class="iconNotification">
-      <i class="icon-notification" style="font-size: 1.5rem"></i>
+    <div
+      class="iconNotification"
+      @click="$router.push({ name: 'orderproduct' })"
+    >
+      Narudžbe
     </div>
   </div>
 </template>
