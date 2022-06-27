@@ -9,6 +9,7 @@
         :name="product.name"
         :price="product.price"
         :id="product.id"
+        :images="product.images"
       ></ProductBase>
       <div v-if="!products.length">Nema proizvoda na stanju.</div>
     </div>

@@ -6,23 +6,40 @@
         :name="name"
         :price="price"
         :state="state"
+        :images="images"
       ></OrderProduct>
     </div>
-    <div class="image-div"></div>
-    <div class="description-button">
-      <div class="description">
-        <div class="text-div">Naziv: {{ name }}</div>
-        <div class="text-div">Kategorija: {{ category }}</div>
-        <div class="text-div">Opis: {{ description }}</div>
-        <div class="text-div">Stanje: {{ state }}</div>
-        <div class="text-div">Cijena: {{ price }}</div>
-        <div class="text-div">Tagovi:</div>
-        <div class="tags">
-          <div class="tag" v-for="tag in tags" :key="tag">{{ tag }}</div>
-        </div>
+    <div style="display: flex; width: 100%">
+      <div class="image-div">
+        <gallery
+          :images="imagesArray"
+          :index="index"
+          @close="index = null"
+        ></gallery>
+
+        <img
+          :src="'http://localhost:5000/Images/' + images[0]"
+          @click="index = 0"
+          style="width: 25rem; height: 100%"
+          alt=""
+        />>
       </div>
-      <div class="button-div">
-        <button @click="openOrderWindov()">Naruči</button>
+
+      <div class="description-button">
+        <div class="description">
+          <div class="text-div">Naziv: {{ name }}</div>
+          <div class="text-div">Kategorija: {{ category }}</div>
+          <div class="text-div">Opis: {{ description }}</div>
+          <div class="text-div">Stanje: {{ state }}</div>
+          <div class="text-div">Cijena: {{ price }}</div>
+          <div class="text-div">Tagovi:</div>
+          <div class="tags">
+            <div class="tag" v-for="tag in tags" :key="tag">{{ tag }}</div>
+          </div>
+        </div>
+        <div class="button-div">
+          <button @click="openOrderWindov()">Naruči</button>
+        </div>
       </div>
     </div>
     <div v-if="order" class="mask" @click.self="away()"></div>
@@ -30,11 +47,13 @@
 </template>
 
 <script>
+import VueGallery from "vue-gallery";
 import OrderProduct from "@/components/OrderProduct.vue";
 import { mapActions } from "vuex";
 export default {
   components: {
     OrderProduct,
+    gallery: VueGallery,
   },
   data() {
     return {
@@ -45,6 +64,9 @@ export default {
       state: null,
       price: null,
       tags: [],
+      images: [],
+      index: null,
+      imagesArray: [],
     };
   },
   async created() {
@@ -57,6 +79,10 @@ export default {
     this.state = response.state;
     this.price = response.price;
     this.tags = response.tags;
+    this.images = response.images;
+    for (let i = 0; i < this.images.length; i++) {
+      this.imagesArray.push("http://localhost:5000/Images/" + this.images[i]);
+    }
   },
   methods: {
     ...mapActions(["getProductById"]),
@@ -78,8 +104,16 @@ export default {
   padding: 2rem 10rem;
 }
 .image-div {
-  border: 1px solid grey;
-  width: 20rem;
+  float: left;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ebebeb;
+  margin: 5px;
+}
+.image-div > img {
+  width: 100%;
+  height: 100%;
 }
 .description {
   display: flex;

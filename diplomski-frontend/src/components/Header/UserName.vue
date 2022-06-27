@@ -19,10 +19,7 @@
         </div>
       </div>
     </div>
-    <div
-      class="iconNotification"
-      @click="$router.push({ name: 'orderproduct' })"
-    >
+    <div class="order" @click="$router.push({ name: 'orderproduct' })">
       Narudžbe
     </div>
   </div>
@@ -77,7 +74,7 @@ export default {
 .namesurname > div:hover {
   text-decoration: underline;
 }
-.iconNotification {
+.order {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
   border: 1px solid gray;
@@ -86,6 +83,7 @@ export default {
   font-size: 1rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .dropdown {
   position: relative;

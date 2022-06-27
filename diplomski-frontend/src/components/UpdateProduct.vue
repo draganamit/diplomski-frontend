@@ -57,13 +57,27 @@
             </div>
           </div>
           <div class="product-images">
-            <div class="add-image">niz</div>
             <div class="add-image">
               <i
                 class="icon-camera"
                 style="padding: 0.5rem 0rem; color: dodgerblu"
               ></i>
-              <div>Dodaj sliku proizvoda</div>
+              <p>Dodaj sliku proizvoda</p>
+              <input
+                type="file"
+                style="position: absolute; height: 100%; opacity: 0"
+                @change="uploadImage"
+              />
+            </div>
+            <div class="add-image" v-for="(img, key) in images" :key="key">
+              <img :src="img" alt="" />
+            </div>
+            <div
+              class="add-image"
+              v-for="(img, key) in model.images"
+              :key="key"
+            >
+              <img :src="'http://localhost:5000/Images/' + img" alt="" />
             </div>
           </div>
           <button
@@ -103,8 +117,11 @@ export default {
         state: null,
         price: null,
         tags: [],
+        images: [],
+        imageFiles: [],
       },
       tag: "",
+      images: [],
     };
   },
 
@@ -119,6 +136,7 @@ export default {
       this.model.price = response.price;
       this.model.id = this.idProduct;
       this.model.tags = response.tags;
+      this.model.images = response.images;
     }
 
     await this.getAllCategories();
@@ -135,11 +153,47 @@ export default {
       this.$emit("closed");
     },
     async addProducts() {
-      await this.addProduct(this.model);
+      //Instanca za slanje objekta sa fajlovima
+      let formData = new FormData();
+
+      //iteracija kroz objekat
+      for (const [key, value] of Object.entries(this.model)) {
+        if (
+          (key === "images" && value.length == 0) ||
+          (key === "imageFiles" && value.length == 0)
+        ) {
+          //ako je model.images prazan, ne treba se apendat
+        } else if (key === "imageFiles") {
+          for (let i = 0; i < value.length; i++) {
+            formData.append(key, value[i]);
+          }
+        } else {
+          formData.append(key, value);
+        }
+      }
+
+      await this.addProduct(formData);
       this.$emit("save");
     },
     async updateProducts() {
-      await this.updateProduct(this.model);
+      let formData = new FormData();
+
+      //iteracija kroz objekat
+      for (const [key, value] of Object.entries(this.model)) {
+        if (
+          (key === "images" && value.length == 0) ||
+          (key === "imageFiles" && value.length == 0)
+        ) {
+          //ako je model.images prazan, ne treba se apendat
+        } else if (key === "imageFiles" || key === "images") {
+          for (let i = 0; i < value.length; i++) {
+            formData.append(key, value[i]);
+          }
+        } else {
+          formData.append(key, value);
+        }
+      }
+      await this.updateProduct(formData);
       this.$emit("save");
     },
     addTags() {
@@ -148,6 +202,10 @@ export default {
     },
     deleteTag(index) {
       this.model.tags.splice(index, 1);
+    },
+    uploadImage(e) {
+      this.images.push(URL.createObjectURL(e.target.files[0]));
+      this.model.imageFiles.push(e.target.files[0]);
     },
   },
   computed: {
@@ -275,5 +333,9 @@ input {
   font-size: 1rem;
   color: dodgerblue;
   cursor: pointer;
+  position: relative;
+}
+.add-image > p {
+  width: 8rem;
 }
 </style>

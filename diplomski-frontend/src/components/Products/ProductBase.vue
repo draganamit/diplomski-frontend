@@ -1,6 +1,8 @@
 <template>
   <div class="container-product" @click.stop="setProductId()">
-    <div class="image"></div>
+    <div class="image">
+      <img :src="'http://localhost:5000/Images/' + images[0]" alt="" />
+    </div>
     <div style="display: flex">
       <div class="name">{{ name }}</div>
       <div class="price">{{ price }} KM</div>
@@ -49,6 +51,10 @@ export default {
       type: Number,
       default: null,
     },
+    images: {
+      type: Array,
+      default: () => [],
+    },
   },
   methods: {
     openWindow() {
@@ -74,7 +80,7 @@ export default {
 <style scoped>
 .container-product {
   border: 1px solid grey;
-  height: 10rem;
+  height: 12rem;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -82,7 +88,12 @@ export default {
 }
 .image {
   border: 1px solid grey;
-  height: 7rem;
+  width: 100%;
+  height: 8rem;
+}
+.image > img {
+  width: 100%;
+  height: 100%;
 }
 .name {
   padding: 0.5rem;

@@ -5,7 +5,9 @@
     </div>
     <div class="order-div">
       <div class="oreder-product">
-        <div class="image"></div>
+        <div class="image">
+          <img :src="'http://localhost:5000/Images/' + images[0]" alt="" />
+        </div>
         <div class="product-information">
           <div class="text">Naziv: {{ name }}</div>
           <div class="text">Cijena: {{ price }}KM</div>
@@ -43,15 +45,25 @@
           <div>Lični podaci</div>
           <div>
             <div class="form-text">Ime*</div>
-            <input class="from-input" type="text" />
+            <input
+              class="from-input"
+              type="text"
+              disabled
+              v-model="user.name"
+            />
           </div>
           <div>
             <div class="form-text">Prezime*</div>
-            <input class="from-input" type="text" />
+            <input
+              class="from-input"
+              type="text"
+              disabled
+              v-model="user.surname"
+            />
           </div>
           <div>
             <div class="form-text">Telefon*</div>
-            <input class="from-input" type="text" />
+            <input class="from-input" type="text" v-model="model.telephone" />
           </div>
           <div>
             <div class="form-text">Grad*</div>
@@ -59,7 +71,7 @@
           </div>
           <div>
             <div class="form-text">Adresa*</div>
-            <input class="from-input" type="text" />
+            <input class="from-input" type="text" v-model="model.address" />
           </div>
         </div>
       </div>
@@ -68,7 +80,9 @@
           <div>Ukupno: {{ sum }}KM</div>
         </div>
         <div class="order-button">
-          <button class="btnOrder">Naruči</button>
+          <button @click="order()" type="button" class="btnOrder">
+            Naruči
+          </button>
         </div>
       </div>
     </div>
@@ -76,6 +90,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   props: {
     name: {
@@ -90,18 +105,35 @@ export default {
       type: Number,
       default: null,
     },
+    images: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
       counter: 1,
+      model: {
+        productId: Number(this.$route.query.productId),
+        confirm: false,
+        telephone: "",
+        address: "",
+      },
     };
   },
   computed: {
     sum() {
       return this.price * this.counter;
     },
+    ...mapState({
+      user: (state) => state.users.user,
+    }),
+  },
+  async created() {
+    await this.getUserByUser();
   },
   methods: {
+    ...mapActions(["getUserByUser", "addOrder"]),
     closeWindowOrder() {
       this.$emit("closed");
     },
@@ -111,6 +143,9 @@ export default {
         ? this.counter
         : (this.counter = 0);
       this.counter <= this.state ? this.counter : (this.counter = this.state);
+    },
+    async order() {
+      await this.addOrder(this.model);
     },
   },
 };
@@ -148,7 +183,13 @@ export default {
 }
 .image {
   border: 1px solid black;
-  width: 7rem;
+  width: 10rem;
+  /* width: 100%; */
+  height: 8rem;
+}
+.image > img {
+  width: 100%;
+  height: 100%;
 }
 .text {
   padding: 1rem;

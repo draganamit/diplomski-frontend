@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 import users from './modules/users.js';
 import categories from './modules/categories.js';
 import products from './modules/products.js';
+import orders from './modules/orders.js';
+
 
 
 import axios from "axios";
@@ -34,7 +36,8 @@ export default new Vuex.Store({
   modules: {
       users,
       categories,
-      products
+      products,
+      orders
   }
 })
 
