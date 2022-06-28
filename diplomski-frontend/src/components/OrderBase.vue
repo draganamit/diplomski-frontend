@@ -6,7 +6,7 @@
       <div class="text-order-product">{{ typeUser }}: {{ userName }}</div>
     </div>
     <div class="order-state">
-      <div class="state" aria-disabled="true">Čeka na potvrdu</div>
+      <div class="state">Čeka na potvrdu</div>
     </div>
   </div>
 </template>

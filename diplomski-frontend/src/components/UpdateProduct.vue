@@ -62,7 +62,7 @@
                 class="icon-camera"
                 style="padding: 0.5rem 0rem; color: dodgerblu"
               ></i>
-              <p>Dodaj sliku proizvoda</p>
+              <p style="width: 100%; margin: 0">Dodaj sliku proizvoda</p>
               <input
                 type="file"
                 style="position: absolute; height: 100%; opacity: 0"
@@ -70,14 +70,24 @@
               />
             </div>
             <div class="add-image" v-for="(img, key) in images" :key="key">
-              <img :src="img" alt="" />
+              <div class="delete-image" @click="removeFromImages(key)">
+                <i class="icon-bin delete-icon"></i>
+              </div>
+              <img :src="img" alt="" style="width: 100%; height: 100%" />
             </div>
             <div
               class="add-image"
               v-for="(img, key) in model.images"
               :key="key"
             >
-              <img :src="'http://localhost:5000/Images/' + img" alt="" />
+              <div class="delete-image" @click="removeFromModelImges(key)">
+                <i class="icon-bin delete-icon"></i>
+              </div>
+              <img
+                :src="'http://localhost:5000/Images/' + img"
+                alt=""
+                style="width: 100%; height: 100%"
+              />
             </div>
           </div>
           <button
@@ -207,6 +217,12 @@ export default {
       this.images.push(URL.createObjectURL(e.target.files[0]));
       this.model.imageFiles.push(e.target.files[0]);
     },
+    removeFromImages(key) {
+      this.images.splice(key, 1);
+    },
+    removeFromModelImges(key) {
+      this.model.images.splice(key, 1);
+    },
   },
   computed: {
     ...mapState({
@@ -321,6 +337,8 @@ input {
   display: flex;
   width: 100%;
   align-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 .add-image {
   display: flex;
@@ -328,14 +346,31 @@ input {
   align-content: center;
   justify-content: center;
   border: 1px solid gainsboro;
-  padding: 2rem 1rem;
-  width: 8rem;
+
+  width: 10rem;
+  height: 9rem;
   font-size: 1rem;
   color: dodgerblue;
   cursor: pointer;
   position: relative;
+  min-width: 10rem;
+  min-height: 9rem;
 }
-.add-image > p {
-  width: 8rem;
+.add-image:hover .delete-image {
+  display: block;
+}
+.delete-image {
+  position: absolute;
+  color: dimgray;
+  border: transparent;
+  display: none;
+  right: 0;
+  top: 0;
+}
+.delete-icon {
+  font-size: 1.2rem;
+  color: red;
+  background: white;
+  font-size: 22px;
 }
 </style>
