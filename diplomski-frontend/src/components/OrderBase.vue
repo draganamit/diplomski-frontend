@@ -1,12 +1,12 @@
 <template>
   <div class="order-base">
-    <div style="display: flex; flex-direction: column">
-      <div class="text-order-product">Proizvod:</div>
-      <div class="text-order-product">Količina:</div>
-      <div class="text-order-product">{{ typeUser }}:</div>
+    <div style="display: flex; flex-direction: column; align-items: flex-start">
+      <div class="text-order-product">Proizvod: {{ productName }}</div>
+      <div class="text-order-product">Količina: {{ quantity }}</div>
+      <div class="text-order-product">{{ typeUser }}: {{ userName }}</div>
     </div>
     <div class="order-state">
-      <div class="state">Čeka na potvrdu</div>
+      <div class="state" aria-disabled="true">Čeka na potvrdu</div>
     </div>
   </div>
 </template>
@@ -15,6 +15,18 @@
 export default {
   props: {
     typeUser: {
+      type: String,
+      default: "",
+    },
+    productName: {
+      type: String,
+      default: "",
+    },
+    quantity: {
+      type: Number,
+      default: null,
+    },
+    userName: {
       type: String,
       default: "",
     },
@@ -45,7 +57,7 @@ export default {
   justify-content: center;
 }
 .state {
-  background-color: rgb(230, 91, 40);
+  background-color: red;
   color: rgb(241, 241, 226);
   border: 1px solid gray;
   padding: 1rem 1rem;

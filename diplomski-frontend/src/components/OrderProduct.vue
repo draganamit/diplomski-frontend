@@ -27,7 +27,7 @@
               class="quantityinput"
               type="text"
               name="name"
-              :value="counter"
+              :value="model.quantity"
             />
             <button
               class="btn btn--plus"
@@ -112,18 +112,19 @@ export default {
   },
   data() {
     return {
-      counter: 1,
+      //counter: 1,
       model: {
         productId: Number(this.$route.query.productId),
         confirm: false,
         telephone: "",
         address: "",
+        quantity: 1,
       },
     };
   },
   computed: {
     sum() {
-      return this.price * this.counter;
+      return this.price * this.model.quantity;
     },
     ...mapState({
       user: (state) => state.users.user,
@@ -138,14 +139,17 @@ export default {
       this.$emit("closed");
     },
     changeCounter: function (num) {
-      this.counter += +num;
-      !isNaN(this.counter) && this.counter > 0
-        ? this.counter
-        : (this.counter = 0);
-      this.counter <= this.state ? this.counter : (this.counter = this.state);
+      this.model.quantity += +num;
+      !isNaN(this.model.quantity) && this.model.quantity > 0
+        ? this.model.quantity
+        : (this.model.quantity = 1);
+      this.model.quantity <= this.state
+        ? this.model.quantity
+        : (this.model.quantity = this.state);
     },
     async order() {
       await this.addOrder(this.model);
+      this.$emit("save");
     },
   },
 };

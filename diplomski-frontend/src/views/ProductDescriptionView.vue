@@ -7,6 +7,7 @@
         :price="price"
         :state="state"
         :images="images"
+        @save="away()"
       ></OrderProduct>
     </div>
     <div style="display: flex; width: 100%">
@@ -110,6 +111,7 @@ export default {
   background-position: center center;
   border: 1px solid #ebebeb;
   margin: 5px;
+  cursor: pointer;
 }
 .image-div > img {
   width: 100%;
