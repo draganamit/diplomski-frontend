@@ -1,5 +1,20 @@
 <template>
   <div class="oreder">
+    <div v-if="order" class="order-form">
+      <OrderProduct
+        @closed="away()"
+        :name="oredrById.product.name"
+        :price="oredrById.product.price"
+        :quantity="oredrById.quantity"
+        :images="oredrById.product.images"
+        :forConfirm="true"
+        :userName="oredrById.product.user.name"
+        :userSurname="oredrById.product.user.surname"
+        :userTelephone="oredrById.telephone"
+        :userAddress="oredrById.address"
+        @save="away()"
+      ></OrderProduct>
+    </div>
     <div class="user-order">Vaše narudžbe:</div>
     <OrderBase
       :typeUser="'Prodavač'"
@@ -8,7 +23,9 @@
       :productName="order.product.name"
       :quantity="order.quantity"
       :userName="order.product.user.email"
+      @openConfromWindow="openConfirm(order.id)"
     ></OrderBase>
+
     <div
       v-if="!ordersByUser.length"
       style="display: flex; margin-left: 1rem; font-size: 1.5rem"
@@ -17,6 +34,7 @@
     </div>
     <div class="user-order">Narudžbe:</div>
     <OrderBase
+      @openConfromWindow="openConfirm(order.id)"
       :typeUser="'Kupac'"
       v-for="order in ordersForUser"
       :key="order.id"
@@ -30,23 +48,46 @@
     >
       Nema narudžbi
     </div>
+    <div v-if="order" class="mask" @click.self="away()"></div>
   </div>
 </template>
 
 <script>
 import OrderBase from "@/components/OrderBase.vue";
+import OrderProduct from "@/components/OrderProduct.vue";
+
 import { mapActions, mapState } from "vuex";
 export default {
   components: {
     OrderBase,
+    OrderProduct,
+  },
+  data() {
+    return {
+      order: false,
+      orderId: null,
+    };
   },
   methods: {
-    ...mapActions(["getAllOrdersByUser", "getAllOrdersForUser"]),
+    ...mapActions([
+      "getAllOrdersByUser",
+      "getAllOrdersForUser",
+      "getOrderById",
+    ]),
+    async openConfirm(id) {
+      this.orderId = id;
+      await this.getOrderById(id);
+      this.order = true;
+    },
+    away() {
+      this.order = false;
+    },
   },
   computed: {
     ...mapState({
       ordersByUser: (state) => state.orders.ordersByUser,
       ordersForUser: (state) => state.orders.ordersForUser,
+      oredrById: (state) => state.orders.oredrById,
     }),
   },
   async created() {
@@ -67,5 +108,25 @@ export default {
   align-items: center;
   font-size: 1.5rem;
   padding: 1rem;
+}
+.order-form {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 60%;
+  margin: auto;
+  z-index: 2;
+  top: 1rem;
+}
+.mask {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
 }
 </style>

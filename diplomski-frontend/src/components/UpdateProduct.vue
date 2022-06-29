@@ -45,13 +45,9 @@
           </div>
 
           <div class="tags" v-if="model.tags.length">
-            <div class="tag" v-for="(tag, index) in model.tags" :key="tag">
+            <div class="tag" v-for="(tag, key) in model.tags" :key="key">
               {{ tag }}
-              <button
-                type="button"
-                class="delete-tag"
-                @click="deleteTag(index)"
-              >
+              <button type="button" class="delete-tag" @click="deleteTag(key)">
                 x
               </button>
             </div>
@@ -210,8 +206,8 @@ export default {
       this.model.tags.push(this.tag);
       this.tag = "";
     },
-    deleteTag(index) {
-      this.model.tags.splice(index, 1);
+    deleteTag(key) {
+      this.model.tags.splice(key, 1);
     },
     uploadImage(e) {
       this.images.push(URL.createObjectURL(e.target.files[0]));

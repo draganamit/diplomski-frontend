@@ -7,6 +7,7 @@
         :price="price"
         :state="state"
         :images="images"
+        :forOrder="true"
         @save="away()"
       ></OrderProduct>
     </div>

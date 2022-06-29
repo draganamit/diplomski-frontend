@@ -12,7 +12,12 @@
           <div class="text">Naziv: {{ name }}</div>
           <div class="text">Cijena: {{ price }}KM</div>
         </div>
-        <div class="quantity">
+        <div class="product-information" v-if="forConfirm">
+          <div class="text">Količina: {{ quantity }}</div>
+          <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div>
+        </div>
+
+        <div class="quantity" v-if="forOrder">
           <div>Izaberite kolicinu</div>
           <div class="wrapper">
             <button
@@ -42,10 +47,21 @@
       </div>
       <div class="user-div">
         <div class="user-form">
-          <div>Lični podaci</div>
+          <div>
+            Lični podaci &nbsp;
+            <div v-if="forConfirm">o kupcu</div>
+          </div>
           <div>
             <div class="form-text">Ime*</div>
             <input
+              v-if="forConfirm"
+              class="from-input"
+              type="text"
+              disabled
+              v-model="nameUser"
+            />
+            <input
+              v-if="forOrder"
               class="from-input"
               type="text"
               disabled
@@ -55,6 +71,14 @@
           <div>
             <div class="form-text">Prezime*</div>
             <input
+              v-if="forConfirm"
+              class="from-input"
+              type="text"
+              disabled
+              v-model="surnameUser"
+            />
+            <input
+              v-if="forOrder"
               class="from-input"
               type="text"
               disabled
@@ -63,7 +87,20 @@
           </div>
           <div>
             <div class="form-text">Telefon*</div>
-            <input class="from-input" type="text" v-model="model.telephone" />
+            <input
+              v-if="forConfirm"
+              class="from-input"
+              type="text"
+              disabled
+              v-model="telephoneUser"
+            />
+
+            <input
+              v-if="forOrder"
+              class="from-input"
+              type="text"
+              v-model="model.telephone"
+            />
           </div>
           <div>
             <div class="form-text">Grad*</div>
@@ -71,17 +108,41 @@
           </div>
           <div>
             <div class="form-text">Adresa*</div>
-            <input class="from-input" type="text" v-model="model.address" />
+            <input
+              v-if="forConfirm"
+              class="from-input"
+              type="text"
+              disabled
+              v-model="addressUser"
+            />
+            <input
+              v-if="forOrder"
+              class="from-input"
+              type="text"
+              v-model="model.address"
+            />
           </div>
         </div>
       </div>
-      <div class="sum-order">
+      <div class="sum-order" v-if="forOrder">
         <div class="sum">
           <div>Ukupno: {{ sum }}KM</div>
         </div>
-        <div class="order-button">
+        <div class="order-button" style="margin-left: auto">
           <button @click="order()" type="button" class="btnOrder">
             Naruči
+          </button>
+        </div>
+      </div>
+      <div class="sum-order" v-if="forConfirm" style="margin-left: auto">
+        <div class="order-button">
+          <button @click="order()" type="button" class="btnOrder">
+            Odbaci
+          </button>
+        </div>
+        <div class="order-button">
+          <button @click="order()" type="button" class="btnOrder">
+            Potvrdi
           </button>
         </div>
       </div>
@@ -97,6 +158,22 @@ export default {
       type: String,
       default: "",
     },
+    userName: {
+      type: String,
+      default: "",
+    },
+    userSurname: {
+      type: String,
+      default: "",
+    },
+    userTelephone: {
+      type: String,
+      default: "",
+    },
+    userAddress: {
+      type: String,
+      default: "",
+    },
     price: {
       type: Number,
       default: null,
@@ -109,10 +186,25 @@ export default {
       type: Array,
       default: () => [],
     },
+    quantity: {
+      type: Number,
+      default: null,
+    },
+    forConfirm: {
+      type: Boolean,
+      default: false,
+    },
+    forOrder: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      //counter: 1,
+      nameUser: this.userName,
+      surnameUser: this.userSurname,
+      telephoneUser: this.userTelephone,
+      addressUser: this.userAddress,
       model: {
         productId: Number(this.$route.query.productId),
         confirm: false,
@@ -125,6 +217,9 @@ export default {
   computed: {
     sum() {
       return this.price * this.model.quantity;
+    },
+    sumConfirm() {
+      return this.price * this.quantity;
     },
     ...mapState({
       user: (state) => state.users.user,
@@ -252,7 +347,7 @@ export default {
 .order-button {
   display: flex;
   justify-content: flex-end;
-  margin-left: auto;
+  /* margin-left: auto; */
 }
 .btnOrder {
   background-color: rgb(230, 91, 40);

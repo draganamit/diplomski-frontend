@@ -1,7 +1,7 @@
 const state = {
     ordersByUser: [],
     ordersForUser: [],
-
+    oredrById:{}
 }
 
 const actions ={
@@ -22,12 +22,22 @@ const actions ={
        
         commit("setOrdersForUser", response.data.data)
         
+    },
+async getOrderById({rootState,commit},id)
+    {
+       const  response = await rootState.authAxios.get("Order/"+id);
+       commit("setOrderById", response.data.data)
+
+       //return response.data.data;
+        
     }
 
 }
 const mutations = {
     setOrdersByUser:(state,ordersByUser) => (state.ordersByUser=ordersByUser),
-    setOrdersForUser: (state,ordersForUser) => (state.ordersForUser=ordersForUser)
+    setOrdersForUser: (state,ordersForUser) => (state.ordersForUser=ordersForUser),
+    setOrderById: (state,oredrById) => (state.oredrById=oredrById)
+
 }
 
 export default{
