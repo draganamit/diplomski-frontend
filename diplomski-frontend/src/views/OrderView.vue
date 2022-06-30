@@ -8,10 +8,11 @@
         :quantity="oredrById.quantity"
         :images="oredrById.product.images"
         :forConfirm="true"
-        :userName="oredrById.product.user.name"
-        :userSurname="oredrById.product.user.surname"
+        :userName="oredrById.userBuyer.name"
+        :userSurname="oredrById.userBuyer.surname"
         :userTelephone="oredrById.telephone"
         :userAddress="oredrById.address"
+        :orderId="orderId"
         @save="away()"
       ></OrderProduct>
     </div>
@@ -23,7 +24,7 @@
       :productName="order.product.name"
       :quantity="order.quantity"
       :userName="order.product.user.email"
-      @openConfromWindow="openConfirm(order.id)"
+      :textButton="order.confirm ? 'Potvrđeno' : 'Čeka na potvrdu'"
     ></OrderBase>
 
     <div
@@ -34,13 +35,14 @@
     </div>
     <div class="user-order">Narudžbe:</div>
     <OrderBase
-      @openConfromWindow="openConfirm(order.id)"
       :typeUser="'Kupac'"
       v-for="order in ordersForUser"
       :key="order.id"
       :productName="order.product.name"
       :quantity="order.quantity"
       :userName="order.userBuyer.email"
+      :textButton="order.confirm ? 'Potvrđeno' : 'Čeka na potvrdu'"
+      @openConfromWindow="openConfirm(order.id)"
     ></OrderBase>
     <div
       v-if="!ordersForUser.length"
@@ -79,8 +81,9 @@ export default {
       await this.getOrderById(id);
       this.order = true;
     },
-    away() {
+    async away() {
       this.order = false;
+      await this.getAllOrdersForUser();
     },
   },
   computed: {

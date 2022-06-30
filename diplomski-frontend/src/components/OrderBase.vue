@@ -6,7 +6,7 @@
       <div class="text-order-product">{{ typeUser }}: {{ userName }}</div>
     </div>
     <div class="order-state">
-      <div class="state" @click.stop="confirmOpen()">Čeka na potvrdu</div>
+      <div class="state" @click.stop="confirmOpen()">{{ textButton }}</div>
     </div>
   </div>
 </template>
@@ -14,6 +14,10 @@
 <script>
 export default {
   props: {
+    textButton: {
+      type: String,
+      default: "",
+    },
     typeUser: {
       type: String,
       default: "",
@@ -58,6 +62,7 @@ export default {
   display: flex;
   margin-left: auto;
   align-items: center;
+  /* pointer-events: none; */
 
   justify-content: center;
 }

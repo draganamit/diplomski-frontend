@@ -23,13 +23,21 @@ const actions ={
         commit("setOrdersForUser", response.data.data)
         
     },
-async getOrderById({rootState,commit},id)
+    async getOrderById({rootState,commit},id)
     {
        const  response = await rootState.authAxios.get("Order/"+id);
        commit("setOrderById", response.data.data)
 
-       //return response.data.data;
-        
+    },
+    async setConfirm({rootState}, newConfrim)
+    {
+       const  response = await rootState.authAxios.put("Order", newConfrim);
+       return response.data.data;
+
+    },
+    async deleteOrder({rootState}, id)
+    {
+        await rootState.authAxios.delete("Order/"+id);
     }
 
 }

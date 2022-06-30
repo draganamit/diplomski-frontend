@@ -29,6 +29,7 @@
 
       <div class="description-button">
         <div class="description">
+          <div class="text-div">{{ username }}</div>
           <div class="text-div">Naziv: {{ name }}</div>
           <div class="text-div">Kategorija: {{ category }}</div>
           <div class="text-div">Opis: {{ description }}</div>
@@ -60,6 +61,7 @@ export default {
   data() {
     return {
       order: false,
+      username: "",
       name: "",
       category: "",
       description: "",
@@ -76,6 +78,7 @@ export default {
       Number(this.$route.query.productId)
     );
     this.name = response.name;
+    this.username = response.user.email;
     this.category = response.category.name;
     this.description = response.description;
     this.state = response.state;

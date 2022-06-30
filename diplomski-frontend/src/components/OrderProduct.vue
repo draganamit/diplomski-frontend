@@ -136,12 +136,12 @@
       </div>
       <div class="sum-order" v-if="forConfirm" style="margin-left: auto">
         <div class="order-button">
-          <button @click="order()" type="button" class="btnOrder">
+          <button @click="removeOrder()" type="button" class="btnOrder">
             Odbaci
           </button>
         </div>
         <div class="order-button">
-          <button @click="order()" type="button" class="btnOrder">
+          <button @click="changeConfrim()" type="button" class="btnOrder">
             Potvrdi
           </button>
         </div>
@@ -198,6 +198,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    orderId: {
+      type: Number,
+      default: null,
+    },
   },
   data() {
     return {
@@ -211,6 +215,10 @@ export default {
         telephone: "",
         address: "",
         quantity: 1,
+      },
+      modelConfirm: {
+        idOrder: this.orderId,
+        confirm: false,
       },
     };
   },
@@ -229,7 +237,7 @@ export default {
     await this.getUserByUser();
   },
   methods: {
-    ...mapActions(["getUserByUser", "addOrder"]),
+    ...mapActions(["getUserByUser", "addOrder", "setConfirm", "deleteOrder"]),
     closeWindowOrder() {
       this.$emit("closed");
     },
@@ -244,6 +252,17 @@ export default {
     },
     async order() {
       await this.addOrder(this.model);
+      this.$emit("save");
+    },
+    async changeConfrim() {
+      if (this.orderId) {
+        this.modelConfirm.confirm = true;
+        await this.setConfirm(this.modelConfirm);
+        this.$emit("save");
+      }
+    },
+    async removeOrder() {
+      await this.deleteOrder(this.orderId);
       this.$emit("save");
     },
   },
