@@ -25,6 +25,8 @@
       :quantity="order.quantity"
       :userName="order.product.user.email"
       :textButton="order.confirm ? 'Potvrđeno' : 'Čeka na potvrdu'"
+      :isConfirm="order.confirm"
+      @remove="removeOrder(order.id)"
     ></OrderBase>
 
     <div
@@ -42,7 +44,9 @@
       :quantity="order.quantity"
       :userName="order.userBuyer.email"
       :textButton="order.confirm ? 'Potvrđeno' : 'Čeka na potvrdu'"
+      :confirmable="true"
       @openConfromWindow="openConfirm(order.id)"
+      :isConfirm="order.confirm"
     ></OrderBase>
     <div
       v-if="!ordersForUser.length"
@@ -75,6 +79,7 @@ export default {
       "getAllOrdersByUser",
       "getAllOrdersForUser",
       "getOrderById",
+      "deleteOrder",
     ]),
     async openConfirm(id) {
       this.orderId = id;
@@ -84,6 +89,10 @@ export default {
     async away() {
       this.order = false;
       await this.getAllOrdersForUser();
+    },
+    async removeOrder(id) {
+      await this.deleteOrder(id);
+      await this.getAllOrdersByUser();
     },
   },
   computed: {

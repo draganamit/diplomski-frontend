@@ -1,11 +1,18 @@
 <template>
   <div class="container-product" @click.stop="setProductId()">
-    <div class="image">
-      <img :src="'http://localhost:5000/Images/' + images[0]" alt="" />
-    </div>
-    <div style="display: flex">
-      <div class="name">{{ name }}</div>
-      <div class="price">{{ price }} KM</div>
+    <div style="position: relative">
+      <div class="product-state" v-if="!productOnState">
+        <div style="color: #dfd9d9">Trenutno nema na stanju</div>
+      </div>
+      <div class="image">
+        <img :src="'http://localhost:5000/Images/' + images[0]" alt="" />
+      </div>
+      <div style="display: flex">
+        <div style="text-align: start; padding-right: 0" class="name">
+          {{ name }}
+        </div>
+        <div style="padding-left: 0" class="price">{{ price }} KM</div>
+      </div>
     </div>
 
     <div class="icons">
@@ -39,6 +46,10 @@
 <script>
 export default {
   props: {
+    productOnState: {
+      type: Boolean,
+      default: true,
+    },
     name: {
       type: String,
       default: "",
@@ -79,16 +90,18 @@ export default {
 
 <style scoped>
 .container-product {
-  border: 1px solid grey;
-  height: 12rem;
+  /* border: 1px solid grey; */
+  height: 13rem;
   background-color: white;
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
+  padding-bottom: 0.5rem;
+  /* padding: 0.5rem; */
+  position: relative;
 }
 .image {
-  border: 1px solid grey;
-  width: 100%;
+  /* border: 1px solid grey; */
+  /* width: 100%; */
   height: 8rem;
 }
 .image > img {
@@ -107,5 +120,24 @@ export default {
 .icons {
   display: flex;
   justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  /* bottom: 15px; */
+  /* align-items: center; */
+  /* left: 70px; */
+}
+.product-state {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* opacity: 0; */
+  /* z-index: 0; */
+  background: rgba(0, 0, 0, 0.6);
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 </style>

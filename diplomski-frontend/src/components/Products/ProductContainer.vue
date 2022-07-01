@@ -10,6 +10,7 @@
         :price="product.price"
         :id="product.id"
         :images="product.images"
+        :productOnState="product.state == 0 ? false : true"
       ></ProductBase>
       <div v-if="!products.length">Nema proizvoda na stanju.</div>
     </div>

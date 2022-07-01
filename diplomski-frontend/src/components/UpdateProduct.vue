@@ -169,7 +169,7 @@ export default {
           (key === "imageFiles" && value.length == 0)
         ) {
           //ako je model.images prazan, ne treba se apendat
-        } else if (key === "imageFiles") {
+        } else if (key === "imageFiles" || key === "tags") {
           for (let i = 0; i < value.length; i++) {
             formData.append(key, value[i]);
           }
@@ -191,7 +191,7 @@ export default {
           (key === "imageFiles" && value.length == 0)
         ) {
           //ako je model.images prazan, ne treba se apendat
-        } else if (key === "imageFiles" || key === "images") {
+        } else if (key === "imageFiles" || key === "images" || key === "tags") {
           for (let i = 0; i < value.length; i++) {
             formData.append(key, value[i]);
           }
