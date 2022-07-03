@@ -28,6 +28,12 @@
         >
           Promijeni lozinku
         </button>
+        <button
+          style="width: 100%; background-color: #a29999"
+          @click="deleteUser()"
+        >
+          Deaktiviraj profil
+        </button>
       </div>
     </div>
 
@@ -50,7 +56,7 @@
 import ProductContainer from "@/components/Products/ProductContainer.vue";
 import UpdateUser from "@/components/UpdateUser.vue";
 import UpdatePassword from "@/components/UpdatePassword.vue";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
   components: {
@@ -66,7 +72,9 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getUserById"]),
+    ...mapActions(["getUserById", "blockUser"]),
+    ...mapMutations(["setAuthAxiosHeader", "setUser", "setSearchModel"]),
+
     openUpdate() {
       this.update = true;
     },
@@ -83,6 +91,13 @@ export default {
     },
     savePassword() {
       this.updatePassword = false;
+    },
+    async deleteUser() {
+      await this.blockUser(Number(this.$route.query.userId));
+      localStorage.removeItem("token");
+      this.setUser(null);
+      this.setAuthAxiosHeader("setAuthAxiosHeader", null);
+      window.location = "/";
     },
   },
   async created() {

@@ -40,7 +40,12 @@ const actions = {
     {
        const response = await rootState.authAxios.put('auth/UpdatePassword',updatedPassword);
         return response.data;
-    }
+    },
+    async blockUser({rootState}, id)
+    {
+        await rootState.baseAxios.put('auth/'+id);
+        
+    },
 }
 const mutations = {
     setUser: (state,user) => (state.user=user),

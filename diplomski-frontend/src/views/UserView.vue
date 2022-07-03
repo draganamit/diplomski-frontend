@@ -21,8 +21,14 @@
           <td>{{ user.name }}</td>
           <td>{{ user.surname }}</td>
           <td style="text-align: right">
-            <i class="icon-pencil"></i>
-            <i class="icon-bin"></i>
+            <div
+              :class="user.isDeleted ? 'active' : 'block'"
+              @click.stop="setIsDelete(user.id)"
+            >
+              {{ user.isDeleted ? "Aktiviraj" : "Blokiraj" }}
+            </div>
+            <!-- <i class="icon-pencil"></i>
+            <i class="icon-bin"></i> -->
           </td>
         </tr>
       </table>
@@ -34,7 +40,7 @@
 import { mapActions, mapState } from "vuex";
 export default {
   methods: {
-    ...mapActions(["getAllUsers"]),
+    ...mapActions(["getAllUsers", "blockUser"]),
     setIdUser(id) {
       // this.$router.push({ name: "userprofile" }),
       this.$router
@@ -46,6 +52,10 @@ export default {
           },
         })
         .catch();
+    },
+    async setIsDelete(id) {
+      await this.blockUser(id);
+      await this.getAllUsers();
     },
   },
   async created() {
@@ -88,5 +98,13 @@ td {
 a {
   text-decoration: none;
   color: black;
+}
+.block {
+  cursor: pointer;
+  color: #e90c0c;
+}
+.active {
+  color: rgb(5, 162, 5);
+  cursor: pointer;
 }
 </style>
