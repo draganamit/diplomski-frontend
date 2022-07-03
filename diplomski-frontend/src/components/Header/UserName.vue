@@ -13,8 +13,12 @@
       <div class="relative">
         <div class="dropdown-content">
           <a @click="$router.push({ name: 'product' })">Proizvodi</a>
-          <a @click="$router.push({ name: 'category' })">Kategorije</a>
-          <a @click="$router.push({ name: 'users' })">Korisnici</a>
+          <a v-if="user.type == 0" @click="$router.push({ name: 'category' })"
+            >Kategorije</a
+          >
+          <a v-if="user.type == 0" @click="$router.push({ name: 'users' })"
+            >Korisnici</a
+          >
           <a @click="Logout()">Odjavi se</a>
         </div>
       </div>

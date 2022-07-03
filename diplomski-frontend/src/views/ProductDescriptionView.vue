@@ -34,14 +34,19 @@
           <div class="text-div">Kategorija: {{ category }}</div>
           <div class="text-div">Opis: {{ description }}</div>
           <div class="text-div">Stanje: {{ state }}</div>
-          <div class="text-div">Cijena: {{ price }}</div>
+          <div class="text-div">Cijena: {{ price }}KM</div>
           <div class="text-div">Tagovi:</div>
           <div class="tags">
             <div class="tag" v-for="tag in tags" :key="tag">{{ tag }}</div>
           </div>
         </div>
         <div class="button-div">
-          <button @click="openOrderWindov()">Naruči</button>
+          <button
+            :class="user ? 'button' : 'block-order'"
+            @click="openOrderWindov()"
+          >
+            Naruči
+          </button>
         </div>
       </div>
     </div>
@@ -52,7 +57,7 @@
 <script>
 import VueGallery from "vue-gallery";
 import OrderProduct from "@/components/OrderProduct.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   components: {
     OrderProduct,
@@ -97,6 +102,11 @@ export default {
     away() {
       this.order = false;
     },
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.users.user,
+    }),
   },
 };
 </script>
@@ -185,5 +195,11 @@ button {
 .tags {
   display: flex;
   align-content: center;
+}
+.block-order {
+  background: #b7b7b7;
+  color: #8f8b8b;
+  border: transparent;
+  pointer-events: none;
 }
 </style>

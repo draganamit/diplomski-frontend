@@ -15,7 +15,10 @@
       </div>
     </div>
 
-    <div class="icons">
+    <div
+      v-if="user && (user.type == 0 || user.id == productUserId)"
+      class="icons"
+    >
       <div
         @click.stop="openWindow()"
         style="
@@ -44,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   props: {
     productOnState: {
@@ -59,6 +63,10 @@ export default {
       default: null,
     },
     id: {
+      type: Number,
+      default: null,
+    },
+    productUserId: {
       type: Number,
       default: null,
     },
@@ -84,6 +92,11 @@ export default {
         })
         .catch();
     },
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.users.user,
+    }),
   },
 };
 </script>
