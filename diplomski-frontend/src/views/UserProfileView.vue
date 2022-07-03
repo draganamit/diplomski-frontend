@@ -8,6 +8,12 @@
         @closed="away()"
       ></UpdatePassword>
     </div>
+    <DeleteModal
+      v-if="deactivate"
+      @close="away()"
+      @remove="confirmRemove()"
+      :textQuestion="'Da li ste sugurni da želite da deaktivirate nalog?'"
+    ></DeleteModal>
     <div class="user-imformation">
       <div class="user-div">
         <div v-if="userById" style="padding: 1rem; font-size: 2rem">
@@ -45,7 +51,7 @@
     </div>
 
     <div
-      v-if="update || updatePassword"
+      v-if="update || updatePassword || deactivate"
       class="mask"
       @click.self="away()"
     ></div>
@@ -56,6 +62,8 @@
 import ProductContainer from "@/components/Products/ProductContainer.vue";
 import UpdateUser from "@/components/UpdateUser.vue";
 import UpdatePassword from "@/components/UpdatePassword.vue";
+import DeleteModal from "@/components/DeleteModal.vue";
+
 import { mapActions, mapState, mapMutations } from "vuex";
 
 export default {
@@ -63,12 +71,14 @@ export default {
     ProductContainer,
     UpdateUser,
     UpdatePassword,
+    DeleteModal,
   },
 
   data() {
     return {
       update: false,
       updatePassword: false,
+      deactivate: false,
     };
   },
   methods: {
@@ -84,6 +94,7 @@ export default {
     away() {
       this.update = false;
       this.updatePassword = false;
+      this.deactivate = false;
     },
     async save() {
       this.update = false;
@@ -92,7 +103,10 @@ export default {
     savePassword() {
       this.updatePassword = false;
     },
-    async deleteUser() {
+    deleteUser() {
+      this.deactivate = true;
+    },
+    async confirmRemove() {
       await this.blockUser(Number(this.$route.query.userId));
       localStorage.removeItem("token");
       this.setUser(null);
