@@ -1,5 +1,15 @@
 <template>
   <div class="user-container">
+    <DeleteModal
+      v-if="block || active"
+      @close="away()"
+      @remove="setBlockUser()"
+      :textQuestion="
+        block
+          ? 'Da li ste sugurni da želite da blokirate korisnika?'
+          : 'Da li ste sugurni da želite da aktivirate korisnika?'
+      "
+    ></DeleteModal>
     <div class="users-title">
       <div>Korisnici</div>
     </div>
@@ -23,7 +33,7 @@
           <td style="text-align: right">
             <div
               :class="user.isDeleted ? 'active' : 'block'"
-              @click.stop="setIsDelete(user.id)"
+              @click.stop="setIsDelete(user.id, user.isDeleted)"
             >
               {{ user.isDeleted ? "Aktiviraj" : "Blokiraj" }}
             </div>
@@ -33,12 +43,25 @@
         </tr>
       </table>
     </div>
+    <div v-if="block || active" class="mask" @click.self="away()"></div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import DeleteModal from "@/components/DeleteModal.vue";
+
 export default {
+  components: {
+    DeleteModal,
+  },
+  data() {
+    return {
+      id: null,
+      block: false,
+      active: false,
+    };
+  },
   methods: {
     ...mapActions(["getAllUsers", "blockUser"]),
     setIdUser(id) {
@@ -53,9 +76,24 @@ export default {
         })
         .catch();
     },
-    async setIsDelete(id) {
-      await this.blockUser(id);
+    setIsDelete(id, deleted) {
+      if (deleted == false) {
+        this.block = true;
+      } else {
+        this.active = true;
+      }
+      this.id = id;
+    },
+    async setBlockUser() {
+      await this.blockUser(this.id);
+      this.block = false;
+      this.active = false;
+
       await this.getAllUsers();
+    },
+    away() {
+      this.block = false;
+      this.active = false;
     },
   },
   async created() {
@@ -106,5 +144,13 @@ a {
 .active {
   color: rgb(5, 162, 5);
   cursor: pointer;
+}
+.mask {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 0;
 }
 </style>

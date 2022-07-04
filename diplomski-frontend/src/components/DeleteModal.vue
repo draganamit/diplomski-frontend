@@ -62,6 +62,7 @@ export default {
   margin-right: 0.5rem;
   border-radius: 5px;
   color: white;
+  cursor: pointer;
 }
 .button-no {
   background: #adabab;
@@ -69,5 +70,6 @@ export default {
 
   border-radius: 5px;
   color: white;
+  cursor: pointer;
 }
 </style>

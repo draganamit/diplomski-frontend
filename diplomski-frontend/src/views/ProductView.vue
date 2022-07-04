@@ -1,5 +1,11 @@
 <template>
   <div class="container-product">
+    <DeleteModal
+      v-if="remove"
+      @close="closeWindow()"
+      @remove="removeProduct()"
+      :textQuestion="'Da li ste sugurni da želite da obrišete proizvod?'"
+    ></DeleteModal>
     <div
       v-if="update"
       class="update-product"
@@ -19,9 +25,12 @@
       </div>
     </div>
     <div class="show-products">
-      <ProductContainer @openUpdate="openUpdateProduct"></ProductContainer>
+      <ProductContainer
+        @openUpdate="openUpdateProduct"
+        @openRemove="openRemoveProduct"
+      ></ProductContainer>
     </div>
-    <div v-if="update" class="mask" @click.self="closeWindow()"></div>
+    <div v-if="update || remove" class="mask" @click.self="closeWindow()"></div>
   </div>
 </template>
 
@@ -29,14 +38,18 @@
 import { mapActions, mapState } from "vuex";
 import ProductContainer from "@/components/Products/ProductContainer.vue";
 import UpdateProduct from "@/components/UpdateProduct.vue";
+import DeleteModal from "@/components/DeleteModal.vue";
+
 export default {
   name: "ProductView",
-  components: { ProductContainer, UpdateProduct },
+  components: { ProductContainer, UpdateProduct, DeleteModal },
 
   data() {
     return {
       update: false,
       idProduct: null,
+      id: null, //id Producta za brisanje
+      remove: false,
     };
   },
   computed: {
@@ -46,16 +59,26 @@ export default {
     }),
   },
   methods: {
-    ...mapActions(["GetProductsForIndex"]),
+    ...mapActions(["GetProductsForIndex", "deleteProduct"]),
     openUpdateProduct(productId = null) {
       this.idProduct = productId;
       this.update = true;
     },
+    openRemoveProduct(id) {
+      this.id = id;
+      this.remove = true;
+    },
     closeWindow() {
       this.update = false;
+      this.remove = false;
     },
     async closeGetProduct() {
       this.update = false;
+      await this.GetProductsForIndex(this.searchModel);
+    },
+    async removeProduct() {
+      await this.deleteProduct(this.id);
+      this.remove = false;
       await this.GetProductsForIndex(this.searchModel);
     },
   },

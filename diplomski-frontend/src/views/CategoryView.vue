@@ -1,5 +1,11 @@
 <template>
   <div class="container-category">
+    <DeleteModal
+      v-if="remove"
+      @close="closeWindow()"
+      @remove="removeCategory()"
+      :textQuestion="'Da li ste sugurni da želite da obrišete kategoriju?'"
+    ></DeleteModal>
     <div v-if="update" class="update-category">
       <UpdateCategory
         @closed="closeWindow()"
@@ -20,27 +26,31 @@
         :key="key"
         @open="openUpdateCategory(category.id)"
         :nameCategory="category.name"
-        @remove="removeProduct(category.id)"
+        @remove="openRemoveCategory(category.id)"
       ></CategoryBase>
     </div>
-    <div v-if="update" class="mask" @click.self="closeWindow()"></div>
+    <div v-if="update || remove" class="mask" @click.self="closeWindow()"></div>
   </div>
 </template>
 
 <script>
 import UpdateCategory from "@/components/UpdateCategory.vue";
 import CategoryBase from "@/components/CategoryBase.vue";
+import DeleteModal from "@/components/DeleteModal.vue";
+
 import { mapActions, mapState } from "vuex";
 
 export default {
   components: {
     CategoryBase,
     UpdateCategory,
+    DeleteModal,
   },
   data() {
     return {
       update: false,
       idCategory: null,
+      remove: false,
     };
   },
   methods: {
@@ -51,14 +61,20 @@ export default {
     },
     closeWindow() {
       this.update = false;
+      this.remove = false;
     },
     async closeGetCategories() {
       this.update = false;
       await this.getAllCategories();
     },
-    async removeProduct(id) {
+    openRemoveCategory(id) {
+      this.idCategory = id;
+      this.remove = true;
+    },
+    async removeCategory() {
       try {
-        await this.deleteCategory(id);
+        await this.deleteCategory(this.idCategory);
+        this.remove = false;
         await this.getAllCategories();
       } catch (error) {
         console.log(error.response);

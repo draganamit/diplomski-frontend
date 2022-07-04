@@ -5,7 +5,7 @@
         v-for="(product, key) in products"
         :key="key"
         @open="openWindowUpdate(product.id)"
-        @remove="removeProduct(product.id)"
+        @remove="openRemoveWindow(product.id)"
         :name="product.name"
         :price="product.price"
         :id="product.id"
@@ -69,9 +69,11 @@ export default {
     openWindowUpdate(id) {
       this.$emit("openUpdate", id);
     },
-    async removeProduct(id) {
-      await this.deleteProduct(id);
-      await this.GetProductsForIndex(this.searchModel);
+    async openRemoveWindow(id) {
+      this.$emit("openRemove", id);
+
+      // await this.deleteProduct(id);
+      // await this.GetProductsForIndex(this.searchModel);
     },
     mapQueryToSearchModel(query) {
       this.setSearchModel({
