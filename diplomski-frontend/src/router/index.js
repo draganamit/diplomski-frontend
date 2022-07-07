@@ -8,8 +8,7 @@ import UserProfileView from '@/views/UserProfileView.vue'
 import ProductDescriptionView from '@/views/ProductDescriptionView.vue'
 import OrderView from '@/views/OrderView.vue'
 import ForgotPassword from '@/views/ForgotPassword.vue'
-
-
+import ReportView from '@/views/ReportView.vue'
 
 Vue.use(VueRouter)
 
@@ -54,6 +53,11 @@ const routes = [
     name: 'forgotpassword',
     component: ForgotPassword
   },
+  {
+    path: '/report',
+    name: 'report',
+    component: ReportView
+  }
   // {
   //   path: '/about',
   //   name: 'about',

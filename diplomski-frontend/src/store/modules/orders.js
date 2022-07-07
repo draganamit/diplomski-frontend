@@ -1,7 +1,8 @@
 const state = {
     ordersByUser: [],
     ordersForUser: [],
-    oredrById:{}
+    oredrById:{},
+    orders:[]
 }
 
 const actions ={
@@ -38,13 +39,19 @@ const actions ={
     async deleteOrder({rootState}, id)
     {
         await rootState.authAxios.delete("Order/"+id);
+    },
+    async searchOrders({rootState, commit}, reportSearchModel)
+    {
+        const response = await rootState.baseAxios.post("Order/GetOrdersForIndex", reportSearchModel);
+        commit("setOrders", response.data.data);
     }
 
 }
 const mutations = {
     setOrdersByUser:(state,ordersByUser) => (state.ordersByUser=ordersByUser),
     setOrdersForUser: (state,ordersForUser) => (state.ordersForUser=ordersForUser),
-    setOrderById: (state,oredrById) => (state.oredrById=oredrById)
+    setOrderById: (state,oredrById) => (state.oredrById=oredrById),
+    setOrders: (state,orders) => (state.orders = orders)
 
 }
 

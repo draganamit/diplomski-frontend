@@ -1,4 +1,5 @@
 const state ={
+    allProducts:[],
     products: [],
     searchModel:
     {
@@ -21,6 +22,11 @@ const actions = {
         commit("setProducts", response.data.data)
         commit("setTotalCount", response.data.totalCount)
         
+    },
+    async getAllProducts({rootState, commit})
+    {
+        const response = await rootState.baseAxios.get("ProductContorller/GetAll");
+        commit("setAllProducts",response.data.data);
     },
     async addProduct({rootState},newProduct)
     {
@@ -50,7 +56,8 @@ const mutations = {
     setSearchModel:(state, model)=> {
         state.searchModel = model;
     },
-    setTotalCount: (state,totalCount) => (state.totalCount=totalCount)
+    setTotalCount: (state,totalCount) => (state.totalCount=totalCount),
+    setAllProducts: (state, allProducts) => (state.allProducts = allProducts)
 }
 export default{
     state,
