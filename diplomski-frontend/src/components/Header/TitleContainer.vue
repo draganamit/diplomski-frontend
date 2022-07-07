@@ -111,7 +111,7 @@ export default {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 0;
+  z-index: 1;
 }
 .prijava {
   position: absolute;

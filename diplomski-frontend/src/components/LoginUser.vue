@@ -29,6 +29,7 @@
       <div class="btnPrijaviSe">
         <button>Prijavi se</button>
       </div>
+      <a @click="openForgot()">Zaboravili ste lozinku?</a>
     </form>
   </div>
 </template>
@@ -72,6 +73,10 @@ export default {
       } else {
         console.log("The username and password must be present");
       }
+    },
+    openForgot() {
+      this.$router.push({ name: "forgotpassword" });
+      this.closeWindowLogin();
     },
   },
 };
@@ -151,6 +156,7 @@ input {
 .btnPrijaviSe {
   text-align: right;
   margin: auto 0.5rem 0.5rem auto;
+  font-size: 1rem;
 }
 .btnPrijaviSe > button {
   padding: 0.5rem 1rem;
@@ -160,5 +166,15 @@ input {
   border: 1px solid transparent;
   border-radius: 5px;
   margin-top: 0.5rem;
+}
+a {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  font-size: 0.9rem;
+  color: #0a86ff;
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>

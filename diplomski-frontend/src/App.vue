@@ -47,6 +47,10 @@ body {
 input {
   box-sizing: border-box;
 }
+
+.message {
+  font-size: 1rem !important;
+}
 </style>
 
 <style scoped>

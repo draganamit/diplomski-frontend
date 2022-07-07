@@ -46,6 +46,10 @@ const actions = {
         await rootState.baseAxios.put('auth/'+id);
         
     },
+    async resetPassword({rootState},email)
+    {
+        await rootState.baseAxios.post('auth/ResetPassword', {email});
+    }
 }
 const mutations = {
     setUser: (state,user) => (state.user=user),

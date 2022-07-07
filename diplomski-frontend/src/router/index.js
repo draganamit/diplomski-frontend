@@ -7,6 +7,8 @@ import UserView from '@/views/UserView.vue'
 import UserProfileView from '@/views/UserProfileView.vue'
 import ProductDescriptionView from '@/views/ProductDescriptionView.vue'
 import OrderView from '@/views/OrderView.vue'
+import ForgotPassword from '@/views/ForgotPassword.vue'
+
 
 
 Vue.use(VueRouter)
@@ -46,6 +48,11 @@ const routes = [
     path: '/orderproduct',
     name: 'orderproduct',
     component: OrderView
+  },
+  {
+    path: '/forgotpassword',
+    name: 'forgotpassword',
+    component: ForgotPassword
   },
   // {
   //   path: '/about',

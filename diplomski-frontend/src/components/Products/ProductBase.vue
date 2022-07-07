@@ -103,18 +103,14 @@ export default {
 
 <style scoped>
 .container-product {
-  /* border: 1px solid grey; */
   height: 13rem;
   background-color: white;
   display: flex;
   flex-direction: column;
   padding-bottom: 0.5rem;
-  /* padding: 0.5rem; */
   position: relative;
 }
 .image {
-  /* border: 1px solid grey; */
-  /* width: 100%; */
   height: 8rem;
 }
 .image > img {
@@ -138,16 +134,12 @@ export default {
   bottom: 0;
   left: 0;
   padding: 1rem;
-  /* bottom: 15px; */
-  /* align-items: center; */
-  /* left: 70px; */
 }
 .product-state {
   position: absolute;
   width: 100%;
   height: 100%;
-  /* opacity: 0; */
-  /* z-index: 0; */
+
   background: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: center;

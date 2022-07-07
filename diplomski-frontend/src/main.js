@@ -6,7 +6,9 @@ import store from './store'
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 
 
+
 import "@/assets/icons/style.css"
+
 
 Vue.config.productionTip = false
 

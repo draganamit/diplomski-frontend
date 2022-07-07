@@ -33,13 +33,4 @@ export default {
   display: flex;
   flex-direction: column;
 }
-/* .content-product { 
-  border: 1px solid grey;
-  margin: 0.5rem 1rem;
-  padding: 0.5rem;
-  display: grid;
-  gap: 3rem 3rem;
-  grid-template-columns: repeat(4, 1fr);
-}
-*/
 </style>
