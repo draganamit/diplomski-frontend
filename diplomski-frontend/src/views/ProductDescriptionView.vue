@@ -24,7 +24,7 @@
           @click="index = 0"
           style="width: 25rem; height: 100%"
           alt=""
-        />>
+        />
       </div>
 
       <div class="description-button">
@@ -130,6 +130,7 @@ export default {
 .image-div > img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 .description {
   display: flex;

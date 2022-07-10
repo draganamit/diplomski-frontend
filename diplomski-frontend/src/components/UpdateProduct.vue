@@ -82,7 +82,7 @@
               <img
                 :src="'http://localhost:5000/Images/' + img"
                 alt=""
-                style="width: 100%; height: 100%"
+                style="width: 100%; height: 100%; object-fit: contain"
               />
             </div>
           </div>

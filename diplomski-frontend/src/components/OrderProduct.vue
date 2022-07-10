@@ -302,12 +302,13 @@ export default {
 .image {
   border: 1px solid black;
   width: 10rem;
-  /* width: 100%; */
+
   height: 8rem;
 }
 .image > img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 .text {
   padding: 1rem;

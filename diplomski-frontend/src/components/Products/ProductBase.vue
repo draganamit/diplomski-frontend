@@ -116,6 +116,7 @@ export default {
 .image > img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 .name {
   padding: 0.5rem;
