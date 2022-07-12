@@ -4,11 +4,21 @@
     <div class="content justify-between">
       <div class="price">
         Od
-        <input type="text" placeholder="od" v-model="priceModel.priceFrom" />
+        <input
+          type="text"
+          placeholder="od"
+          v-model="priceModel.priceFrom"
+          @keyup.enter="getProductByPrice()"
+        />
       </div>
       <div class="price">
         Do
-        <input type="text" placeholder="do" v-model="priceModel.priceTo" />
+        <input
+          type="text"
+          placeholder="do"
+          v-model="priceModel.priceTo"
+          @keyup.enter="getProductByPrice()"
+        />
       </div>
     </div>
     <div class="search">
@@ -50,7 +60,7 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   margin: 0.5rem 0;
 }
 .header {
@@ -87,6 +97,7 @@ export default {
   outline: none;
   border: 1px solid transparent;
   border-radius: 5px;
+  cursor: pointer;
 }
 input {
   padding: 0.5rem 1rem;

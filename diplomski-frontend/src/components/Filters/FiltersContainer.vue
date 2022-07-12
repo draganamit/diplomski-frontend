@@ -23,7 +23,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 25rem;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   padding: 0.5rem;
   background-color: blanchedalmond;
 }

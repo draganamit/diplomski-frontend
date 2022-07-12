@@ -20,7 +20,7 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   padding: 0.5rem;
   background-color: blanchedalmond;
   width: 100%;
@@ -29,7 +29,7 @@ export default {
 }
 .content {
   width: 100%;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   display: flex;
   flex-direction: column;
 }

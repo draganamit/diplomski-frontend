@@ -116,7 +116,7 @@ export default {
 }
 .show-products {
   width: 100%;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   display: flex;
   flex-direction: column;
 }
@@ -133,6 +133,7 @@ button {
   font-size: 1rem;
   width: 10rem;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 .update-product {
   position: absolute;

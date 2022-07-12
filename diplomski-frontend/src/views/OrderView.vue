@@ -128,7 +128,8 @@ export default {
   background-color: white;
   border: 1px solid black;
   border-radius: 5px;
-  width: 60%;
+  width: 40%;
+  /* width: 60%; */
   margin: auto;
   z-index: 2;
   top: 1rem;

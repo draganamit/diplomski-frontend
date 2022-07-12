@@ -61,7 +61,12 @@
               <p style="width: 100%; margin: 0">Dodaj sliku proizvoda</p>
               <input
                 type="file"
-                style="position: absolute; height: 100%; opacity: 0"
+                style="
+                  position: absolute;
+                  height: 100%;
+                  opacity: 0;
+                  cursor: pointer;
+                "
                 @change="uploadImage"
               />
             </div>
@@ -293,6 +298,7 @@ input {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  cursor: pointer;
 }
 .tag {
   padding: 0.5rem 1rem;
@@ -321,6 +327,7 @@ input {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   height: 100%;
+  cursor: pointer;
 }
 .delete-tag {
   font-weight: bold;
@@ -328,6 +335,7 @@ input {
   color: dimgray;
   border: transparent;
   border-radius: 2px;
+  cursor: pointer;
 }
 .product-images {
   display: flex;
@@ -342,12 +350,11 @@ input {
   align-content: center;
   justify-content: center;
   border: 1px solid gainsboro;
-
   width: 10rem;
   height: 9rem;
   font-size: 1rem;
   color: dodgerblue;
-  cursor: pointer;
+
   position: relative;
   min-width: 10rem;
   min-height: 9rem;
@@ -362,11 +369,13 @@ input {
   display: none;
   right: 0;
   top: 0;
+  cursor: pointer;
 }
 .delete-icon {
   font-size: 1.2rem;
   color: red;
   background: white;
   font-size: 22px;
+  cursor: pointer;
 }
 </style>

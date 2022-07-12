@@ -15,7 +15,7 @@
       ></ProductBase>
       <div v-if="!products.length">Nema proizvoda na stanju.</div>
     </div>
-    <div class="pagination">
+    <div class="pagination" v-if="products.length">
       <div class="page" @click="prevPage()">&#60;</div>
       <div
         class="page"
@@ -128,7 +128,7 @@ export default {
 </script>
 <style scoped>
 .content-products {
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   margin: 0.5rem 1rem;
   padding: 0.5rem;
   display: grid;
@@ -163,5 +163,6 @@ export default {
   margin-left: 0.5rem;
   background: white;
   font-size: 1rem;
+  cursor: pointer;
 }
 </style>

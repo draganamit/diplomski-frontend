@@ -10,6 +10,7 @@
           border: 1px solid grey;
           border-radius: 0.2rem;
           margin-right: 0.3rem;
+          cursor: pointer;
         "
       >
         <i class="icon-pencil"></i>
@@ -21,6 +22,7 @@
           font-size: 1.1rem;
           border: 1px solid grey;
           border-radius: 0.2rem;
+          cursor: pointer;
         "
       >
         <i class="icon-bin"></i>

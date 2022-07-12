@@ -117,6 +117,7 @@ button {
   font-size: 1rem;
   width: 10rem;
   border-radius: 0.5rem;
+  cursor: pointer;
 }
 .all-category {
   margin: 0.5rem 1rem;

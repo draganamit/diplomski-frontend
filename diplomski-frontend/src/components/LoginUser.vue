@@ -166,6 +166,7 @@ input {
   border: 1px solid transparent;
   border-radius: 5px;
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 a {
   display: flex;

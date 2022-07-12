@@ -101,9 +101,9 @@ export default {
   justify-content: center;
 }
 .state {
-  background-color: red;
-  color: #605858;
-  border: 1px solid gray;
+  background-color: #ff1717;
+  color: white;
+  /* border: 1px solid gray; */
   padding: 1rem 1rem;
   margin-right: 0.5rem;
   font-size: 1rem;
@@ -112,17 +112,19 @@ export default {
 }
 .green {
   background: #77ef00;
-
+  color: white;
   pointer-events: none;
+  background: #06e66c;
 }
 .yellow {
-  background: #f1f400;
-
+  background: rgb(238 164 39);
+  color: white;
   cursor: pointer;
 }
 .grey {
-  background: #bcbcbc;
+  background: #c4c4c4;
 
   pointer-events: none;
+  color: white;
 }
 </style>

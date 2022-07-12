@@ -22,7 +22,7 @@
         <img
           :src="'http://localhost:5000/Images/' + images[0]"
           @click="index = 0"
-          style="width: 25rem; height: 100%"
+          style="width: 25rem; height: 100%; max-height: 505px"
           alt=""
         />
       </div>
@@ -114,7 +114,7 @@ export default {
 <style scoped>
 .description-div {
   display: flex;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   align-items: center;
   padding: 2rem 10rem;
 }
@@ -124,7 +124,7 @@ export default {
   background-repeat: no-repeat;
   background-position: center center;
   border: 1px solid #ebebeb;
-  margin: 5px;
+
   cursor: pointer;
 }
 .image-div > img {
@@ -157,6 +157,8 @@ button {
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   margin-right: 0.5rem;
+  cursor: pointer;
+  border: none;
 }
 .description-button {
   display: flex;
@@ -172,7 +174,7 @@ button {
   background-color: white;
   border: 1px solid black;
   border-radius: 5px;
-  width: 60%;
+  width: 40%;
   margin: auto;
   z-index: 2;
   top: 1rem;
@@ -202,5 +204,6 @@ button {
   color: #8f8b8b;
   border: transparent;
   pointer-events: none;
+  border: none;
 }
 </style>

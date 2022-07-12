@@ -70,7 +70,11 @@
               </ValidationProvider>
             </div>
 
-            <button type="button" @click="update()" style="width: 100%">
+            <button
+              type="button"
+              @click="update()"
+              style="width: 100%; cursor: pointer"
+            >
               Sačuvaj izmjene
             </button>
           </form>

@@ -16,7 +16,11 @@
     </div>
 
     <div
-      v-if="user && (user.type == 0 || user.id == productUserId)"
+      v-if="
+        user &&
+        (user.type == 0 || user.id == productUserId) &&
+        $route.path == '/product'
+      "
       class="icons"
     >
       <div
@@ -27,6 +31,7 @@
           border: 1px solid grey;
           border-radius: 0.2rem;
           margin-right: 0.3rem;
+          cursor: pointer;
         "
       >
         <i class="icon-pencil"></i>
@@ -38,6 +43,7 @@
           font-size: 1.1rem;
           border: 1px solid grey;
           border-radius: 0.2rem;
+          cursor: pointer;
         "
       >
         <i class="icon-bin"></i>
@@ -109,6 +115,7 @@ export default {
   flex-direction: column;
   padding-bottom: 0.5rem;
   position: relative;
+  cursor: pointer;
 }
 .image {
   height: 8rem;

@@ -2,7 +2,12 @@
   <div name="lokacija" class="container">
     <div class="header">Lokacija</div>
     <div class="content">
-      <input class="location" type="text" v-model="location" />
+      <input
+        class="location"
+        type="text"
+        v-model="location"
+        @keyup.enter="getProductByLocation()"
+      />
     </div>
     <div class="search">
       <button type="button" @click="getProductByLocation()">Pretraži</button>
@@ -35,7 +40,7 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   margin: 0.5rem 0;
 }
 .header {
@@ -62,6 +67,7 @@ export default {
   outline: none;
   border: 1px solid transparent;
   border-radius: 5px;
+  cursor: pointer;
 }
 input {
   padding: 0.5rem 1rem;

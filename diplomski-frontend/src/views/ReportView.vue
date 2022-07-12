@@ -35,9 +35,6 @@
               </option>
             </select>
           </div>
-          <div style="display: none" class="btn">
-            <button @click="getOrders()">Pretraži</button>
-          </div>
         </div>
         <div class="date-container" style="border-left: none">
           <div style="display: flex; font-size: 1.2rem">Kategorija</div>
@@ -57,9 +54,6 @@
                 {{ category.name }}
               </option>
             </select>
-          </div>
-          <div style="display: none" class="btn">
-            <button @click="getOrders()">Pretraži</button>
           </div>
         </div>
       </div>
@@ -227,6 +221,7 @@ button {
   margin-left: auto;
   width: 10%;
   font-size: 1.1rem;
+  cursor: pointer;
 }
 .list {
   width: 100%;

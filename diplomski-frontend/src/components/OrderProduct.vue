@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="cls">
-      <div @click="closeWindowOrder()">X</div>
+      <div class="title">
+        {{ name }}
+      </div>
+      <div class="close-button" @click="closeWindowOrder()">X</div>
     </div>
     <div class="order-div">
       <div class="oreder-product">
@@ -9,12 +12,15 @@
           <img :src="'http://localhost:5000/Images/' + images[0]" alt="" />
         </div>
         <div class="product-information">
-          <div class="text">Naziv: {{ name }}</div>
+          <!-- <div class="text">Naziv: {{ name }}</div> -->
           <div class="text">Cijena: {{ price }}KM</div>
-        </div>
-        <div class="product-information" v-if="forConfirm">
+          <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
           <div class="text">Količina: {{ quantity }}</div>
           <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div>
+        </div>
+        <div class="product-information" v-if="forConfirm">
+          <!-- <div class="text">Količina: {{ quantity }}</div> -->
+          <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
         </div>
 
         <div class="quantity" v-if="forOrder">
@@ -102,10 +108,7 @@
               v-model="model.telephone"
             />
           </div>
-          <div>
-            <div class="form-text">Grad*</div>
-            <input class="from-input" type="text" />
-          </div>
+
           <div>
             <div class="form-text">Adresa*</div>
             <input
@@ -272,10 +275,10 @@ export default {
 <style scoped>
 .cls {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
-.cls > div {
+.cls > .close-button {
   color: white;
   border: 1px solid white;
   background: red;
@@ -287,20 +290,26 @@ export default {
   width: 2.5rem;
   padding: 0.3rem 0;
 }
+.cls > .title {
+  padding: 0 1rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
 .order-div {
-  padding: 1rem 1rem;
+  padding: 0 1rem;
 
   display: flex;
   flex-direction: column;
 }
 .oreder-product {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   padding: 00.2rem;
   margin-bottom: 1rem;
 }
 .image {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 10rem;
 
   height: 8rem;
@@ -311,7 +320,7 @@ export default {
   object-fit: contain;
 }
 .text {
-  padding: 1rem;
+  padding: 0 1rem;
   font-size: 1rem;
 }
 .quantity {
@@ -325,7 +334,7 @@ export default {
 .user-div {
   display: flex;
   padding: 1rem 1rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .user-form {
   display: flex;
@@ -356,7 +365,7 @@ export default {
 .sum-order {
   display: flex;
   padding: 1rem 1rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin: 1rem;
 }
 .sum {
@@ -372,18 +381,21 @@ export default {
 .btnOrder {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   padding: 1rem 1rem;
   font-size: 1rem;
   width: 10rem;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   margin-right: 0.5rem;
+  cursor: pointer;
+  border: none;
 }
 .product-information {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-evenly;
 }
 .wrapper {
   height: 30px;

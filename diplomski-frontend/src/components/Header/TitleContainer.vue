@@ -154,6 +154,7 @@ export default {
   margin-right: 0.5rem;
   font-size: 1rem;
   width: 8rem;
+  cursor: pointer;
 }
 .btnRegistracija {
   background-color: rgb(230, 91, 40);
@@ -162,6 +163,7 @@ export default {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   width: 8rem;
+  cursor: pointer;
 }
 
 .container {
@@ -200,6 +202,7 @@ input {
   border: 1px solid transparent;
   border-radius: 5px;
   margin-top: 0.5rem;
+  cursor: pointer;
 }
 .cls {
   display: flex;

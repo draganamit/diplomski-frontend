@@ -5,17 +5,21 @@
       @click="getProductByCategory(null)"
       style="padding: 0.5rem"
       class="category"
+      :class="{ selected: $route.query.categoryId == null }"
     >
-      Svi proizvodi
+      <div>Svi proizvodi</div>
     </div>
     <div
       v-for="(category, key) in categories"
       :key="key"
       style="padding: 0.5rem"
       class="category"
+      :class="{ selected: category.id == $route.query.categoryId }"
       @click="getProductByCategory(category.id)"
     >
-      {{ category.name }}
+      <div>
+        {{ category.name }}
+      </div>
     </div>
   </div>
 </template>
@@ -55,7 +59,7 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   margin: 0.5rem 0;
 }
 .header {
@@ -65,9 +69,18 @@ export default {
 }
 .category {
   cursor: pointer;
+  transition: all 0.3s linear;
 }
-.category:hover {
-  background: rgb(231, 144, 90);
-  color: white;
+.category > div {
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+.category:hover > div {
+  /* background: rgb(231, 144, 90); */
+  /* color: white; */
+  transform: scale(1.2);
+}
+.selected {
+  background: rgb(231, 179, 90);
 }
 </style>

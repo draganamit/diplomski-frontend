@@ -14,7 +14,7 @@
           <button
             type="button"
             @click="categoryId ? updateCategories() : addCategories()"
-            style="width: 100%"
+            style="width: 100%; cursor: pointer"
           >
             {{ textButton }}
           </button>

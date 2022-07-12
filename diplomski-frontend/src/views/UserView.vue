@@ -22,7 +22,7 @@
           <th style="text-align: right">Opcije</th>
         </tr>
         <tr
-          style="background-color: blanchedalmond"
+          style="background-color: blanchedalmond; cursor: pointer"
           v-for="(user, key) in users"
           :key="key"
           @click="setIdUser(user.id)"

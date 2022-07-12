@@ -25,17 +25,17 @@
         <div v-if="userById" style="padding: 1rem; font-size: 1.5rem">
           {{ userById.location }}
         </div>
-        <button style="width: 100%" @click="openUpdate()">
+        <button style="width: 100%; cursor: pointer" @click="openUpdate()">
           Azuriraj lične podatke
         </button>
         <button
-          style="width: 100%; background-color: rgb(183 28 11)"
+          style="width: 100%; background-color: rgb(183 28 11); cursor: pointer"
           @click="openUpdatePassword()"
         >
           Promijeni lozinku
         </button>
         <button
-          style="width: 100%; background-color: #a29999"
+          style="width: 100%; background-color: #a29999; cursor: pointer"
           @click="deleteUser()"
         >
           Deaktiviraj profil

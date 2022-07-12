@@ -1,6 +1,11 @@
 <template>
   <div class="contaner">
-    <input type="text" placeholder="Ukucaj proizvod" v-model="nameProduct" />
+    <input
+      type="text"
+      placeholder="Ukucaj proizvod"
+      v-model="nameProduct"
+      @keyup.enter="getProduct()"
+    />
     <button @click="getProduct()">Pretrazi</button>
   </div>
 </template>
@@ -33,7 +38,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
 }
 input {
   padding: 0.5rem 1rem;
@@ -52,5 +57,6 @@ button {
   border: 1px solid transparent;
   border-radius: 5px;
   font-size: 1rem;
+  cursor: pointer;
 }
 </style>

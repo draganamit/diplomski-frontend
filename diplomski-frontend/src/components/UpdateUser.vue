@@ -22,7 +22,11 @@
             <div class="text-div">Lokacija:</div>
             <input type="text" v-model="model.location" />
           </div>
-          <button @click="update()" type="button" style="width: 100%">
+          <button
+            @click="update()"
+            type="button"
+            style="width: 100%; cursor: pointer"
+          >
             Sačuvaj izmjene
           </button>
         </form>
