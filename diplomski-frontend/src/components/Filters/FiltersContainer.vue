@@ -14,7 +14,6 @@ import PriceContainer from "./PriceContainer.vue";
 import LocationContainer from "./LocationContainer.vue";
 export default {
   components: { CategoryContainer, PriceContainer, LocationContainer },
-  methods: {},
 };
 </script>
 
@@ -24,7 +23,7 @@ export default {
   flex-direction: column;
   width: 25rem;
   /* border: 1px solid grey; */
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   background-color: blanchedalmond;
 }
 </style>

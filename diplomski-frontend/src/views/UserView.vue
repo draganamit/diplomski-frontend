@@ -15,7 +15,7 @@
     </div>
     <div class="table-div">
       <table style="width: 100%; border-collapse: collapse">
-        <tr style="background-color: rgb(230, 91, 40)">
+        <tr class="thr" style="background-color: rgb(230, 91, 40)">
           <th>Korisničko ime</th>
           <th>Ime</th>
           <th>Prezime</th>
@@ -152,5 +152,11 @@ a {
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 0;
+}
+tr:hover:not(.thr) {
+  background-color: #e8d0ad !important;
+}
+.block:hover {
+  text-decoration: underline;
 }
 </style>

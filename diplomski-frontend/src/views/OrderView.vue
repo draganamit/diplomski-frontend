@@ -18,7 +18,7 @@
     </div>
     <div class="user-order">Vaše narudžbe:</div>
     <OrderBase
-      :typeUser="'Prodavač'"
+      :typeUser="'Proizvođač:'"
       v-for="order in ordersByUser"
       :key="order.id"
       :productName="order.product.name"
@@ -37,7 +37,7 @@
     </div>
     <div class="user-order">Narudžbe:</div>
     <OrderBase
-      :typeUser="'Kupac'"
+      :typeUser="'Kupac:'"
       v-for="order in ordersForUser"
       :key="order.id"
       :productName="order.product.name"
@@ -126,10 +126,10 @@ export default {
   left: 0;
   right: 0;
   background-color: white;
-  border: 1px solid black;
+
   border-radius: 5px;
   width: 40%;
-  /* width: 60%; */
+
   margin: auto;
   z-index: 2;
   top: 1rem;

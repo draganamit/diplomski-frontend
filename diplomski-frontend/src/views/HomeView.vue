@@ -20,6 +20,7 @@ export default {
 <style scoped>
 .image {
   width: 100%;
+  display: none;
 }
 .image > img {
   width: 100%;

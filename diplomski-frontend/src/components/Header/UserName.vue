@@ -12,7 +12,7 @@
       </div>
       <div class="relative">
         <div class="dropdown-content">
-          <a @click="$router.push({ name: 'product' })">Proizvodi</a>
+          <a @click="openProducts()">Proizvodi</a>
           <a v-if="user.type == 0" @click="$router.push({ name: 'category' })"
             >Kategorije</a
           >
@@ -60,6 +60,16 @@ export default {
         })
         .catch();
     },
+    openProducts() {
+      this.$router
+        .push({
+          name: "product",
+          query: {
+            userId: this.user.id,
+          },
+        })
+        .catch();
+    },
   },
 };
 </script>
@@ -73,12 +83,16 @@ export default {
 .namesurname {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-  border: 1px solid gray;
+
   padding: 0.5rem;
   font-size: 1rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+}
+.namesurname:hover {
+  transform: scale(1.01);
+  background-color: rgb(193 73 28);
 }
 .namesurname > div:hover {
   text-decoration: underline;
@@ -86,13 +100,17 @@ export default {
 .order {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-  border: 1px solid gray;
+
   padding: 0.5rem;
   margin-right: 0.5rem;
   font-size: 1rem;
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+.order:hover {
+  transform: scale(1.01);
+  background-color: rgb(193 73 28);
 }
 .dropdown {
   position: relative;

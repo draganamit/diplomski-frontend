@@ -29,20 +29,28 @@
 
       <div class="description-button">
         <div class="description">
-          <div class="text-div">{{ username }}</div>
-          <div class="text-div">Naziv: {{ name }}</div>
-          <div class="text-div">Kategorija: {{ category }}</div>
-          <div class="text-div">Opis: {{ description }}</div>
-          <div class="text-div">Stanje: {{ state }}</div>
-          <div class="text-div">Cijena: {{ price }}KM</div>
-          <div class="text-div">Tagovi:</div>
+          <div class="text-div" style="font-weight: bold; font-size: 1.5rem">
+            {{ name }}
+          </div>
+          <div class="text-div"><b>Opis:</b> {{ description }}</div>
+          <div class="text-div">
+            <b>Cijena:</b>
+            <div style="color: red; font-weight: bold">{{ price }}KM</div>
+          </div>
+          <div class="text-div"><b>Proizvođač:</b> {{ username }}</div>
+
+          <div class="text-div"><b>Kategorija:</b> {{ category }}</div>
+
+          <!-- <div class="text-div">Stanje: {{ state }}</div> -->
+
+          <div class="text-div"><b>Tagovi:</b></div>
           <div class="tags">
             <div class="tag" v-for="tag in tags" :key="tag">{{ tag }}</div>
           </div>
         </div>
         <div class="button-div">
           <button
-            :class="user ? 'button' : 'block-order'"
+            :class="user && userProduct != user.id ? 'button' : 'block-order'"
             @click="openOrderWindov()"
           >
             Naruči
@@ -76,12 +84,14 @@ export default {
       images: [],
       index: null,
       imagesArray: [],
+      userProduct: null,
     };
   },
   async created() {
     const response = await this.getProductById(
       Number(this.$route.query.productId)
     );
+    this.userProduct = response.user.id;
     this.name = response.name;
     this.username = response.user.email;
     this.category = response.category.name;
@@ -141,6 +151,7 @@ export default {
 .text-div {
   padding: 1rem;
   margin-bottom: 0.5rem;
+  display: flex;
 }
 .button-div {
   display: flex;
@@ -160,6 +171,10 @@ button {
   cursor: pointer;
   border: none;
 }
+button:hover {
+  transform: scale(1.01);
+  background-color: rgb(193 73 28);
+}
 .description-button {
   display: flex;
   flex-direction: column;
@@ -172,7 +187,7 @@ button {
   left: 0;
   right: 0;
   background-color: white;
-  border: 1px solid black;
+
   border-radius: 5px;
   width: 40%;
   margin: auto;
@@ -205,5 +220,8 @@ button {
   border: transparent;
   pointer-events: none;
   border: none;
+}
+b {
+  margin-right: 0.5rem;
 }
 </style>

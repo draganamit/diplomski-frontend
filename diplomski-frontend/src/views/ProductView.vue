@@ -127,13 +127,17 @@ export default {
 button {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-  border: 1px solid gray;
+  border: none;
   padding: 1rem 1rem;
   margin-right: 0.5rem;
   font-size: 1rem;
   width: 10rem;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+button:hover {
+  transform: scale(1.01);
+  background-color: rgb(193 73 28);
 }
 .update-product {
   position: absolute;

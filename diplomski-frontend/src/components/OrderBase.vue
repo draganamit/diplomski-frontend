@@ -1,9 +1,13 @@
 <template>
   <div class="order-base">
     <div style="display: flex; flex-direction: column; align-items: flex-start">
-      <div class="text-order-product">Proizvod: {{ productName }}</div>
-      <div class="text-order-product">Količina: {{ quantity }}</div>
-      <div class="text-order-product">{{ typeUser }}: {{ userName }}</div>
+      <div class="text-order-product">
+        <b>{{ productName }}</b>
+      </div>
+      <div class="text-order-product"><b>Količina:</b> {{ quantity }}</div>
+      <div class="text-order-product">
+        <b>{{ typeUser }} </b> {{ userName }}
+      </div>
     </div>
     <div class="order-state" style="flex-direction: column">
       <div
@@ -82,7 +86,7 @@ export default {
 .order-base {
   display: flex;
   padding: 1rem 0.5rem;
-  border: 1px solid grey;
+
   border-radius: 1rem;
   background-color: blanchedalmond;
   margin-top: 0.8rem;
@@ -103,23 +107,27 @@ export default {
 .state {
   background-color: #ff1717;
   color: white;
-  /* border: 1px solid gray; */
   padding: 1rem 1rem;
   margin-right: 0.5rem;
   font-size: 1rem;
   width: 10rem;
   border-radius: 0.5rem;
 }
+.state:hover {
+  background-color: #d00d0d;
+}
 .green {
-  background: #77ef00;
   color: white;
   pointer-events: none;
-  background: #06e66c;
+  background: #06a95e;
 }
 .yellow {
   background: rgb(238 164 39);
   color: white;
   cursor: pointer;
+}
+.yellow:hover {
+  background: rgb(204 136 20);
 }
 .grey {
   background: #c4c4c4;

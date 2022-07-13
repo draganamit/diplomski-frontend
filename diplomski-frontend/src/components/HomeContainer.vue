@@ -21,6 +21,6 @@ export default {
 .main {
   display: flex;
   width: 100%;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TitleView></TitleView>
-    <div class="content">
+    <div :class="$route.path == '/' ? 'content-main' : 'content'">
       <router-view></router-view>
     </div>
   </div>
@@ -59,5 +59,12 @@ input {
   width: 100vw;
   overflow: scroll;
   overflow-x: hidden;
+}
+.content-main {
+  height: calc(100vh - 4.5rem);
+  width: 100vw;
+  overflow: scroll;
+  overflow-x: hidden;
+  background-image: url("./assets/slika.jpg");
 }
 </style>

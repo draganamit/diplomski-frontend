@@ -13,10 +13,18 @@
         </div>
         <div class="product-information">
           <!-- <div class="text">Naziv: {{ name }}</div> -->
-          <div class="text">Cijena: {{ price }}KM</div>
+          <div class="text">
+            <b>Cijena:</b>
+            <div style="color: red; font-weight: bold">{{ price }}KM</div>
+          </div>
           <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
-          <div class="text">Količina: {{ quantity }}</div>
-          <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div>
+          <div class="text" v-if="forConfirm">
+            <b>Količina:</b> {{ quantity }}
+          </div>
+          <div class="text" v-if="forConfirm">
+            <b>Ukupna cijena:</b>
+            <div style="color: red; font-weight: bold">{{ sumConfirm }}KM</div>
+          </div>
         </div>
         <div class="product-information" v-if="forConfirm">
           <!-- <div class="text">Količina: {{ quantity }}</div> -->
@@ -24,7 +32,7 @@
         </div>
 
         <div class="quantity" v-if="forOrder">
-          <div>Izaberite kolicinu</div>
+          <div style="padding: 0.5rem 0"><b>Izaberite kolicinu</b></div>
           <div class="wrapper">
             <button
               class="btn btn--minus"
@@ -54,8 +62,10 @@
       <div class="user-div">
         <div class="user-form">
           <div>
-            Lični podaci &nbsp;
-            <div v-if="forConfirm">o kupcu</div>
+            <b style="display: flex"
+              >Lični podaci &nbsp;
+              <div v-if="forConfirm">o kupcu:</div></b
+            >
           </div>
           <div>
             <div class="form-text">Ime*</div>
@@ -129,7 +139,10 @@
       </div>
       <div class="sum-order" v-if="forOrder">
         <div class="sum">
-          <div>Ukupno: {{ sum }}KM</div>
+          <div class="text">
+            <b>Ukupno:</b>
+            <div style="color: red; font-weight: bold">{{ sum }}KM</div>
+          </div>
         </div>
         <div class="order-button" style="margin-left: auto">
           <button @click="order()" type="button" class="btnOrder">
@@ -290,6 +303,9 @@ export default {
   width: 2.5rem;
   padding: 0.3rem 0;
 }
+.close-button:hover {
+  background: #c40404;
+}
 .cls > .title {
   padding: 0 1rem;
   font-weight: 700;
@@ -303,13 +319,11 @@ export default {
   flex-direction: column;
 }
 .oreder-product {
-  /* border: 1px solid black; */
   display: flex;
   padding: 00.2rem;
   margin-bottom: 1rem;
 }
 .image {
-  /* border: 1px solid black; */
   width: 10rem;
 
   height: 8rem;
@@ -322,6 +336,7 @@ export default {
 .text {
   padding: 0 1rem;
   font-size: 1rem;
+  display: flex;
 }
 .quantity {
   display: flex;
@@ -330,6 +345,7 @@ export default {
   margin-left: auto;
   padding: 1rem;
   font-size: 1rem;
+  align-items: center;
 }
 .user-div {
   display: flex;
@@ -365,7 +381,7 @@ export default {
 .sum-order {
   display: flex;
   padding: 1rem 1rem;
-  /* border: 1px solid black; */
+
   margin: 1rem;
 }
 .sum {
@@ -376,12 +392,11 @@ export default {
 .order-button {
   display: flex;
   justify-content: flex-end;
-  /* margin-left: auto; */
 }
 .btnOrder {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-  /* border: 1px solid gray; */
+
   padding: 1rem 1rem;
   font-size: 1rem;
   width: 10rem;
@@ -390,6 +405,10 @@ export default {
   margin-right: 0.5rem;
   cursor: pointer;
   border: none;
+}
+.btnOrder:hover {
+  transform: scale(1.01);
+  background-color: rgb(193 73 28);
 }
 .product-information {
   display: flex;
@@ -418,5 +437,11 @@ export default {
   width: 30px;
   background-color: #e1e8ee;
   cursor: pointer;
+}
+b {
+  margin-right: 0.5rem;
+}
+.wrapper > button:hover {
+  background-color: #b5babf;
 }
 </style>

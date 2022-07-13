@@ -1,7 +1,15 @@
 <template>
-  <div style="height: 4.5rem; display: flex; align-items: center">
+  <div style="display: flex; align-items: center">
     <div class="title_line">
-      <div class="title" @click="goToHome()">Naslov</div>
+      <div
+        class="title"
+        @click="goToHome()"
+        style="margin-left: 5rem; cursor: pointer"
+      >
+        <!-- Naslov -->
+
+        <img src="@/assets/logo2d.png" alt="" />
+      </div>
       <div class="buttons" v-if="!user">
         <button class="btnPrijava" @click="loginOpen()">Prijavi se</button>
         <button class="btnRegistracija" @click="registrationOpen()">
@@ -135,7 +143,7 @@ export default {
 
 .title_line {
   display: flex;
-  padding: 1rem 10rem;
+  padding: 0.5rem 10rem;
   font-size: 1.5rem;
   background-color: blanchedalmond;
   align-items: center;
@@ -149,7 +157,8 @@ export default {
 .btnPrijava {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-  border: 1px solid gray;
+  border: none;
+
   padding: 0.5rem 1rem;
   margin-right: 0.5rem;
   font-size: 1rem;
@@ -159,7 +168,7 @@ export default {
 .btnRegistracija {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-  border: 1px solid gray;
+  border: none;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   width: 8rem;

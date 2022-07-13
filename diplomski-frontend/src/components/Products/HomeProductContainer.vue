@@ -22,10 +22,11 @@ export default {
   flex-direction: column;
   /* border: 1px solid grey; */
   padding: 0.5rem;
-  background-color: blanchedalmond;
+  /* background-color: blanchedalmond; */
   width: 100%;
   margin-right: 1rem;
   margin-left: 0.5rem;
+  padding-top: 4rem;
 }
 .content {
   width: 100%;

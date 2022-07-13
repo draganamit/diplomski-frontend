@@ -60,7 +60,7 @@ export default {
   display: flex;
   flex-direction: column;
   /* border: 1px solid gray; */
-  margin: 0.5rem 0;
+  /* margin: 0.5rem 0; */
 }
 .header {
   background-color: rgb(230, 91, 40);
@@ -78,9 +78,13 @@ export default {
 .category:hover > div {
   /* background: rgb(231, 144, 90); */
   /* color: white; */
-  transform: scale(1.2);
+  /* transform: scale(1.2); */
+  color: rgb(230, 91, 40);
+  font-weight: bold;
 }
 .selected {
-  background: rgb(231, 179, 90);
+  /* background: rgb(231, 179, 90); */
+  background: rgb(231, 144, 90);
+  color: white;
 }
 </style>

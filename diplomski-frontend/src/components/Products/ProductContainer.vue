@@ -13,9 +13,11 @@
         :productUserId="product.user.id"
         :productOnState="product.state == 0 ? false : true"
       ></ProductBase>
-      <div v-if="!products.length">Nema proizvoda na stanju.</div>
+      <div v-if="!products.length" style="color: red; font-size: 1.1rem">
+        Nema proizvoda na stanju.
+      </div>
     </div>
-    <div class="pagination" v-if="products.length">
+    <div class="pagination" v-if="products.length && $route.fullPath != '/'">
       <div class="page" @click="prevPage()">&#60;</div>
       <div
         class="page"
@@ -164,5 +166,8 @@ export default {
   background: white;
   font-size: 1rem;
   cursor: pointer;
+}
+.page:hover {
+  background: #e3dbdb;
 }
 </style>

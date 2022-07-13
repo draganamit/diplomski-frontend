@@ -41,6 +41,7 @@ export default {
       },
     };
   },
+
   methods: {
     getProductByPrice() {
       let query = Object.assign({}, this.$route.query);
@@ -62,6 +63,7 @@ export default {
   flex-direction: column;
   /* border: 1px solid gray; */
   margin: 0.5rem 0;
+  margin-bottom: 0;
 }
 .header {
   background-color: rgb(230, 91, 40);
@@ -99,8 +101,13 @@ export default {
   border-radius: 5px;
   cursor: pointer;
 }
+button:hover {
+  transform: scale(1.01);
+  background-color: rgb(193 73 28);
+}
 input {
   padding: 0.5rem 1rem;
   outline: none;
+  border: none;
 }
 </style>

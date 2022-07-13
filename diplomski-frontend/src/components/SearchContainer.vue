@@ -6,7 +6,7 @@
       v-model="nameProduct"
       @keyup.enter="getProduct()"
     />
-    <button @click="getProduct()">Pretrazi</button>
+    <button @click="getProduct()">Pretraži</button>
   </div>
 </template>
 
@@ -41,16 +41,17 @@ export default {
   /* border: 1px solid grey; */
 }
 input {
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
   outline: none;
   font-size: 1rem;
   width: 100%;
   min-width: 10rem;
   max-width: 40rem;
   margin: 0.5rem;
+  border: none;
 }
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1rem;
   background-color: rgb(230, 91, 40);
   color: white;
   outline: none;
@@ -58,5 +59,9 @@ button {
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
+}
+button:hover {
+  transform: scale(1.01);
+  background-color: rgb(193 73 28);
 }
 </style>
