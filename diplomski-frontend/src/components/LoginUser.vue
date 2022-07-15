@@ -114,6 +114,9 @@ export default {
   width: 2.5rem;
   padding: 0.3rem 0;
 }
+.cls > div:hover {
+  background: #c40404;
+}
 .container {
   margin-bottom: 1rem;
   margin-right: 2rem;
@@ -167,6 +170,9 @@ input {
   border-radius: 5px;
   margin-top: 0.5rem;
   cursor: pointer;
+}
+.btnPrijaviSe > button:hover {
+  background-color: rgb(193 73 28);
 }
 a {
   display: flex;

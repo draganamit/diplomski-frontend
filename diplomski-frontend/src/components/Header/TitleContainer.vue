@@ -213,6 +213,10 @@ input {
   margin-top: 0.5rem;
   cursor: pointer;
 }
+button:hover {
+  transform: scale(1.01);
+  background-color: rgb(193 73 28);
+}
 .cls {
   display: flex;
   justify-content: flex-end;

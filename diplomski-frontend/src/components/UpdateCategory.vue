@@ -122,4 +122,10 @@ button {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+button:hover {
+  background-color: rgb(16 161 30);
+}
+.cls > div:hover {
+  background: #c40404;
+}
 </style>

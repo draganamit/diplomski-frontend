@@ -19,9 +19,7 @@
           <a v-if="user.type == 0" @click="$router.push({ name: 'users' })"
             >Korisnici</a
           >
-          <a v-if="user.type == 0" @click="$router.push({ name: 'report' })"
-            >Izvještaj</a
-          >
+          <a @click="$router.push({ name: 'report' })">Izvještaj</a>
           <a style="border-top: 2px solid #d8d7d7" @click="Logout()"
             >Odjavi se</a
           >

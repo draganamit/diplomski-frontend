@@ -64,12 +64,18 @@ export default {
   color: white;
   cursor: pointer;
 }
+.button-yes:hover {
+  background: #0474e4;
+}
 .button-no {
-  background: #adabab;
+  background: #b6b6b6;
   padding: 0.5rem 2rem;
 
   border-radius: 5px;
   color: white;
   cursor: pointer;
+}
+.button-no:hover {
+  background: #aaa8a8;
 }
 </style>

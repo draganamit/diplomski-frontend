@@ -350,7 +350,6 @@ export default {
 .user-div {
   display: flex;
   padding: 1rem 1rem;
-  /* border: 1px solid black; */
 }
 .user-form {
   display: flex;

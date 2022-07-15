@@ -300,6 +300,9 @@ input {
   border-bottom-right-radius: 0;
   cursor: pointer;
 }
+.btn-add:hover {
+  background-color: rgb(16 161 30);
+}
 .tag {
   padding: 0.5rem 1rem;
   border: 1px solid #e1e8ee;
@@ -328,6 +331,9 @@ input {
   font-size: 1rem;
   height: 100%;
   cursor: pointer;
+}
+.button-add-tag:hover {
+  background-color: rgb(16 161 30);
 }
 .delete-tag {
   font-weight: bold;
@@ -359,6 +365,9 @@ input {
   min-width: 10rem;
   min-height: 9rem;
 }
+.add-image:hover {
+  background: #e9e9e9;
+}
 .add-image:hover .delete-image {
   display: block;
 }
@@ -377,5 +386,8 @@ input {
   background: white;
   font-size: 22px;
   cursor: pointer;
+}
+.cls > div:hover {
+  background: #c40404;
 }
 </style>

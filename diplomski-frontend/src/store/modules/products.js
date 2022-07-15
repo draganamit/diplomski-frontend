@@ -1,4 +1,6 @@
 const state ={
+    allUserProducts:[],
+
     allProducts:[],
     products: [],
     searchModel:
@@ -27,6 +29,11 @@ const actions = {
     {
         const response = await rootState.baseAxios.get("ProductContorller/GetAll");
         commit("setAllProducts",response.data.data);
+    },
+    async getAllUserProducts({rootState, commit})
+    {
+        const response = await rootState.authAxios.get("ProductContorller/GetUserProducts");
+        commit("setAllUserProducts",response.data.data);
     },
     async addProduct({rootState},newProduct)
     {
@@ -57,7 +64,9 @@ const mutations = {
         state.searchModel = model;
     },
     setTotalCount: (state,totalCount) => (state.totalCount=totalCount),
-    setAllProducts: (state, allProducts) => (state.allProducts = allProducts)
+    setAllProducts: (state, allProducts) => (state.allProducts = allProducts),
+    setAllUserProducts: (state, allUserProducts) => (state.allUserProducts = allUserProducts)
+
 }
 export default{
     state,

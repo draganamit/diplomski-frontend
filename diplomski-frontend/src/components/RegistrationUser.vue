@@ -272,4 +272,10 @@ input {
   margin-top: 0.5rem;
   cursor: pointer;
 }
+.btnPrijaviSe > button:hover {
+  background-color: rgb(193 73 28);
+}
+.cls > div:hover {
+  background: #c40404;
+}
 </style>
