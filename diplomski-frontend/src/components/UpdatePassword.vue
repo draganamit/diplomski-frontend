@@ -15,7 +15,7 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span> Trenutna lozinka: </span>
+                  <span style="text-align: start"> Trenutna lozinka: </span>
                   <input
                     name="oldPassword"
                     type="text"
@@ -37,7 +37,7 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span> Nova lozinka: </span>
+                  <span style="text-align: start"> Nova lozinka: </span>
 
                   <input
                     type="text"
@@ -58,7 +58,7 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span> Potvrdite lozinku: </span>
+                  <span style="text-align: start"> Potvrdite lozinku: </span>
                   <input
                     name="comfirmPassword"
                     type="text"
@@ -136,7 +136,9 @@ export default {
   width: 2.5rem;
   padding: 0.3rem 0;
 }
-
+.cls > div:hover {
+  background: #c40404;
+}
 form > div {
   display: flex;
   padding: 1rem 2rem;
@@ -179,6 +181,9 @@ button {
   margin-top: 2rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+button:hover {
+  background-color: rgb(16 161 30);
 }
 .error {
   margin: auto;

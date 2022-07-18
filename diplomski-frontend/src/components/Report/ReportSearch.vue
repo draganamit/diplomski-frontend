@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="input-container" v-if="user.type == 0">
+    <!-- <div class="input-container" v-if="user.type == 0">
       <b> Korisnik </b>
       <select name="user" class="list" v-model="reportSearchModel.userId">
         <option :value="null">-- Izaberite korisnika --</option>
@@ -8,7 +8,7 @@
           {{ user.email }}
         </option>
       </select>
-    </div>
+    </div> -->
 
     <div class="input-container">
       <b>Proizvod</b>
@@ -51,6 +51,16 @@
         <span> do </span>
         <input type="date" v-model="reportSearchModel.dateTo" />
       </div>
+    </div>
+
+    <div class="input-container" v-if="user.type == 0">
+      <b> Korisnik </b>
+      <select name="user" class="list" v-model="reportSearchModel.userId">
+        <option :value="null">-- Izaberite korisnika --</option>
+        <option v-for="(user, key) in users" :key="key" :value="user.id">
+          {{ user.email }}
+        </option>
+      </select>
     </div>
 
     <div
@@ -133,13 +143,13 @@ export default {
       return distinct;
     },
     products() {
-      if (this.user.type == 0) return this.allProducts;
-      if (this.user.type == 1) return this.allUserProducts;
+      if (this.user && this.user.type == 0) return this.allProducts;
+      if (this.user && this.user.type == 1) return this.allUserProducts;
       return [];
     },
     categories() {
-      if (this.user.type == 0) return this.allCategories;
-      if (this.user.type == 1) return this.allUserCategories;
+      if (this.user && this.user.type == 0) return this.allCategories;
+      if (this.user && this.user.type == 1) return this.allUserCategories;
       return [];
     },
     sumprice() {

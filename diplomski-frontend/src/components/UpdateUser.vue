@@ -1,26 +1,71 @@
 <template>
-  <div>
-    <div class="cls">
-      <div @click="closeWindowUpdate()">X</div>
-    </div>
-    <div class="update">
-      <div class="form-container">
-        <form>
+  <ValidationObserver ref="observer">
+    <div>
+      <div class="cls">
+        <div @click="closeWindowUpdate()">X</div>
+      </div>
+      <div class="update">
+        <form class="form-container">
           <div>
             <div class="text-div">Ime:</div>
-            <input type="text" v-model="model.name" />
+            <div class="input">
+              <ValidationProvider
+                name="name"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input type="text" v-model="model.name" />
+
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+            </div>
           </div>
           <div>
             <div class="text-div">Prezime:</div>
-            <input type="text" v-model="model.surname" />
+            <div class="input">
+              <ValidationProvider
+                name="surname"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input type="text" v-model="model.surname" />
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+            </div>
           </div>
           <div>
             <div class="text-div">Email:</div>
-            <input type="text" v-model="model.email" />
+            <div class="input">
+              <ValidationProvider
+                name="email"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input type="text" v-model="model.email" />
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+            </div>
           </div>
           <div>
             <div class="text-div">Lokacija:</div>
-            <input type="text" v-model="model.location" />
+            <div class="input">
+              <ValidationProvider
+                name="location"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input type="text" v-model="model.location" />
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+            </div>
           </div>
           <button
             @click="update()"
@@ -32,7 +77,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </ValidationObserver>
 </template>
 
 <script>
@@ -47,6 +92,7 @@ export default {
         email: "",
         location: "",
       },
+      showError: false,
     };
   },
   created() {
@@ -62,6 +108,10 @@ export default {
       this.$emit("closed");
     },
     async update() {
+      const valid = await this.$refs.observer.validate();
+      this.showError = true;
+      if (!valid) return;
+
       await this.updateUser(this.model);
       this.$emit("save");
     },
@@ -92,7 +142,9 @@ export default {
   width: 2.5rem;
   padding: 0.3rem 0;
 }
-
+.cls > div:hover {
+  background: #c40404;
+}
 form > div {
   display: flex;
   padding: 1rem 2rem;
@@ -127,5 +179,20 @@ button {
   margin-top: 2rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+button:hover {
+  background-color: rgb(16 161 30);
+}
+.error {
+  margin: auto;
+  text-align: left;
+  color: red;
+  background: transparent;
+  font-size: 1rem;
+}
+.input {
+  text-align: left;
+  position: relative;
+  width: 100%;
 }
 </style>

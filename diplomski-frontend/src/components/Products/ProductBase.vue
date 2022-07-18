@@ -19,7 +19,7 @@
       v-if="
         user &&
         (user.type == 0 || user.id == productUserId) &&
-        $route.path == '/product'
+        ($route.path == '/product' || $route.path == '/userprofile')
       "
       class="icons"
     >

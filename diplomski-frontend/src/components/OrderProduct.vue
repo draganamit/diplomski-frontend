@@ -1,169 +1,191 @@
 <template>
-  <div>
-    <div class="cls">
-      <div class="title">
-        {{ name }}
+  <ValidationObserver ref="observer">
+    <div>
+      <div class="cls">
+        <div class="title">
+          {{ name }}
+        </div>
+        <div class="close-button" @click="closeWindowOrder()">X</div>
       </div>
-      <div class="close-button" @click="closeWindowOrder()">X</div>
-    </div>
-    <div class="order-div">
-      <div class="oreder-product">
-        <div class="image">
-          <img :src="'http://localhost:5000/Images/' + images[0]" alt="" />
-        </div>
-        <div class="product-information">
-          <!-- <div class="text">Naziv: {{ name }}</div> -->
-          <div class="text">
-            <b>Cijena:</b>
-            <div style="color: red; font-weight: bold">{{ price }}KM</div>
+      <div class="order-div">
+        <div class="oreder-product">
+          <div class="image">
+            <img :src="'http://localhost:5000/Images/' + images[0]" alt="" />
           </div>
-          <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
-          <div class="text" v-if="forConfirm">
-            <b>Količina:</b> {{ quantity }}
+          <div class="product-information">
+            <!-- <div class="text">Naziv: {{ name }}</div> -->
+            <div class="text">
+              <b>Cijena:</b>
+              <div style="color: red; font-weight: bold">{{ price }}KM</div>
+            </div>
+            <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
+            <div class="text" v-if="forConfirm">
+              <b>Količina:</b> {{ quantity }}
+            </div>
+            <div class="text" v-if="forConfirm">
+              <b>Ukupna cijena:</b>
+              <div style="color: red; font-weight: bold">
+                {{ sumConfirm }}KM
+              </div>
+            </div>
           </div>
-          <div class="text" v-if="forConfirm">
-            <b>Ukupna cijena:</b>
-            <div style="color: red; font-weight: bold">{{ sumConfirm }}KM</div>
+          <div class="product-information" v-if="forConfirm">
+            <!-- <div class="text">Količina: {{ quantity }}</div> -->
+            <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
           </div>
-        </div>
-        <div class="product-information" v-if="forConfirm">
-          <!-- <div class="text">Količina: {{ quantity }}</div> -->
-          <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
-        </div>
 
-        <div class="quantity" v-if="forOrder">
-          <div style="padding: 0.5rem 0"><b>Izaberite kolicinu</b></div>
-          <div class="wrapper">
-            <button
-              class="btn btn--minus"
-              @click="changeCounter('-1')"
-              type="button"
-              name="button"
-            >
-              -
+          <div class="quantity" v-if="forOrder">
+            <div style="padding: 0.5rem 0"><b>Izaberite kolicinu</b></div>
+            <div class="wrapper">
+              <button
+                class="btn btn--minus"
+                @click="changeCounter('-1')"
+                type="button"
+                name="button"
+              >
+                -
+              </button>
+              <input
+                class="quantityinput"
+                type="text"
+                name="name"
+                :value="model.quantity"
+              />
+              <button
+                class="btn btn--plus"
+                @click="changeCounter('1')"
+                type="button"
+                name="button"
+              >
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="user-div">
+          <div class="user-form">
+            <div>
+              <b style="display: flex"
+                >Lični podaci &nbsp;
+                <div v-if="forConfirm">o kupcu:</div></b
+              >
+            </div>
+            <div>
+              <div class="form-text">Ime*</div>
+              <input
+                v-if="forConfirm"
+                class="from-input"
+                type="text"
+                disabled
+                v-model="nameUser"
+              />
+              <input
+                v-if="forOrder"
+                class="from-input"
+                type="text"
+                disabled
+                v-model="user.name"
+              />
+            </div>
+            <div>
+              <div class="form-text">Prezime*</div>
+              <input
+                v-if="forConfirm"
+                class="from-input"
+                type="text"
+                disabled
+                v-model="surnameUser"
+              />
+              <input
+                v-if="forOrder"
+                class="from-input"
+                type="text"
+                disabled
+                v-model="user.surname"
+              />
+            </div>
+            <div>
+              <div class="form-text">Telefon*</div>
+              <ValidationProvider
+                name="telephone"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input
+                  v-if="forConfirm"
+                  class="from-input"
+                  type="text"
+                  disabled
+                  v-model="telephoneUser"
+                />
+
+                <input
+                  v-if="forOrder"
+                  class="from-input"
+                  type="text"
+                  v-model="model.telephone"
+                />
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+            </div>
+
+            <div>
+              <div class="form-text">Adresa*</div>
+              <ValidationProvider
+                name="address"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input
+                  v-if="forConfirm"
+                  class="from-input"
+                  type="text"
+                  disabled
+                  v-model="addressUser"
+                />
+                <input
+                  v-if="forOrder"
+                  class="from-input"
+                  type="text"
+                  v-model="model.address"
+                />
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
+              </ValidationProvider>
+            </div>
+          </div>
+        </div>
+        <div class="sum-order" v-if="forOrder">
+          <div class="sum">
+            <div class="text">
+              <b>Ukupno:</b>
+              <div style="color: red; font-weight: bold">{{ sum }}KM</div>
+            </div>
+          </div>
+          <div class="order-button" style="margin-left: auto">
+            <button @click="order()" type="button" class="btnOrder">
+              Naruči
             </button>
-            <input
-              class="quantityinput"
-              type="text"
-              name="name"
-              :value="model.quantity"
-            />
-            <button
-              class="btn btn--plus"
-              @click="changeCounter('1')"
-              type="button"
-              name="button"
-            >
-              +
+          </div>
+        </div>
+        <div class="sum-order" v-if="forConfirm" style="margin-left: auto">
+          <div class="order-button">
+            <button @click="removeOrder()" type="button" class="btnOrder">
+              Odbaci
+            </button>
+          </div>
+          <div class="order-button">
+            <button @click="changeConfrim()" type="button" class="btnOrder">
+              Potvrdi
             </button>
           </div>
         </div>
       </div>
-      <div class="user-div">
-        <div class="user-form">
-          <div>
-            <b style="display: flex"
-              >Lični podaci &nbsp;
-              <div v-if="forConfirm">o kupcu:</div></b
-            >
-          </div>
-          <div>
-            <div class="form-text">Ime*</div>
-            <input
-              v-if="forConfirm"
-              class="from-input"
-              type="text"
-              disabled
-              v-model="nameUser"
-            />
-            <input
-              v-if="forOrder"
-              class="from-input"
-              type="text"
-              disabled
-              v-model="user.name"
-            />
-          </div>
-          <div>
-            <div class="form-text">Prezime*</div>
-            <input
-              v-if="forConfirm"
-              class="from-input"
-              type="text"
-              disabled
-              v-model="surnameUser"
-            />
-            <input
-              v-if="forOrder"
-              class="from-input"
-              type="text"
-              disabled
-              v-model="user.surname"
-            />
-          </div>
-          <div>
-            <div class="form-text">Telefon*</div>
-            <input
-              v-if="forConfirm"
-              class="from-input"
-              type="text"
-              disabled
-              v-model="telephoneUser"
-            />
-
-            <input
-              v-if="forOrder"
-              class="from-input"
-              type="text"
-              v-model="model.telephone"
-            />
-          </div>
-
-          <div>
-            <div class="form-text">Adresa*</div>
-            <input
-              v-if="forConfirm"
-              class="from-input"
-              type="text"
-              disabled
-              v-model="addressUser"
-            />
-            <input
-              v-if="forOrder"
-              class="from-input"
-              type="text"
-              v-model="model.address"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="sum-order" v-if="forOrder">
-        <div class="sum">
-          <div class="text">
-            <b>Ukupno:</b>
-            <div style="color: red; font-weight: bold">{{ sum }}KM</div>
-          </div>
-        </div>
-        <div class="order-button" style="margin-left: auto">
-          <button @click="order()" type="button" class="btnOrder">
-            Naruči
-          </button>
-        </div>
-      </div>
-      <div class="sum-order" v-if="forConfirm" style="margin-left: auto">
-        <div class="order-button">
-          <button @click="removeOrder()" type="button" class="btnOrder">
-            Odbaci
-          </button>
-        </div>
-        <div class="order-button">
-          <button @click="changeConfrim()" type="button" class="btnOrder">
-            Potvrdi
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
+  </ValidationObserver>
 </template>
 
 <script>
@@ -236,6 +258,7 @@ export default {
         idOrder: this.orderId,
         confirm: false,
       },
+      showError: false,
     };
   },
   computed: {
@@ -267,6 +290,10 @@ export default {
         : (this.model.quantity = this.state);
     },
     async order() {
+      const valid = await this.$refs.observer.validate();
+      this.showError = true;
+      if (!valid) return;
+
       await this.addOrder(this.model);
       this.$emit("save");
     },
@@ -442,5 +469,12 @@ b {
 }
 .wrapper > button:hover {
   background-color: #b5babf;
+}
+.error {
+  margin: auto;
+  padding: 0.2rem;
+  text-align: left;
+  color: red;
+  background: transparent;
 }
 </style>

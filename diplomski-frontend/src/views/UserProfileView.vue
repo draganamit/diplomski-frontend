@@ -14,7 +14,7 @@
       @remove="confirmRemove()"
       :textQuestion="'Da li ste sugurni da želite da deaktivirate nalog?'"
     ></DeleteModal>
-    <div class="user-imformation">
+    <div class="user-information">
       <div class="user-div">
         <div v-if="userById" style="padding: 1rem; font-size: 2rem">
           {{ fullName }}
@@ -25,19 +25,13 @@
         <div v-if="userById" style="padding: 1rem; font-size: 1.5rem">
           {{ userById.location }}
         </div>
-        <button style="width: 100%; cursor: pointer" @click="openUpdate()">
+        <button class="button-update-user" @click="openUpdate()">
           Azuriraj lične podatke
         </button>
-        <button
-          style="width: 100%; background-color: rgb(183 28 11); cursor: pointer"
-          @click="openUpdatePassword()"
-        >
+        <button class="button-update-password" @click="openUpdatePassword()">
           Promijeni lozinku
         </button>
-        <button
-          style="width: 100%; background-color: #a29999; cursor: pointer"
-          @click="deleteUser()"
-        >
+        <button class="button-deactivate" @click="deleteUser()">
           Deaktiviraj profil
         </button>
       </div>
@@ -148,7 +142,7 @@ button {
   border-radius: 0.5rem;
   font-size: 1.2rem;
 }
-.user-imformation {
+.user-information {
   display: flex;
   justify-content: flex-start;
   padding: 3rem 3rem;
@@ -187,5 +181,28 @@ button {
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 0;
+}
+.button-update-user {
+  width: 100%;
+  cursor: pointer;
+}
+.button-update-user:hover {
+  background-color: rgb(193 73 28);
+}
+.button-update-password {
+  width: 100%;
+  background-color: rgb(183 28 11);
+  cursor: pointer;
+}
+.button-update-password:hover {
+  background: rgb(161 23 8);
+}
+.button-deactivate {
+  width: 100%;
+  background-color: rgb(135 132 132);
+  cursor: pointer;
+}
+.button-deactivate:hover {
+  background: rgb(122 121 121);
 }
 </style>

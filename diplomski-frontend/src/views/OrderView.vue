@@ -29,12 +29,7 @@
       @remove="removeOrder(order.id)"
     ></OrderBase>
 
-    <div
-      v-if="!ordersByUser.length"
-      style="display: flex; margin-left: 1rem; font-size: 1.5rem"
-    >
-      Nema narudžbi
-    </div>
+    <div v-if="!ordersByUser.length" class="no-order">Nema narudžbi</div>
     <div class="user-order">Narudžbe:</div>
     <OrderBase
       :typeUser="'Kupac:'"
@@ -48,12 +43,7 @@
       @openConfromWindow="openConfirm(order.id)"
       :isConfirm="order.confirm"
     ></OrderBase>
-    <div
-      v-if="!ordersForUser.length"
-      style="display: flex; margin-left: 1rem; font-size: 1.5rem"
-    >
-      Nema narudžbi
-    </div>
+    <div v-if="!ordersForUser.length" class="no-order">Nema narudžbi</div>
     <div v-if="order" class="mask" @click.self="away()"></div>
   </div>
 </template>
@@ -141,5 +131,13 @@ export default {
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
   z-index: 0;
+}
+.no-order {
+  display: flex;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  background: blanchedalmond;
+  padding: 0.5rem;
+  color: red;
 }
 </style>
