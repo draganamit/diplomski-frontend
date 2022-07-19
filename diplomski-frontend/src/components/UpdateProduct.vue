@@ -1,107 +1,181 @@
 <template>
-  <div>
-    <div class="cls">
-      <div @click="closeWindowUpdate()">X</div>
-    </div>
-    <div class="update">
-      <div class="form-container">
-        <form>
-          <div>
-            <div class="text-div">Naziv:</div>
-            <input type="text" v-model="model.name" />
-          </div>
-          <div>
-            <div class="text-div">Kategorija:</div>
-            <select name="category" class="list" v-model="model.categoryId">
-              <option
-                v-for="(category, key) in categories"
-                :key="key"
-                :value="category.id"
-              >
-                {{ category.name }}
-              </option>
-            </select>
-          </div>
-          <div>
-            <div class="text-div">Opis:</div>
-            <input type="text" v-model="model.description" />
-          </div>
-          <div>
-            <div class="text-div">Stanje:</div>
-            <input type="number" v-model.number="model.state" />
-          </div>
-          <div>
-            <div class="text-div">Cijena:</div>
-            <input type="number" v-model.number="model.price" />
-          </div>
-          <div>
-            <div class="text-div">Tagovi:</div>
-            <div class="addTag">
-              <input type="text" v-model="tag" @keydown.enter="addTags()" />
-              <button type="button" class="button-add-tag" @click="addTags()">
-                Dodaj
-              </button>
-            </div>
-          </div>
-
-          <div class="tags" v-if="model.tags.length">
-            <div class="tag" v-for="(tag, key) in model.tags" :key="key">
-              {{ tag }}
-              <button type="button" class="delete-tag" @click="deleteTag(key)">
-                x
-              </button>
-            </div>
-          </div>
-          <div class="product-images">
-            <div class="add-image">
-              <i
-                class="icon-camera"
-                style="padding: 0.5rem 0rem; color: dodgerblu"
-              ></i>
-              <p style="width: 100%; margin: 0">Dodaj sliku proizvoda</p>
-              <input
-                type="file"
-                style="
-                  position: absolute;
-                  height: 100%;
-                  opacity: 0;
-                  cursor: pointer;
-                "
-                @change="uploadImage"
-              />
-            </div>
-            <div class="add-image" v-for="(img, key) in images" :key="key">
-              <div class="delete-image" @click="removeFromImages(key)">
-                <i class="icon-bin delete-icon"></i>
+  <ValidationObserver ref="observer">
+    <div>
+      <div class="cls">
+        <div @click="closeWindowUpdate()">X</div>
+      </div>
+      <div class="update">
+        <div class="form-container">
+          <form>
+            <div>
+              <div class="text-div">Naziv:</div>
+              <div class="input">
+                <ValidationProvider
+                  name="name"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <input type="text" v-model="model.name" />
+                  <span v-if="errors.length && showError" class="error">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
               </div>
-              <img :src="img" alt="" style="width: 100%; height: 100%" />
+            </div>
+            <div>
+              <div class="text-div">Kategorija:</div>
+              <div class="input">
+                <ValidationProvider
+                  name="category"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <select
+                    name="category"
+                    class="list"
+                    v-model="model.categoryId"
+                  >
+                    <option
+                      v-for="(category, key) in categories"
+                      :key="key"
+                      :value="category.id"
+                    >
+                      {{ category.name }}
+                    </option>
+                  </select>
+                  <span v-if="errors.length && showError" class="error">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div>
+              <div class="text-div">Opis:</div>
+              <div class="input">
+                <ValidationProvider
+                  name="description"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <input type="text" v-model="model.description" />
+                  <span v-if="errors.length && showError" class="error">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div>
+              <div class="text-div">Stanje:</div>
+              <div class="input">
+                <ValidationProvider
+                  name="state"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <input type="number" v-model.number="model.state" />
+                  <span v-if="errors.length && showError" class="error">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div>
+              <div class="text-div">Cijena:</div>
+              <div class="input">
+                <ValidationProvider
+                  name="price"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <input type="number" v-model.number="model.price" />
+                  <span v-if="errors.length && showError" class="error">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
+            <div>
+              <div class="text-div">Tagovi:</div>
+              <div class="addTag">
+                <input type="text" v-model="tag" @keydown.enter="addTags()" />
+                <button type="button" class="button-add-tag" @click="addTags()">
+                  Dodaj
+                </button>
+              </div>
+            </div>
+
+            <div class="tags" v-if="model.tags.length">
+              <div class="tag" v-for="(tag, key) in model.tags" :key="key">
+                {{ tag }}
+                <button
+                  type="button"
+                  class="delete-tag"
+                  @click="deleteTag(key)"
+                >
+                  x
+                </button>
+              </div>
+            </div>
+            <div v-if="!model.tags.length && tagError" class="error">
+              Tagovi su obavezni
+            </div>
+            <div class="product-images">
+              <div class="add-image">
+                <i
+                  class="icon-camera"
+                  style="padding: 0.5rem 0rem; color: dodgerblu"
+                ></i>
+                <p style="width: 100%; margin: 0">Dodaj sliku proizvoda</p>
+                <input
+                  type="file"
+                  style="
+                    position: absolute;
+                    height: 100%;
+                    opacity: 0;
+                    cursor: pointer;
+                  "
+                  @change="uploadImage"
+                />
+              </div>
+              <div class="add-image" v-for="(img, key) in images" :key="key">
+                <div class="delete-image" @click="removeFromImages(key)">
+                  <i class="icon-bin delete-icon"></i>
+                </div>
+                <img :src="img" alt="" style="width: 100%; height: 100%" />
+              </div>
+              <div
+                class="add-image"
+                v-for="(img, key) in model.images"
+                :key="key"
+              >
+                <div class="delete-image" @click="removeFromModelImges(key)">
+                  <i class="icon-bin delete-icon"></i>
+                </div>
+                <img
+                  :src="'http://localhost:5000/Images/' + img"
+                  alt=""
+                  style="width: 100%; height: 100%; object-fit: contain"
+                />
+              </div>
             </div>
             <div
-              class="add-image"
-              v-for="(img, key) in model.images"
-              :key="key"
+              v-if="(!images.length && imageError) || imageUpdateError"
+              class="error"
             >
-              <div class="delete-image" @click="removeFromModelImges(key)">
-                <i class="icon-bin delete-icon"></i>
-              </div>
-              <img
-                :src="'http://localhost:5000/Images/' + img"
-                alt=""
-                style="width: 100%; height: 100%; object-fit: contain"
-              />
+              Slika proizvoda je obavezna
             </div>
-          </div>
-          <button
-            class="btn-add"
-            type="button"
-            @click="model.id ? updateProducts() : addProducts()"
-          >
-            {{ textButton }}
-          </button>
-        </form>
+            <button
+              class="btn-add"
+              type="button"
+              @click="model.id ? updateProducts() : addProducts()"
+            >
+              {{ textButton }}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+  </ValidationObserver>
 </template>
 
 <script>
@@ -133,6 +207,10 @@ export default {
       },
       tag: "",
       images: [],
+      showError: false,
+      tagError: false,
+      imageError: false,
+      imageUpdateError: false,
     };
   },
 
@@ -164,6 +242,19 @@ export default {
       this.$emit("closed");
     },
     async addProducts() {
+      const valid = await this.$refs.observer.validate();
+      this.showError = true;
+
+      if (!this.model.tags.length) {
+        this.tagError = true;
+      }
+
+      if (!this.images.length) {
+        this.imageError = true;
+      }
+
+      if (!valid || this.tagError || this.imageError) return;
+
       //Instanca za slanje objekta sa fajlovima
       let formData = new FormData();
 
@@ -187,6 +278,18 @@ export default {
       this.$emit("save");
     },
     async updateProducts() {
+      const valid = await this.$refs.observer.validate();
+      this.showError = true;
+      if (!this.model.tags.length) {
+        this.tagError = true;
+      }
+      if (!this.model.images.length) {
+        if (!this.images.length) {
+          this.imageUpdateError = true;
+        }
+      }
+      if (!valid || this.tagError || this.imageUpdateError) return;
+
       let formData = new FormData();
 
       //iteracija kroz objekat
@@ -208,8 +311,11 @@ export default {
       this.$emit("save");
     },
     addTags() {
-      this.model.tags.push(this.tag);
-      this.tag = "";
+      if (this.tag != "") {
+        this.model.tags.push(this.tag);
+        this.tag = "";
+        this.tagError = false;
+      }
     },
     deleteTag(key) {
       this.model.tags.splice(key, 1);
@@ -217,6 +323,8 @@ export default {
     uploadImage(e) {
       this.images.push(URL.createObjectURL(e.target.files[0]));
       this.model.imageFiles.push(e.target.files[0]);
+      this.imageError = false;
+      this.imageUpdateError = false;
     },
     removeFromImages(key) {
       this.images.splice(key, 1);
@@ -389,5 +497,17 @@ input {
 }
 .cls > div:hover {
   background: #c40404;
+}
+.input {
+  text-align: left;
+  position: relative;
+  width: 100%;
+}
+.error {
+  margin: auto;
+  text-align: left;
+  color: red;
+  background: transparent;
+  font-size: 1rem;
 }
 </style>

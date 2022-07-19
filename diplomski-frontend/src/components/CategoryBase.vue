@@ -2,30 +2,11 @@
   <div class="category-base">
     <div class="name-category">{{ nameCategory }}</div>
     <div class="buttons">
-      <div
-        @click="openWindow()"
-        class="icons"
-        style="
-          padding: 0 0.5rem;
-          font-size: 1.1rem;
-          border-radius: 0.2rem;
-          margin-right: 0.3rem;
-          cursor: pointer;
-        "
-      >
-        <i class="icon-pencil"></i>
+      <div @click="openWindow()" class="update-product">
+        <i style="color: #e65b28; font-size: 1.2rem" class="icon-pencil"></i>
       </div>
-      <div
-        @click="remove()"
-        class="icons"
-        style="
-          padding: 0 0.5rem;
-          font-size: 1.1rem;
-          border-radius: 0.2rem;
-          cursor: pointer;
-        "
-      >
-        <i class="icon-bin"></i>
+      <div @click="remove()" class="update-product">
+        <i style="color: #b70707" class="icon-bin"></i>
       </div>
     </div>
   </div>
@@ -63,7 +44,7 @@ export default {
   justify-content: space-between;
 }
 .name-category {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 .buttons {
   display: flex;
@@ -76,42 +57,16 @@ export default {
   margin: 0 0.3rem;
   cursor: pointer;
 }
-.icons:hover {
-  background: rgb(158 154 154 / 58%);
+.update-product {
+  padding: 0.2rem 0.6rem;
+  font-size: 1.2rem;
+
+  border-radius: 0.2rem;
+  margin-right: 0.3rem;
+  cursor: pointer;
+  background: #d8d1d1;
 }
-.icon-pencil:hover {
-  /* color: white; */
-  /* color: #00ffff; */
+.update-product:hover {
+  background: #bdb6b6;
 }
-
-/*
-.buttons > div:hover {
-  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-@keyframes shake {
-  10%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%,
-  80% {
-    transform: translate3d(1px, 0, 0);
-  }
-
-  30%,
-  50%,
-  70% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  40%,
-  60% {
-    transform: translate3d(1px, 0, 0);
-  }
-} */
 </style>

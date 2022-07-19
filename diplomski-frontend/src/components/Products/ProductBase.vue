@@ -23,30 +23,11 @@
       "
       class="icons"
     >
-      <div
-        @click.stop="openWindow()"
-        style="
-          padding: 0 0.5rem;
-          font-size: 1.1rem;
-          border: 1px solid grey;
-          border-radius: 0.2rem;
-          margin-right: 0.3rem;
-          cursor: pointer;
-        "
-      >
-        <i class="icon-pencil"></i>
+      <div @click.stop="openWindow()" class="update-product">
+        <i style="color: #e65b28; font-size: 1.2rem" class="icon-pencil"></i>
       </div>
-      <div
-        @click.stop="remove()"
-        style="
-          padding: 0 0.5rem;
-          font-size: 1.1rem;
-          border: 1px solid grey;
-          border-radius: 0.2rem;
-          cursor: pointer;
-        "
-      >
-        <i class="icon-bin"></i>
+      <div @click.stop="remove()" class="update-product">
+        <i style="color: #b70707" class="icon-bin"></i>
       </div>
     </div>
   </div>
@@ -152,5 +133,17 @@ export default {
   align-items: center;
   justify-content: center;
   display: flex;
+}
+.update-product {
+  padding: 0.2rem 0.6rem;
+  font-size: 1.2rem;
+
+  border-radius: 0.2rem;
+  margin-right: 0.3rem;
+  cursor: pointer;
+  background: #d8d1d1;
+}
+.update-product:hover {
+  background: #bdb6b6;
 }
 </style>

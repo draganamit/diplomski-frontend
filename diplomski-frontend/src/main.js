@@ -29,6 +29,14 @@ extend("email", {
   ...email,
   message: "Neispravan email"
 });
+// extend("tag", {
+//   ...tag,
+//   message: "Tagovi su obavezni"
+// });
+// extend("image", {
+//   ...image,
+//   message: "Slika proizvoda je obavezna"
+// });
 
 
 new Vue({

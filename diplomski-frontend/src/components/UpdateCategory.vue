@@ -1,27 +1,40 @@
 <template>
-  <div>
-    <div class="cls">
-      <div @click="closeWindowUpdate()">X</div>
-    </div>
-    <div class="update">
-      <div class="form-container">
-        <form>
-          <div>
-            <div class="text-div">Naziv:</div>
-            <input type="text" v-model="model.name" />
-          </div>
+  <ValidationObserver ref="observer">
+    <div>
+      <div class="cls">
+        <div @click="closeWindowUpdate()">X</div>
+      </div>
+      <div class="update">
+        <div class="form-container">
+          <form>
+            <div>
+              <div class="text-div">Naziv:</div>
+              <div class="input">
+                <ValidationProvider
+                  name="name"
+                  rules="required"
+                  v-slot="{ errors }"
+                >
+                  <input type="text" v-model="model.name" />
+                  <span v-if="errors.length && showError" class="error">{{
+                    errors[0]
+                  }}</span>
+                </ValidationProvider>
+              </div>
+            </div>
 
-          <button
-            type="button"
-            @click="categoryId ? updateCategories() : addCategories()"
-            style="width: 100%; cursor: pointer"
-          >
-            {{ textButton }}
-          </button>
-        </form>
+            <button
+              type="button"
+              @click="categoryId ? updateCategories() : addCategories()"
+              style="width: 100%; cursor: pointer"
+            >
+              {{ textButton }}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
+  </ValidationObserver>
 </template>
 
 <script>
@@ -43,6 +56,7 @@ export default {
         name: "",
         id: null,
       },
+      showError: false,
     };
   },
   methods: {
@@ -51,10 +65,18 @@ export default {
       this.$emit("closed");
     },
     async addCategories() {
+      const valid = await this.$refs.observer.validate();
+      this.showError = true;
+      if (!valid) return;
+
       await this.addCategory(this.model);
       this.$emit("save");
     },
     async updateCategories() {
+      const valid = await this.$refs.observer.validate();
+      this.showError = true;
+      if (!valid) return;
+
       await this.updateCategory(this.model);
       this.$emit("save");
     },
@@ -127,5 +149,17 @@ button:hover {
 }
 .cls > div:hover {
   background: #c40404;
+}
+.input {
+  text-align: left;
+  position: relative;
+  width: 100%;
+}
+.error {
+  margin: auto;
+  text-align: left;
+  color: red;
+  background: transparent;
+  font-size: 1rem;
 }
 </style>
