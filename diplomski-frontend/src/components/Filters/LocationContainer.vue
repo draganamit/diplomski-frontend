@@ -42,6 +42,7 @@ export default {
   flex-direction: column;
   /* border: 1px solid gray; */
   /* margin: 0.5rem 0; */
+  height: 9rem;
 }
 .header {
   background-color: rgb(230, 91, 40);
@@ -77,5 +78,8 @@ input {
   padding: 0.5rem 1rem;
   outline: none;
   border: none;
+}
+input:focus {
+  border: 1px solid #b5babf;
 }
 </style>

@@ -38,10 +38,13 @@ export default {
   display: flex;
   justify-content: center;
   align-content: center;
-  border: 1px solid grey;
+
   padding: 2rem;
   width: 30%;
   flex-direction: column;
+  position: absolute;
+  top: 15rem;
+  background: blanchedalmond;
 }
 .label {
   text-align: left;
@@ -56,7 +59,7 @@ export default {
 input {
   width: 100%;
   display: flex;
-  background-color: rgb(213, 210, 210);
+  background: white;
   border-color: transparent;
   border-radius: 0.2rem;
   padding: 0.8rem 1rem;
@@ -78,5 +81,8 @@ input {
 button {
   font-size: 1rem;
   padding: 0.5rem 1rem;
+  background: #e65b28;
+  border: none;
+  color: white;
 }
 </style>

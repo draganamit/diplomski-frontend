@@ -7,7 +7,7 @@
       <div class="update">
         <div class="form-container">
           <form>
-            <div>
+            <div class="input-div">
               <div class="text-div">Naziv:</div>
               <div class="input">
                 <ValidationProvider
@@ -22,7 +22,7 @@
                 </ValidationProvider>
               </div>
             </div>
-            <div>
+            <div class="input-div">
               <div class="text-div">Kategorija:</div>
               <div class="input">
                 <ValidationProvider
@@ -49,7 +49,7 @@
                 </ValidationProvider>
               </div>
             </div>
-            <div>
+            <div class="input-div">
               <div class="text-div">Opis:</div>
               <div class="input">
                 <ValidationProvider
@@ -64,7 +64,7 @@
                 </ValidationProvider>
               </div>
             </div>
-            <div>
+            <div class="input-div">
               <div class="text-div">Stanje:</div>
               <div class="input">
                 <ValidationProvider
@@ -79,7 +79,7 @@
                 </ValidationProvider>
               </div>
             </div>
-            <div>
+            <div class="input-div">
               <div class="text-div">Cijena:</div>
               <div class="input">
                 <ValidationProvider
@@ -94,7 +94,7 @@
                 </ValidationProvider>
               </div>
             </div>
-            <div>
+            <div class="input-div">
               <div class="text-div">Tagovi:</div>
               <div class="addTag">
                 <input type="text" v-model="tag" @keydown.enter="addTags()" />
@@ -385,6 +385,12 @@ input {
   outline: none;
   font-size: 1rem;
 }
+input:focus {
+  border: 1px solid grey;
+}
+select:focus {
+  border: 1px solid grey;
+}
 .list {
   width: 100%;
   display: flex;
@@ -435,9 +441,9 @@ input {
   background-color: rgb(19 187 35);
   color: rgb(241, 241, 226);
   border: transparent;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   font-size: 1rem;
-  height: 100%;
+  /* height: 100%; */
   cursor: pointer;
 }
 .button-add-tag:hover {
@@ -457,6 +463,7 @@ input {
   align-content: center;
   flex-wrap: wrap;
   gap: 1rem;
+  height: 8rem;
 }
 .add-image {
   display: flex;
@@ -509,5 +516,8 @@ input {
   color: red;
   background: transparent;
   font-size: 1rem;
+}
+.input-div {
+  height: 2rem;
 }
 </style>

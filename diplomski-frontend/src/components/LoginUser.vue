@@ -135,11 +135,17 @@ export default {
 input {
   width: 100%;
   display: flex;
-  background-color: rgb(213, 210, 210);
+  background-color: rgb(220 220 220);
   border-color: transparent;
   border-radius: 0.2rem;
   padding: 0.5rem 1rem;
   outline: none;
+}
+input:focus {
+  box-shadow: 0 0 5px #b7b7b7;
+  border-color: #b6aeae;
+  border-top-color: #fbf6f6;
+  border-left-color: #fbf6f6;
 }
 .error {
   margin: auto;

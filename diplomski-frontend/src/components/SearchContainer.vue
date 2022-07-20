@@ -39,6 +39,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   /* border: 1px solid grey; */
+  height: 4.5rem;
 }
 input {
   padding: 0.7rem 1rem;
@@ -49,6 +50,9 @@ input {
   max-width: 40rem;
   margin: 0.5rem;
   border: none;
+}
+input:focus {
+  border: 1px solid #b5babf;
 }
 button {
   padding: 0.7rem 1rem;

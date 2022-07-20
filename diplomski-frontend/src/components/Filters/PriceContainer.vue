@@ -3,7 +3,7 @@
     <div class="header">Cijena</div>
     <div class="content justify-between">
       <div class="price">
-        Od
+        Od&nbsp;
         <input
           type="text"
           placeholder="od"
@@ -12,7 +12,7 @@
         />
       </div>
       <div class="price">
-        Do
+        Do&nbsp;
         <input
           type="text"
           placeholder="do"
@@ -64,6 +64,7 @@ export default {
   /* border: 1px solid gray; */
   margin: 0.5rem 0;
   margin-bottom: 0;
+  height: 9rem;
 }
 .header {
   background-color: rgb(230, 91, 40);
@@ -82,6 +83,7 @@ export default {
 .price {
   display: flex;
   align-items: center;
+  height: 2rem;
 }
 .price:not(:first-child) {
   margin-left: 0.5rem;
@@ -109,5 +111,8 @@ input {
   padding: 0.5rem 1rem;
   outline: none;
   border: none;
+}
+input:focus {
+  border: 1px solid #b5babf;
 }
 </style>

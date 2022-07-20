@@ -98,9 +98,13 @@ export default {
   position: relative;
   cursor: pointer;
 }
+.container-product:hover {
+  background: #f4d9cb;
+}
 .image {
   height: 8rem;
 }
+
 .image > img {
   width: 100%;
   height: 100%;
@@ -109,11 +113,13 @@ export default {
 .name {
   padding: 0.5rem;
   font-size: 1rem;
+  font-weight: bold;
 }
 .price {
   padding: 0.5rem;
   font-size: 1rem;
   margin-left: auto;
+  color: red;
 }
 .icons {
   display: flex;
