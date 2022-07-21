@@ -27,7 +27,6 @@ export default {
   width: 100vw;
   overflow: hidden;
 }
-
 nav {
   padding: 30px;
 }

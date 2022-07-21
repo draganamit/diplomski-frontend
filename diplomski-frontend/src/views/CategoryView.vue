@@ -15,7 +15,7 @@
       ></UpdateCategory>
     </div>
     <div class="add">
-      <div>Kategorije</div>
+      <!-- <div>Kategorije</div> -->
       <div class="button-add">
         <button @click="openUpdateCategory()">Dodaj kategoriju</button>
       </div>

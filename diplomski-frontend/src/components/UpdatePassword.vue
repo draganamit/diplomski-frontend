@@ -7,7 +7,7 @@
       <div class="form-container">
         <ValidationObserver ref="observer">
           <form>
-            <div>
+            <div class="input-div">
               <ValidationProvider
                 class="validation-provider"
                 name="oldPassword"
@@ -22,13 +22,15 @@
                     v-model="model.oldPassword"
                   />
                 </div>
-                <span v-if="errors.length" class="error">{{ errors[0] }}</span>
-                <span v-if="incorrectPassword" class="error">
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
+                <span v-if="incorrectPassword && showError" class="error">
                   Pogrešna lozinka</span
                 >
               </ValidationProvider>
             </div>
-            <div>
+            <div class="input-div">
               <ValidationProvider
                 class="validation-provider"
                 vid="password"
@@ -50,7 +52,7 @@
                 }}</span>
               </ValidationProvider>
             </div>
-            <div>
+            <div class="input-div">
               <ValidationProvider
                 class="validation-provider"
                 name="comfirmPassword"
@@ -66,7 +68,9 @@
                   />
                 </div>
 
-                <span v-if="errors.length" class="error">{{ errors[0] }}</span>
+                <span v-if="errors.length && showError" class="error">{{
+                  errors[0]
+                }}</span>
               </ValidationProvider>
             </div>
 
@@ -95,6 +99,7 @@ export default {
       },
       confirmPassword: "",
       incorrectPassword: false,
+      showError: false,
     };
   },
   methods: {
@@ -104,6 +109,8 @@ export default {
     },
     async update() {
       const valid = await this.$refs.observer.validate();
+      this.showError = true;
+
       if (!valid) return;
 
       const response = await this.updatePassword(this.model);
@@ -191,5 +198,11 @@ button:hover {
   text-align: left;
   color: red;
   background: transparent;
+}
+.input-div {
+  height: 2rem;
+}
+input:focus {
+  border: 1px solid grey;
 }
 </style>

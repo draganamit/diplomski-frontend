@@ -1,6 +1,6 @@
 <template>
   <div class="report-container">
-    <ReportSearch />
+    <ReportSearch @order="orderProduct()" />
     <div class="table-div" v-if="orders.length">
       <table style="width: 100%; border-collapse: collapse">
         <tr style="background-color: rgb(230, 91, 40)">
@@ -50,7 +50,14 @@
       </table>
     </div>
     <div
-      style="padding: 1rem 0; font-size: 1.1rem; display: flex; color: red"
+      style="
+        padding: 1rem 0.5rem;
+        font-size: 1.1rem;
+        display: flex;
+        color: red;
+        background: blanchedalmond;
+        margin-top: 1rem;
+      "
       v-if="!orders.length && message"
     >
       Nije ostvarena nijedna prodaja prema datom kriterijumu.
@@ -89,6 +96,9 @@ export default {
       if (value) {
         return moment(String(value)).format("DD.MM.YYYY");
       }
+    },
+    orderProduct() {
+      this.message = true;
     },
   },
 };

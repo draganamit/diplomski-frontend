@@ -11,7 +11,7 @@
       "
     ></DeleteModal>
     <div class="users-title">
-      <div>Korisnici</div>
+      <!-- <div>Korisnici</div> -->
     </div>
     <div class="table-div">
       <table style="width: 100%; border-collapse: collapse">
@@ -157,6 +157,9 @@ tr:hover:not(.thr) {
   background-color: #e8d0ad !important;
 }
 .block:hover {
+  text-decoration: underline;
+}
+.active:hover {
   text-decoration: underline;
 }
 </style>

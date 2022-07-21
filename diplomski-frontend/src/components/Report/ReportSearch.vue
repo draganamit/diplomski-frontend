@@ -1,15 +1,5 @@
 <template>
   <div class="container">
-    <!-- <div class="input-container" v-if="user.type == 0">
-      <b> Korisnik </b>
-      <select name="user" class="list" v-model="reportSearchModel.userId">
-        <option :value="null">-- Izaberite korisnika --</option>
-        <option v-for="(user, key) in users" :key="key" :value="user.id">
-          {{ user.email }}
-        </option>
-      </select>
-    </div> -->
-
     <div class="input-container">
       <b>Proizvod</b>
       <select name="product" class="list" v-model="reportSearchModel.productId">
@@ -172,7 +162,8 @@ export default {
 
     async getOrders() {
       await this.searchOrders(this.reportSearchModel);
-      this.message = true;
+      // this.message = true;
+      this.$emit("order");
     },
   },
   watch: {

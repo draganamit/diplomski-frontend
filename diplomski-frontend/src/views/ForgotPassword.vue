@@ -55,6 +55,7 @@ export default {
 .input {
   text-align: left;
   position: relative;
+  height: 2.7rem;
 }
 input {
   width: 100%;
@@ -62,7 +63,7 @@ input {
   background: white;
   border-color: transparent;
   border-radius: 0.2rem;
-  padding: 0.8rem 1rem;
+  padding: 0.7rem 1rem;
   outline: none;
 }
 .forgot-div {
@@ -74,15 +75,20 @@ input {
   align-items: center;
 }
 .btn {
-  padding: 0.5rem;
-  padding-bottom: 0;
+  margin-left: auto;
   padding-top: 1rem;
 }
 button {
   font-size: 1rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
   background: #e65b28;
   border: none;
   color: white;
+}
+.input-div {
+  height: 2rem;
+}
+input:focus {
+  border: 1px solid grey;
 }
 </style>

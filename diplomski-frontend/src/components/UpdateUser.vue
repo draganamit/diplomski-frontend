@@ -6,7 +6,7 @@
       </div>
       <div class="update">
         <form class="form-container">
-          <div>
+          <div class="input-div">
             <div class="text-div">Ime:</div>
             <div class="input">
               <ValidationProvider
@@ -22,7 +22,7 @@
               </ValidationProvider>
             </div>
           </div>
-          <div>
+          <div class="input-div">
             <div class="text-div">Prezime:</div>
             <div class="input">
               <ValidationProvider
@@ -37,7 +37,7 @@
               </ValidationProvider>
             </div>
           </div>
-          <div>
+          <div class="input-div">
             <div class="text-div">Email:</div>
             <div class="input">
               <ValidationProvider
@@ -52,7 +52,7 @@
               </ValidationProvider>
             </div>
           </div>
-          <div>
+          <div class="input-div">
             <div class="text-div">Lokacija:</div>
             <div class="input">
               <ValidationProvider
@@ -194,5 +194,11 @@ button:hover {
   text-align: left;
   position: relative;
   width: 100%;
+}
+.input-div {
+  height: 2rem;
+}
+input:focus {
+  border: 1px solid grey;
 }
 </style>

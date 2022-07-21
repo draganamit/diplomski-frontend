@@ -12,7 +12,7 @@
       </div>
       <div class="relative">
         <div class="dropdown-content">
-          <a @click="openProducts()">Proizvodi</a>
+          <a @click="openProducts()">Vaši proizvodi</a>
           <a v-if="user.type == 0" @click="$router.push({ name: 'category' })"
             >Kategorije</a
           >

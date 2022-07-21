@@ -19,7 +19,7 @@
       ></UpdateProduct>
     </div>
     <div class="add">
-      <div>Proizvodi</div>
+      <!-- <div>Proizvodi</div> -->
       <div class="button-add">
         <button @click="openUpdateProduct()">Dodaj proizvod</button>
       </div>

@@ -7,7 +7,7 @@
       <div class="update">
         <div class="form-container">
           <form>
-            <div>
+            <div class="input-div">
               <div class="text-div">Naziv:</div>
               <div class="input">
                 <ValidationProvider
@@ -161,5 +161,11 @@ button:hover {
   color: red;
   background: transparent;
   font-size: 1rem;
+}
+.input-div {
+  height: 2rem;
+}
+input:focus {
+  border: 1px solid grey;
 }
 </style>
