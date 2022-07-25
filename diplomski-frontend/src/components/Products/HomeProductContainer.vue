@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div class="content">
-      <SearchContainer></SearchContainer>
+      <SearchContainer
+        v-model="model"
+        @search="$emit('search')"
+      ></SearchContainer>
 
       <ProductContainer></ProductContainer>
     </div>
@@ -13,6 +16,23 @@ import SearchContainer from "../SearchContainer.vue";
 import ProductContainer from "./ProductContainer.vue";
 export default {
   components: { SearchContainer, ProductContainer },
+
+  props: {
+    value: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
+  },
 };
 </script>
 

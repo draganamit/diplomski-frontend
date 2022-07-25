@@ -3,7 +3,7 @@
     <input
       type="text"
       placeholder="Ukucaj proizvod"
-      v-model="nameProduct"
+      v-model="model.name"
       @keyup.enter="getProduct()"
     />
     <button @click="getProduct()">Pretraži</button>
@@ -12,20 +12,38 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       nameProduct: this.$route.query.name ? this.$route.query.name : "",
     };
   },
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
+  },
   methods: {
     getProduct() {
-      let query = Object.assign({}, this.$route.query);
-      query.name = this.nameProduct;
-      this.$router
-        .push({
-          query: query,
-        })
-        .catch();
+      this.$emit("search");
+
+      // let query = Object.assign({}, this.$route.query);
+      // query.name = this.nameProduct;
+      // this.$router
+      //   .push({
+      //     query: query,
+      //   })
+      //   .catch();
     },
   },
 };

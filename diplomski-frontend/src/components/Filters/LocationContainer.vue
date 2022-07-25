@@ -5,7 +5,7 @@
       <input
         class="location"
         type="text"
-        v-model="location"
+        v-model="model.location"
         @keyup.enter="getProductByLocation()"
       />
     </div>
@@ -17,20 +17,38 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       location: this.$route.query.location ? this.$route.query.location : "",
     };
   },
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
+  },
   methods: {
     getProductByLocation() {
-      let query = Object.assign({}, this.$route.query);
-      query.location = this.location;
-      this.$router
-        .push({
-          query: query,
-        })
-        .catch();
+      this.$emit("search");
+
+      // let query = Object.assign({}, this.$route.query);
+      // query.location = this.location;
+      // this.$router
+      //   .push({
+      //     query: query,
+      //   })
+      //   .catch();
     },
   },
 };

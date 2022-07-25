@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="filters">
-      <CategoryContainer></CategoryContainer>
-      <PriceContainer></PriceContainer>
-      <LocationContainer></LocationContainer>
+      <CategoryContainer
+        v-model="model"
+        @search="$emit('search')"
+      ></CategoryContainer>
+      <PriceContainer
+        v-model="model"
+        @search="$emit('search')"
+      ></PriceContainer>
+      <LocationContainer
+        v-model="model"
+        @search="$emit('search')"
+      ></LocationContainer>
     </div>
   </div>
 </template>
@@ -14,6 +23,23 @@ import PriceContainer from "./PriceContainer.vue";
 import LocationContainer from "./LocationContainer.vue";
 export default {
   components: { CategoryContainer, PriceContainer, LocationContainer },
+
+  props: {
+    value: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
+  },
 };
 </script>
 

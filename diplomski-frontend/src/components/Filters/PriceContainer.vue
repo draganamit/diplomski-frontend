@@ -7,7 +7,7 @@
         <input
           type="text"
           placeholder="od"
-          v-model="priceModel.priceFrom"
+          v-model="model.priceFrom"
           @keyup.enter="getProductByPrice()"
         />
       </div>
@@ -16,7 +16,7 @@
         <input
           type="text"
           placeholder="do"
-          v-model="priceModel.priceTo"
+          v-model="model.priceTo"
           @keyup.enter="getProductByPrice()"
         />
       </div>
@@ -29,6 +29,12 @@
 
 <script>
 export default {
+  props: {
+    value: {
+      type: Object,
+      default: () => {},
+    },
+  },
   data() {
     return {
       priceModel: {
@@ -41,17 +47,28 @@ export default {
       },
     };
   },
-
+  computed: {
+    model: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
+  },
   methods: {
     getProductByPrice() {
-      let query = Object.assign({}, this.$route.query);
-      query.priceFrom = this.priceModel.priceFrom;
-      query.priceTo = this.priceModel.priceTo;
-      this.$router
-        .push({
-          query: query,
-        })
-        .catch();
+      this.$emit("search");
+
+      // let query = Object.assign({}, this.$route.query);
+      // query.priceFrom = this.priceModel.priceFrom;
+      // query.priceTo = this.priceModel.priceTo;
+      // this.$router
+      //   .push({
+      //     query: query,
+      //   })
+      //   .catch();
     },
   },
 };

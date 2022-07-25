@@ -27,8 +27,11 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  data() {
-    return {};
+  props: {
+    value: {
+      type: Object,
+      default: () => {},
+    },
   },
   async created() {
     await this.getAllCategories();
@@ -37,19 +40,29 @@ export default {
     ...mapState({
       categories: (state) => state.categories.categories,
     }),
+    model: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit("input", val);
+      },
+    },
   },
   methods: {
     ...mapActions(["getAllCategories"]),
 
     getProductByCategory(id) {
-      let query = Object.assign({}, this.$route.query);
-      query.categoryId = id;
-      console.log("postavljamo query:", query);
-      this.$router
-        .push({
-          query: query,
-        })
-        .catch();
+      this.model.categoryId = id;
+      this.$emit("search");
+      // let query = Object.assign({}, this.$route.query);
+      // query.categoryId = id;
+      // console.log("postavljamo query:", query);
+      // this.$router
+      //   .push({
+      //     query: query,
+      //   })
+      //   .catch();
     },
   },
 };
