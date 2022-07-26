@@ -103,7 +103,7 @@ export default {
   padding: 1rem 0.5rem;
 
   border-radius: 1rem;
-  background-color: blanchedalmond;
+  background-color: white;
   margin-top: 0.8rem;
   width: 100%;
   justify-content: space-between;
@@ -145,7 +145,7 @@ export default {
   background: rgb(204 136 20);
 }
 .grey {
-  background: #c4c4c4;
+  background: #8f8f8f;
 
   pointer-events: none;
   color: white;

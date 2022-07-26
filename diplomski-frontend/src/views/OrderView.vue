@@ -17,48 +17,69 @@
         @save="away()"
       ></OrderProduct>
     </div>
-    <div class="user-order">Vaše narudžbe:</div>
-    <OrderBase
-      :typeUser="'Proizvođač:'"
-      v-for="order in ordersByUser"
-      :key="order.id"
-      :productName="order.product.name"
-      :quantity="order.quantity"
-      :userName="order.product.user.email"
-      :textButton="
-        order.confirm
-          ? 'Potvrđeno'
-          : order.sellerNote == null
-          ? 'Čeka na potvrdu'
-          : 'Odbijeno'
+    <div
+      style="
+        margin-right: 5rem;
+        width: 40rem;
+        padding: 1rem;
+        background: blanchedalmond;
+        padding-right: 2rem;
+        height: fit-content;
       "
-      :isConfirm="order.confirm"
-      :note="order.sellerNote"
-      @remove="removeOrder(order.id)"
-    ></OrderBase>
+    >
+      <div class="user-order">Vaše narudžbe:</div>
+      <OrderBase
+        :typeUser="'Proizvođač:'"
+        v-for="order in ordersByUser"
+        :key="order.id"
+        :productName="order.product.name"
+        :quantity="order.quantity"
+        :userName="order.product.user.email"
+        :textButton="
+          order.confirm
+            ? 'Potvrđeno'
+            : order.sellerNote == null
+            ? 'Čeka na potvrdu'
+            : 'Odbijeno'
+        "
+        :isConfirm="order.confirm"
+        :note="order.sellerNote"
+        @remove="removeOrder(order.id)"
+      ></OrderBase>
 
-    <div v-if="!ordersByUser.length" class="no-order">Nema narudžbi</div>
-    <div class="user-order">Narudžbe:</div>
-    <OrderBase
-      :typeUser="'Kupac:'"
-      v-for="order in ordersForUser"
-      :key="order.id"
-      :productName="order.product.name"
-      :quantity="order.quantity"
-      :userName="order.userBuyer.email"
-      :textButton="
-        order.confirm
-          ? 'Potvrđeno'
-          : order.sellerNote == null
-          ? 'Čeka na potvrdu'
-          : 'Odbijeno'
+      <div v-if="!ordersByUser.length" class="no-order">Nema narudžbi</div>
+    </div>
+    <div
+      style="
+        width: 40rem;
+        padding: 1rem;
+        background: blanchedalmond;
+        padding-right: 2rem;
+        height: fit-content;
       "
-      :confirmable="true"
-      @openConfromWindow="openConfirm(order.id)"
-      :isConfirm="order.confirm"
-      :note="order.sellerNote"
-    ></OrderBase>
-    <div v-if="!ordersForUser.length" class="no-order">Nema narudžbi</div>
+    >
+      <div class="user-order">Narudžbe:</div>
+      <OrderBase
+        :typeUser="'Kupac:'"
+        v-for="order in ordersForUser"
+        :key="order.id"
+        :productName="order.product.name"
+        :quantity="order.quantity"
+        :userName="order.userBuyer.email"
+        :textButton="
+          order.confirm
+            ? 'Potvrđeno'
+            : order.sellerNote == null
+            ? 'Čeka na potvrdu'
+            : 'Odbijeno'
+        "
+        :confirmable="true"
+        @openConfromWindow="openConfirm(order.id)"
+        :isConfirm="order.confirm"
+        :note="order.sellerNote"
+      ></OrderBase>
+      <div v-if="!ordersForUser.length" class="no-order">Nema narudžbi</div>
+    </div>
     <div v-if="order" class="mask" @click.self="away()"></div>
   </div>
 </template>
@@ -117,8 +138,7 @@ export default {
 <style scoped>
 .oreder {
   display: flex;
-  padding: 3rem 20rem;
-  flex-direction: column;
+  padding: 3rem 6rem;
 }
 .user-order {
   display: flex;
