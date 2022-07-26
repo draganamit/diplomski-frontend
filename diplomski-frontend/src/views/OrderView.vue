@@ -13,6 +13,7 @@
         :userTelephone="oredrById.telephone"
         :userAddress="oredrById.address"
         :orderId="orderId"
+        :noteBuyer="oredrById.buyerNote"
         @save="away()"
       ></OrderProduct>
     </div>
@@ -24,8 +25,15 @@
       :productName="order.product.name"
       :quantity="order.quantity"
       :userName="order.product.user.email"
-      :textButton="order.confirm ? 'Potvrđeno' : 'Čeka na potvrdu'"
+      :textButton="
+        order.confirm
+          ? 'Potvrđeno'
+          : order.sellerNote == null
+          ? 'Čeka na potvrdu'
+          : 'Odbijeno'
+      "
       :isConfirm="order.confirm"
+      :note="order.sellerNote"
       @remove="removeOrder(order.id)"
     ></OrderBase>
 
@@ -38,10 +46,17 @@
       :productName="order.product.name"
       :quantity="order.quantity"
       :userName="order.userBuyer.email"
-      :textButton="order.confirm ? 'Potvrđeno' : 'Čeka na potvrdu'"
+      :textButton="
+        order.confirm
+          ? 'Potvrđeno'
+          : order.sellerNote == null
+          ? 'Čeka na potvrdu'
+          : 'Odbijeno'
+      "
       :confirmable="true"
       @openConfromWindow="openConfirm(order.id)"
       :isConfirm="order.confirm"
+      :note="order.sellerNote"
     ></OrderBase>
     <div v-if="!ordersForUser.length" class="no-order">Nema narudžbi</div>
     <div v-if="order" class="mask" @click.self="away()"></div>

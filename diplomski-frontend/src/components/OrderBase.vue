@@ -8,6 +8,13 @@
       <div class="text-order-product">
         <b>{{ typeUser }} </b> {{ userName }}
       </div>
+      <div
+        v-if="note != null && note != '' && !confirmable"
+        style="color: red"
+        class="text-order-product"
+      >
+        Napomena: {{ note }}
+      </div>
     </div>
     <div class="order-state" style="flex-direction: column">
       <div
@@ -17,10 +24,14 @@
           confirmable
             ? isConfirm
               ? 'green'
-              : 'yellow'
+              : note == null
+              ? 'yellow'
+              : 'red'
             : isConfirm
             ? 'green'
-            : 'grey'
+            : note == null
+            ? 'grey'
+            : 'red'
         "
         @click.stop="confirmOpen()"
       >
@@ -30,7 +41,7 @@
       <div
         style="cursor: pointer"
         class="state"
-        v-if="!isConfirm && !confirmable"
+        v-if="!isConfirm && !confirmable && note == null"
         @click.stop="remove()"
       >
         Opozovi
@@ -69,6 +80,10 @@ export default {
     isConfirm: {
       type: Boolean,
       default: false,
+    },
+    note: {
+      type: String,
+      default: "",
     },
   },
   methods: {
@@ -134,5 +149,10 @@ export default {
 
   pointer-events: none;
   color: white;
+}
+.red {
+  pointer-events: none;
+  color: white;
+  background-color: #ff1717;
 }
 </style>

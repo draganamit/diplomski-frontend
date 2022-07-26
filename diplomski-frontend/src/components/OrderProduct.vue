@@ -13,12 +13,11 @@
             <img :src="'http://localhost:5000/Images/' + images[0]" alt="" />
           </div>
           <div class="product-information">
-            <!-- <div class="text">Naziv: {{ name }}</div> -->
             <div class="text">
               <b>Cijena:</b>
               <div style="color: red; font-weight: bold">{{ price }}KM</div>
             </div>
-            <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
+
             <div class="text" v-if="forConfirm">
               <b>Količina:</b> {{ quantity }}
             </div>
@@ -29,10 +28,7 @@
               </div>
             </div>
           </div>
-          <div class="product-information" v-if="forConfirm">
-            <!-- <div class="text">Količina: {{ quantity }}</div> -->
-            <!-- <div class="text">Ukupna cijena: {{ sumConfirm }}KM</div> -->
-          </div>
+          <div class="product-information" v-if="forConfirm"></div>
 
           <div class="quantity" v-if="forOrder">
             <div style="padding: 0.5rem 0"><b>Izaberite kolicinu</b></div>
@@ -156,6 +152,42 @@
                 }}</span>
               </ValidationProvider>
             </div>
+
+            <div v-if="forOrder">
+              <div style="align-items: start" class="form-text">
+                Napomena<br />(nije obavezno)
+              </div>
+              <textarea
+                v-model="model.buyerNote"
+                :disabled="forConfirm ? true : false"
+                name="Text1"
+                rows="3"
+                class="from-input"
+              ></textarea>
+            </div>
+            <div v-if="forConfirm && buyerNote != '' && buyerNote != null">
+              <div style="align-items: start" class="form-text">
+                Napomena<br />
+              </div>
+              <textarea
+                v-model="buyerNote"
+                :disabled="forConfirm ? true : false"
+                name="Text1"
+                rows="3"
+                class="from-input"
+              ></textarea>
+            </div>
+            <div v-if="forConfirm && remove">
+              <div style="align-items: start" class="form-text">
+                Unesite napomenu<br />(nije obavezno)
+              </div>
+              <textarea
+                v-model="modelRefuse.sellerNote"
+                name="Text1"
+                rows="3"
+                class="from-input"
+              ></textarea>
+            </div>
           </div>
         </div>
         <div class="sum-order" v-if="forOrder">
@@ -240,6 +272,10 @@ export default {
       type: Number,
       default: null,
     },
+    noteBuyer: {
+      type: String,
+      default: "",
+    },
   },
   data() {
     return {
@@ -247,18 +283,25 @@ export default {
       surnameUser: this.userSurname,
       telephoneUser: this.userTelephone,
       addressUser: this.userAddress,
+      buyerNote: this.noteBuyer,
       model: {
         productId: Number(this.$route.query.productId),
         confirm: false,
         telephone: "",
         address: "",
         quantity: 1,
+        buyerNote: "",
       },
       modelConfirm: {
         idOrder: this.orderId,
         confirm: false,
       },
+      modelRefuse: {
+        sellerNote: "",
+        idOrder: this.orderId,
+      },
       showError: false,
+      remove: false,
     };
   },
   computed: {
@@ -276,7 +319,7 @@ export default {
     await this.getUserByUser();
   },
   methods: {
-    ...mapActions(["getUserByUser", "addOrder", "setConfirm", "deleteOrder"]),
+    ...mapActions(["getUserByUser", "addOrder", "setConfirm", "refuseOrder"]),
     closeWindowOrder() {
       this.$emit("closed");
     },
@@ -305,8 +348,12 @@ export default {
       }
     },
     async removeOrder() {
-      await this.deleteOrder(this.orderId);
-      this.$emit("save");
+      if (this.remove == true) {
+        await this.refuseOrder(this.modelRefuse);
+
+        this.$emit("save");
+      }
+      this.remove = true;
     },
   },
 };
@@ -377,6 +424,7 @@ export default {
 .user-div {
   display: flex;
   padding: 1rem 1rem;
+  padding-bottom: 0;
 }
 .user-form {
   display: flex;
@@ -387,9 +435,10 @@ export default {
   padding-bottom: 1rem;
   font-size: 1rem;
   display: flex;
+  text-align: start;
 }
 .form-text {
-  width: 6rem;
+  width: 7rem;
   padding: 0 0.5rem;
   display: flex;
   justify-content: flex-start;
@@ -407,7 +456,10 @@ export default {
 .sum-order {
   display: flex;
   padding: 1rem 1rem;
-
+  padding-top: 0.3rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0.3rem;
   margin: 1rem;
 }
 .sum {
