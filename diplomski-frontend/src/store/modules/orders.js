@@ -2,7 +2,9 @@ const state = {
     ordersByUser: [],
     ordersForUser: [],
     oredrById:{},
-    orders:[]
+    orders:[],
+    totalCountForUser: null,
+    totalCountByUser: null
 }
 
 const actions ={
@@ -10,18 +12,20 @@ const actions ={
     {
          await rootState.authAxios.post("Order", newOrder);
     },
-    async getAllOrdersByUser({rootState, commit})
+    async getAllOrdersByUser({rootState, commit}, pageModel)
     {
-        const response = await rootState.authAxios.get(`Order/GetByUser`);
+        const response = await rootState.authAxios.post(`Order/GetByUser`, pageModel);
        
         commit("setOrdersByUser", response.data.data)
-        
+        commit("setTotalCountByUser", response.data.totalCount)  
     },
-    async getAllOrdersForUser({rootState, commit})
+    async getAllOrdersForUser({rootState, commit}, pageModel)
     {
-        const response = await rootState.authAxios.get(`Order/GetForUser`);
+        const response = await rootState.authAxios.post(`Order/GetForUser`, pageModel);
        
         commit("setOrdersForUser", response.data.data)
+        commit("setTotalCountForUser", response.data.totalCount)
+
         
     },
     async getOrderById({rootState,commit},id)
@@ -51,8 +55,9 @@ const mutations = {
     setOrdersByUser:(state,ordersByUser) => (state.ordersByUser=ordersByUser),
     setOrdersForUser: (state,ordersForUser) => (state.ordersForUser=ordersForUser),
     setOrderById: (state,oredrById) => (state.oredrById=oredrById),
-    setOrders: (state,orders) => (state.orders = orders)
-
+    setOrders: (state,orders) => (state.orders = orders),
+    setTotalCountForUser: (state,totalCountForUser) => (state.totalCountForUser=totalCountForUser),
+    setTotalCountByUser: (state,totalCountByUser) => (state.totalCountByUser=totalCountByUser),
 }
 
 export default{

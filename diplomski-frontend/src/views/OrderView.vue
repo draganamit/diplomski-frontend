@@ -48,6 +48,18 @@
       ></OrderBase>
 
       <div v-if="!ordersByUser.length" class="no-order">Nema narudžbi</div>
+      <div class="pagination">
+        <div class="page" @click="prevPageByUser()">&#60;</div>
+        <div
+          class="page"
+          v-for="index in pageCountByUser"
+          :key="index"
+          @click="setPageNumByUser(index)"
+        >
+          {{ index }}
+        </div>
+        <div class="page" @click="nextPageByUser()">></div>
+      </div>
     </div>
     <div
       style="
@@ -79,6 +91,18 @@
         :note="order.sellerNote"
       ></OrderBase>
       <div v-if="!ordersForUser.length" class="no-order">Nema narudžbi</div>
+      <div class="pagination">
+        <div class="page" @click="prevPageForUser()">&#60;</div>
+        <div
+          class="page"
+          v-for="index in pageCountForUser"
+          :key="index"
+          @click="setPageNumForUser(index)"
+        >
+          {{ index }}
+        </div>
+        <div class="page" @click="nextPageForUser()">></div>
+      </div>
     </div>
     <div v-if="order" class="mask" @click.self="away()"></div>
   </div>
@@ -98,8 +122,17 @@ export default {
     return {
       order: false,
       orderId: null,
+      pageModelForUser: {
+        pageNum: 1,
+        pageSize: 4,
+      },
+      pageModelByUser: {
+        pageNum: 1,
+        pageSize: 4,
+      },
     };
   },
+
   methods: {
     ...mapActions([
       "getAllOrdersByUser",
@@ -120,17 +153,69 @@ export default {
       await this.deleteOrder(id);
       await this.getAllOrdersByUser();
     },
+    setPageNumByUser(index) {
+      let query = Object.assign({}, this.$route.query);
+      query.setPageNumByUser = index;
+      this.$router
+        .push({
+          query: query,
+        })
+        .catch();
+    },
+    setPageNumForUser(index) {
+      let query = Object.assign({}, this.$route.query);
+      query.setPageNumForUser = index;
+      this.$router
+        .push({
+          query: query,
+        })
+        .catch();
+    },
+    prevPageByUser() {
+      if (this.pageModelByUser.pageNum == 1) {
+        return;
+      }
+      this.setPageNumByUser(this.pageModelByUser.pageNum - 1);
+    },
+    prevPageForUser() {
+      if (this.pageModelForUser.pageNum == 1) {
+        return;
+      }
+      this.setPageNumForUser(this.pageModelForUser.pageNum - 1);
+    },
+    nextPageByUser() {
+      if (this.pageModelByUser.pageNum == this.pageCountByUser) {
+        return;
+      }
+      this.setPageNumByUser(this.pageModelByUser.pageNum + 1);
+    },
+    nextPageForUser() {
+      if (this.pageModelForUser.pageNum == this.pageCountForUser) {
+        return;
+      }
+      this.setPageNumForUser(this.pageModelForUser.pageNum + 1);
+    },
   },
   computed: {
     ...mapState({
       ordersByUser: (state) => state.orders.ordersByUser,
       ordersForUser: (state) => state.orders.ordersForUser,
       oredrById: (state) => state.orders.oredrById,
+      pageCountForUser(state) {
+        return Math.ceil(
+          state.orders.totalCountForUser / this.pageModelForUser.pageSize
+        );
+      },
+      pageCountByUser(state) {
+        return Math.ceil(
+          state.orders.totalCountByUser / this.pageModelByUser.pageSize
+        );
+      },
     }),
   },
   async created() {
-    await this.getAllOrdersByUser();
-    await this.getAllOrdersForUser();
+    await this.getAllOrdersByUser(this.pageModelByUser);
+    await this.getAllOrdersForUser(this.pageModelForUser);
   },
 };
 </script>
@@ -174,5 +259,22 @@ export default {
   background: blanchedalmond;
   padding: 0.5rem;
   color: red;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.page {
+  border: 1px solid #e1e8ee;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-left: 0.5rem;
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.page:hover {
+  background: #e3dbdb;
 }
 </style>
