@@ -6,11 +6,7 @@
       @remove="removeProduct()"
       :textQuestion="'Da li ste sugurni da želite da obrišete proizvod?'"
     ></DeleteModal>
-    <div
-      v-if="update"
-      class="update-product"
-      style="overflow: scroll; height: 80%; overflow-x: hidden"
-    >
+    <div v-if="update" class="update-product" style="height: 80%">
       <UpdateProduct
         @closed="closeWindow()"
         @save="closeGetProduct()"
@@ -144,7 +140,6 @@ button:hover {
   left: 0;
   right: 0;
   background-color: white;
-  border: 1px solid black;
   border-radius: 0.5rem;
   width: 50%;
   margin: auto;
