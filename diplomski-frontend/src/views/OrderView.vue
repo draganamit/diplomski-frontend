@@ -52,9 +52,10 @@
         <div class="page" @click="prevPageByUser()">&#60;</div>
         <div
           class="page"
+          :class="{ 'page-selected': pageModelByUser.pageNum == index }"
           v-for="index in pageCountByUser"
           :key="index"
-          @click="setPageNumByUser(index)"
+          @click="pageModelByUser.pageNum = index"
         >
           {{ index }}
         </div>
@@ -95,9 +96,10 @@
         <div class="page" @click="prevPageForUser()">&#60;</div>
         <div
           class="page"
+          :class="{ 'page-selected': pageModelForUser.pageNum == index }"
           v-for="index in pageCountForUser"
           :key="index"
-          @click="setPageNumForUser(index)"
+          @click="pageModelForUser.pageNum = index"
         >
           {{ index }}
         </div>
@@ -153,47 +155,44 @@ export default {
       await this.deleteOrder(id);
       await this.getAllOrdersByUser();
     },
-    setPageNumByUser(index) {
-      let query = Object.assign({}, this.$route.query);
-      query.setPageNumByUser = index;
-      this.$router
-        .push({
-          query: query,
-        })
-        .catch();
-    },
-    setPageNumForUser(index) {
-      let query = Object.assign({}, this.$route.query);
-      query.setPageNumForUser = index;
-      this.$router
-        .push({
-          query: query,
-        })
-        .catch();
-    },
-    prevPageByUser() {
+
+    async prevPageByUser() {
       if (this.pageModelByUser.pageNum == 1) {
         return;
       }
-      this.setPageNumByUser(this.pageModelByUser.pageNum - 1);
+      this.pageModelByUser.pageNum--;
     },
-    prevPageForUser() {
+    async prevPageForUser() {
       if (this.pageModelForUser.pageNum == 1) {
         return;
       }
-      this.setPageNumForUser(this.pageModelForUser.pageNum - 1);
+      this.pageModelForUser.pageNum--;
     },
-    nextPageByUser() {
+    async nextPageByUser() {
       if (this.pageModelByUser.pageNum == this.pageCountByUser) {
         return;
       }
-      this.setPageNumByUser(this.pageModelByUser.pageNum + 1);
+      this.pageModelByUser.pageNum++;
     },
-    nextPageForUser() {
+    async nextPageForUser() {
       if (this.pageModelForUser.pageNum == this.pageCountForUser) {
         return;
       }
-      this.setPageNumForUser(this.pageModelForUser.pageNum + 1);
+      this.pageModelForUser.pageNum++;
+    },
+  },
+  watch: {
+    pageModelForUser: {
+      deep: true,
+      async handler(newVal) {
+        await this.getAllOrdersForUser(newVal);
+      },
+    },
+    pageModelByUser: {
+      deep: true,
+      async handler(newVal) {
+        await this.getAllOrdersByUser(newVal);
+      },
     },
   },
   computed: {
@@ -275,6 +274,9 @@ export default {
   cursor: pointer;
 }
 .page:hover {
+  background: #e3dbdb;
+}
+.page-selected {
   background: #e3dbdb;
 }
 </style>
