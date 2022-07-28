@@ -67,6 +67,9 @@ export default {
 .main {
   display: flex;
   width: 100%;
-  padding: 1rem;
+  background: #ffebcde3;
+  box-shadow: 5px 6px 5px 0px rgb(0 0 0 / 55%);
+  -webkit-box-shadow: 5px 6px 5px 0px rgb(0 0 0 / 55%);
+  -moz-box-shadow: 5px 6px 5px 0px rgba(0, 0, 0, 0.55);
 }
 </style>

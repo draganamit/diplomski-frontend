@@ -148,6 +148,9 @@ export default {
   background-color: blanchedalmond;
   align-items: center;
   width: 100%;
+  box-shadow: 5px 6px 5px 0px rgb(0 0 0 / 75%);
+  -webkit-box-shadow: 1px 1px 5px 0px rgb(0 0 0 / 20%);
+  -moz-box-shadow: 5px 6px 5px 0px rgba(0, 0, 0, 0.75);
 }
 .buttons {
   margin-left: auto;

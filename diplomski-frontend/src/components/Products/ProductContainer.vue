@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="product-container">
     <div class="content-products">
       <ProductBase
         v-for="(product, key) in products"
@@ -17,10 +17,12 @@
         Nema proizvoda na stanju.
       </div>
     </div>
-    <div class="pagination" v-if="products.length && $route.fullPath != '/'">
+    <div class="pagination" v-if="products.length">
+      <!-- <div class="pagination" v-if="products.length && $route.fullPath != '/'"> -->
       <div class="page" @click="prevPage()">&#60;</div>
       <div
         class="page"
+        :class="{ 'page-active': index == searchModel.pageNum }"
         v-for="index in pageCount"
         :key="index"
         @click="setPageNum(index)"
@@ -136,7 +138,6 @@ export default {
   display: grid;
   gap: 3rem 3rem;
   grid-template-columns: repeat(4, 1fr);
-  background-color: blanchedalmond;
 }
 @media (max-width: 1100px) {
   .content-products {
@@ -157,6 +158,8 @@ export default {
   display: flex;
   justify-content: center;
   align-content: center;
+  margin-top: auto;
+  margin-bottom: 1rem;
 }
 .page {
   border: 1px solid #e1e8ee;
@@ -169,5 +172,13 @@ export default {
 }
 .page:hover {
   background: #e3dbdb;
+}
+.page-active {
+  border: 1px solid #bead84;
+}
+.product-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 </style>

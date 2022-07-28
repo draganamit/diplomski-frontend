@@ -51,11 +51,10 @@ export default {
 
 <style scoped>
 .contaner {
-  margin: 0.5rem 1rem;
   padding: 0.5rem;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   /* border: 1px solid grey; */
   height: 4.5rem;
 }

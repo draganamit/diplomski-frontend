@@ -56,14 +56,13 @@ input {
 .content {
   height: calc(100vh - 4.5rem);
   width: 100vw;
-  overflow: scroll;
   overflow-x: hidden;
 }
 .content-main {
   height: calc(100vh - 4.5rem);
   width: 100vw;
-  overflow: scroll;
   overflow-x: hidden;
   background-image: url("./assets/slika.jpg");
+  background-size: contain;
 }
 </style>
