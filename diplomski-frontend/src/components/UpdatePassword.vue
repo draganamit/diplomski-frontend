@@ -15,7 +15,16 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span style="text-align: start"> Trenutna lozinka: </span>
+                  <span
+                    style="
+                      text-align: start;
+                      font-weight: bold;
+                      font-style: italic;
+                      font-family: auto;
+                    "
+                  >
+                    Trenutna lozinka:
+                  </span>
                   <input
                     name="oldPassword"
                     type="text"
@@ -39,7 +48,16 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span style="text-align: start"> Nova lozinka: </span>
+                  <span
+                    style="
+                      text-align: start;
+                      font-weight: bold;
+                      font-style: italic;
+                      font-family: auto;
+                    "
+                  >
+                    Nova lozinka:
+                  </span>
 
                   <input
                     type="text"
@@ -60,7 +78,16 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span style="text-align: start"> Potvrdite lozinku: </span>
+                  <span
+                    style="
+                      text-align: start;
+                      font-weight: bold;
+                      font-style: italic;
+                      font-family: auto;
+                    "
+                  >
+                    Potvrdite lozinku:
+                  </span>
                   <input
                     name="comfirmPassword"
                     type="text"
@@ -77,7 +104,13 @@
             <button
               type="button"
               @click="update()"
-              style="width: 100%; cursor: pointer"
+              style="
+                width: 100%;
+                cursor: pointer;
+                font-weight: bold;
+                font-style: italic;
+                font-family: inherit;
+              "
             >
               Sačuvaj izmjene
             </button>

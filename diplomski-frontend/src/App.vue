@@ -57,6 +57,7 @@ input {
   height: calc(100vh - 4.5rem);
   width: 100vw;
   overflow-x: hidden;
+  background: rgb(244 244 244 / 63%);
 }
 .content-main {
   height: calc(100vh - 4.5rem);

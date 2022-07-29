@@ -13,6 +13,16 @@
         </div>
         <div style="padding-left: 0" class="price">{{ price }} KM</div>
       </div>
+      <div
+        style="
+          position: absolute;
+          padding: 0 0.5rem;
+          font-family: cursive;
+          color: #e65b28;
+        "
+      >
+        <i class="icon-location"></i> {{ location }}
+      </div>
     </div>
 
     <div
@@ -42,6 +52,10 @@ export default {
       default: true,
     },
     name: {
+      type: String,
+      default: "",
+    },
+    location: {
       type: String,
       default: "",
     },
@@ -99,7 +113,7 @@ export default {
   cursor: pointer;
 }
 .container-product:hover {
-  background: #f4d9cb;
+  /* background: #f4d9cb; */
 }
 .image {
   height: 8rem;
@@ -112,23 +126,26 @@ export default {
 }
 .name {
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
+  font-family: cursive;
 }
 .price {
   padding: 0.5rem;
   font-size: 1rem;
   margin-left: auto;
   color: red;
+  font-family: cursive;
 }
 .icons {
   display: flex;
-  justify-content: center;
+  justify-content: end;
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 1rem;
+  /* padding: 1rem; */
+  padding-bottom: 0.2rem;
 }
 .product-state {
   position: absolute;

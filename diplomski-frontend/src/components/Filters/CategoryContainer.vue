@@ -3,7 +3,7 @@
     <div class="header">Kategorije</div>
     <div
       @click="getProductByCategory(null)"
-      style="padding: 0.5rem"
+      style="padding: 0.4rem"
       class="category"
       :class="{ selected: $route.query.categoryId == null }"
     >
@@ -12,7 +12,7 @@
     <div
       v-for="(category, key) in categories"
       :key="key"
-      style="padding: 0.5rem"
+      style="padding: 0.4rem"
       class="category"
       :class="{ selected: category.id == $route.query.categoryId }"
       @click="getProductByCategory(category.id)"
@@ -79,10 +79,13 @@ export default {
   background-color: rgb(230, 91, 40);
   color: white;
   padding: 0.5rem;
+  font-weight: bold;
+  font-style: italic;
 }
 .category {
   cursor: pointer;
   transition: all 0.3s linear;
+  font-family: cursive;
 }
 .category > div {
   cursor: pointer;

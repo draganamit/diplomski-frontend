@@ -67,12 +67,13 @@ input {
   max-width: 40rem;
   margin: 0.5rem;
   border: none;
+  border-radius: 5px;
 }
 input:focus {
   border: 1px solid #b5babf;
 }
 button {
-  padding: 0.7rem 1rem;
+  padding: 0.6rem 1rem;
   background-color: rgb(230, 91, 40);
   color: white;
   outline: none;

@@ -8,12 +8,16 @@
         @remove="openRemoveWindow(product.id)"
         :name="product.name"
         :price="product.price"
+        :location="product.user.location"
         :id="product.id"
         :images="product.images"
         :productUserId="product.user.id"
         :productOnState="product.state == 0 ? false : true"
       ></ProductBase>
-      <div v-if="!products.length" style="color: red; font-size: 1.1rem">
+      <div
+        v-if="!products.length"
+        :class="$route.path == '/userprofile' ? 'no-product' : 'no-product-new'"
+      >
         Nema proizvoda na stanju.
       </div>
     </div>
@@ -180,5 +184,31 @@ export default {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+.no-product {
+  color: red;
+
+  width: 80%;
+  position: absolute;
+  font-family: monospace;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.6rem;
+
+  padding: 1rem;
+  margin-left: 7rem;
+}
+.no-product-new {
+  color: red;
+
+  width: 60%;
+  position: absolute;
+  font-family: monospace;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.6rem;
+  margin-top: 3rem;
+  padding: 1rem;
+  margin-left: 7rem;
 }
 </style>

@@ -158,6 +158,9 @@ form > div {
   display: flex;
   align-items: center;
   justify-content: left;
+  font-weight: bold;
+  font-style: italic;
+  font-family: auto;
 }
 input {
   width: 100%;
@@ -179,6 +182,9 @@ button {
   margin-top: 2rem;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  font-weight: bold;
+  font-style: italic;
+  font-family: inherit;
 }
 button:hover {
   background-color: rgb(16 161 30);

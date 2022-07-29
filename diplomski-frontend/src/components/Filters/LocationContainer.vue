@@ -66,6 +66,8 @@ export default {
   background-color: rgb(230, 91, 40);
   color: white;
   padding: 0.5rem;
+  font-weight: bold;
+  font-style: italic;
 }
 .content {
   display: flex;
@@ -78,6 +80,7 @@ export default {
 }
 .search {
   margin: auto 0.5rem 0.5rem auto;
+  margin-bottom: 1rem;
 }
 .search > button {
   padding: 0.5rem 1rem;

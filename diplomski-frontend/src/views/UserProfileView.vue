@@ -16,14 +16,49 @@
     ></DeleteModal>
     <div class="user-information">
       <div class="user-div">
-        <div v-if="userById" style="padding: 1rem; font-size: 2rem">
+        <div
+          v-if="userById"
+          style="
+            padding: 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+            font-style: italic;
+            font-family: cursive;
+            color: #aa3409;
+          "
+        >
           {{ fullName }}
         </div>
-        <div v-if="userById" style="padding: 1rem; font-size: 1.5rem">
-          {{ userById.email }}
-        </div>
-        <div v-if="userById" style="padding: 1rem; font-size: 1.5rem">
-          {{ userById.location }}
+        <div style="margin-left: 7rem">
+          <div
+            v-if="userById"
+            style="
+              padding: 1rem;
+              font-size: 1.5rem;
+              color: #e65b28;
+              font-family: cursive;
+              padding-bottom: 0.5rem;
+              text-align: start;
+            "
+          >
+            <i class="icon-envelope"></i>
+            {{ userById.email }}
+          </div>
+          <div
+            v-if="userById"
+            style="
+              padding: 1rem;
+              font-size: 1.5rem;
+              color: #e65b28;
+              font-family: cursive;
+              padding-top: 0.5rem;
+              text-align: start;
+            "
+          >
+            <i class="icon-location"></i>
+
+            {{ userById.location }}
+          </div>
         </div>
         <button class="button-update-user" @click="openUpdate()">
           Azuriraj lične podatke
@@ -38,7 +73,7 @@
     </div>
 
     <div class="proizvodi-title">
-      <div>Proizvodi</div>
+      <div>Proizvodi:</div>
     </div>
     <div class="show-products">
       <ProductContainer></ProductContainer>
@@ -157,6 +192,11 @@ button {
   align-items: center;
   font-size: 1.5rem;
   padding: 1rem 3rem;
+  font-weight: bold;
+  font-style: italic;
+  font-family: cursive;
+  color: rgb(170, 52, 9);
+  margin-left: 2rem;
 }
 .show-products {
   display: flex;
@@ -185,24 +225,33 @@ button {
 .button-update-user {
   width: 100%;
   cursor: pointer;
+  background: #d19b26;
+  font-weight: bold;
 }
 .button-update-user:hover {
-  background-color: rgb(193 73 28);
+  /* background-color: rgb(193 73 28); */
+  background: #b6861f;
 }
 .button-update-password {
   width: 100%;
-  background-color: rgb(183 28 11);
+  /* background-color: rgb(183 28 11); */
   cursor: pointer;
+  background-color: rgb(230, 91, 40);
+  font-weight: bold;
 }
 .button-update-password:hover {
-  background: rgb(161 23 8);
+  /* background: rgb(161 23 8); */
+  background-color: rgb(204 79 33);
 }
 .button-deactivate {
   width: 100%;
   background-color: rgb(135 132 132);
   cursor: pointer;
+  background: red;
+  font-weight: bold;
 }
 .button-deactivate:hover {
-  background: rgb(122 121 121);
+  /* background: rgb(122 121 121); */
+  background: #db0202;
 }
 </style>
