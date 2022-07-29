@@ -26,4 +26,7 @@ export default {
   width: 100%;
   height: 42rem;
 }
+.home {
+  padding-bottom: 2rem;
+}
 </style>

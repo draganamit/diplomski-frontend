@@ -6,14 +6,7 @@
       @remove="removeProduct()"
       :textQuestion="'Da li ste sugurni da želite da obrišete proizvod?'"
     ></DeleteModal>
-    <div v-if="update" class="update-product" style="height: 80%">
-      <UpdateProduct
-        @closed="closeWindow()"
-        @save="closeGetProduct()"
-        :textButton="idProduct ? 'Sačuvaj izmjene' : 'Dodaj proizvod'"
-        :idProduct="idProduct"
-      ></UpdateProduct>
-    </div>
+
     <div class="add">
       <!-- <div>Proizvodi</div> -->
       <div class="button-add">
@@ -26,7 +19,16 @@
         @openRemove="openRemoveProduct"
       ></ProductContainer>
     </div>
-    <div v-if="update || remove" class="mask" @click.self="closeWindow()"></div>
+    <div v-if="update || remove" class="mask" @click.self="closeWindow()">
+      <div v-if="update" class="update-product" style="height: 80%">
+        <UpdateProduct
+          @closed="closeWindow()"
+          @save="closeGetProduct()"
+          :textButton="idProduct ? 'Sačuvaj izmjene' : 'Dodaj proizvod'"
+          :idProduct="idProduct"
+        ></UpdateProduct>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -139,6 +141,8 @@ button:hover {
   position: absolute;
   left: 0;
   right: 0;
+  top: 0;
+  bottom: 0;
   background-color: white;
   border-radius: 0.5rem;
   width: 50%;
