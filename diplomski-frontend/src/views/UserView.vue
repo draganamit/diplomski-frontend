@@ -14,7 +14,9 @@
       <!-- <div>Korisnici</div> -->
     </div>
     <div class="table-div">
-      <table style="width: 100%; border-collapse: collapse">
+      <table
+        style="width: 100%; border-collapse: collapse; font-family: cursive"
+      >
         <tr class="thr" style="background-color: rgb(230, 91, 40)">
           <th>Korisničko ime</th>
           <th>Ime</th>

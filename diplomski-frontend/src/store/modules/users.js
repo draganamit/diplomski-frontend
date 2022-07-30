@@ -1,7 +1,8 @@
 const state = {
     user:null,
     users:[],
-    userById: null
+    userById: null,
+    noUserExist:false
 }
 
 const actions = {
@@ -46,15 +47,29 @@ const actions = {
         await rootState.baseAxios.put('auth/'+id);
         
     },
-    async resetPassword({rootState},email)
+    async resetPassword({rootState,commit},email)
     {
+        try {
         await rootState.baseAxios.post('auth/ResetPassword', {email});
+        commit('setUserExistFalse');
+        
+
+            
+        } catch (e) {
+            if(e.response.status == 400)
+            {
+                commit('setUserExist');
+            }
+        }
     }
 }
 const mutations = {
     setUser: (state,user) => (state.user=user),
     setUsers: (state,users) => (state.users = users),
-    setUserById: (state,user) => (state.userById = user)
+    setUserById: (state,user) => (state.userById = user),
+    setUserExist: (state) => (state.noUserExist = true),
+    setUserExistFalse: (state) => (state.noUserExist = false),
+
 }
 export default{
     actions,

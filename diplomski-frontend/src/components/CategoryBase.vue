@@ -45,6 +45,8 @@ export default {
 }
 .name-category {
   font-size: 1.4rem;
+  font-family: cursive;
+  padding-left: 1rem;
 }
 .buttons {
   display: flex;

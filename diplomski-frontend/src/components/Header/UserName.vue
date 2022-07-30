@@ -81,9 +81,12 @@ export default {
 .namesurname {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-
   padding: 0.5rem;
-  font-size: 1rem;
+  font-family: cursive;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-style: italic;
+  border-radius: 5px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
@@ -98,10 +101,13 @@ export default {
 .order {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
-
   padding: 0.5rem;
   margin-right: 0.5rem;
   font-size: 1rem;
+  font-weight: bold;
+  font-style: italic;
+  border-radius: 5px;
+  font-family: cursive;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -124,9 +130,12 @@ export default {
   position: absolute;
   background-color: #f9f9f9;
   z-index: 1;
-  font-size: 1.2rem;
+  border-radius: 5px;
+  font-family: cursive;
+  font-size: 1.1rem;
   width: 12rem;
   right: 0;
+  width: -webkit-fill-available;
 }
 .dropdown-content a {
   color: black;

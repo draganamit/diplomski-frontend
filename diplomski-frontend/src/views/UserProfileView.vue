@@ -240,7 +240,6 @@ button {
   font-weight: bold;
 }
 .button-update-password:hover {
-  /* background: rgb(161 23 8); */
   background-color: rgb(204 79 33);
 }
 .button-deactivate {
@@ -251,7 +250,6 @@ button {
   font-weight: bold;
 }
 .button-deactivate:hover {
-  /* background: rgb(122 121 121); */
   background: #db0202;
 }
 </style>

@@ -101,7 +101,7 @@ export default {
 .order-base {
   display: flex;
   padding: 1rem 0.5rem;
-
+  font-family: cursive;
   border-radius: 1rem;
   background-color: white;
   margin-top: 0.8rem;

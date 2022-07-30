@@ -158,9 +158,9 @@ form > div {
   display: flex;
   align-items: center;
   justify-content: left;
-  font-weight: bold;
-  font-style: italic;
-  font-family: auto;
+  /* font-weight: bold;
+  font-style: italic; */
+  font-family: cursive;
 }
 input {
   width: 100%;

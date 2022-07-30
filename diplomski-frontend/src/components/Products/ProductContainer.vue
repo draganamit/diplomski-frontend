@@ -21,7 +21,7 @@
         Nema proizvoda na stanju.
       </div>
     </div>
-    <div class="pagination" v-if="products.length">
+    <div class="pagination" v-if="products.length && pageCount != 0">
       <!-- <div class="pagination" v-if="products.length && $route.fullPath != '/'"> -->
       <div class="page" @click="prevPage()">&#60;</div>
       <div
@@ -179,6 +179,7 @@ export default {
 }
 .page-active {
   border: 1px solid #bead84;
+  background: #e3dbdb;
 }
 .product-container {
   display: flex;

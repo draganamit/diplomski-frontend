@@ -15,14 +15,7 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span
-                    style="
-                      text-align: start;
-                      font-weight: bold;
-                      font-style: italic;
-                      font-family: auto;
-                    "
-                  >
+                  <span style="text-align: start; font-family: cursive">
                     Trenutna lozinka:
                   </span>
                   <input
@@ -48,14 +41,7 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span
-                    style="
-                      text-align: start;
-                      font-weight: bold;
-                      font-style: italic;
-                      font-family: auto;
-                    "
-                  >
+                  <span style="text-align: start; font-family: cursive">
                     Nova lozinka:
                   </span>
 
@@ -78,14 +64,7 @@
                 v-slot="{ errors }"
               >
                 <div class="text-div">
-                  <span
-                    style="
-                      text-align: start;
-                      font-weight: bold;
-                      font-style: italic;
-                      font-family: auto;
-                    "
-                  >
+                  <span style="text-align: start; font-family: cursive">
                     Potvrdite lozinku:
                   </span>
                   <input

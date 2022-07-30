@@ -73,7 +73,7 @@ input:focus {
   border: 1px solid #b5babf;
 }
 button {
-  padding: 0.6rem 1rem;
+  padding: 0.5rem 1rem;
   background-color: rgb(230, 91, 40);
   color: white;
   outline: none;
@@ -81,6 +81,7 @@ button {
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
+  font-family: cursive;
 }
 button:hover {
   transform: scale(1.01);

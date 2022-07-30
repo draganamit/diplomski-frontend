@@ -2,7 +2,9 @@
   <div class="report-container">
     <ReportSearch @order="orderProduct()" />
     <div class="table-div" v-if="orders.length">
-      <table style="width: 100%; border-collapse: collapse">
+      <table
+        style="width: 100%; border-collapse: collapse; font-family: cursive"
+      >
         <tr style="background-color: rgb(230, 91, 40)">
           <th>Proizvod</th>
           <th>Kategorija</th>
@@ -33,6 +35,7 @@
             style="
               background-color: rgb(230, 91, 40);
               color: rgb(241, 241, 226);
+              font-weight: bold;
             "
           >
             Ukupna vrijednost svih narudžbi:
@@ -55,8 +58,12 @@
         font-size: 1.1rem;
         display: flex;
         color: red;
-        background: blanchedalmond;
-        margin-top: 1rem;
+        margin-top: 3rem;
+        font-family: monospace;
+        font-style: italic;
+        font-weight: bold;
+        justify-content: center;
+        font-size: 1.3rem;
       "
       v-if="!orders.length && message"
     >

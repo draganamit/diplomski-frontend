@@ -29,21 +29,40 @@
 
       <div class="description-button">
         <div class="description">
-          <div class="text-div" style="font-weight: bold; font-size: 1.5rem">
+          <div
+            class="text-div"
+            style="
+              font-weight: bold;
+              font-size: 1.5rem;
+              font-style: italic;
+              font-family: cursive;
+              color: rgb(170, 52, 9);
+            "
+          >
             {{ name }}
           </div>
-          <div class="text-div"><b>Opis:</b> {{ description }}</div>
           <div class="text-div">
-            <b>Cijena:</b>
+            <b style="font-family: cursive">Opis:</b> {{ description }}
+          </div>
+          <div class="text-div">
+            <b style="font-family: cursive">Cijena:</b>
             <div style="color: red; font-weight: bold">{{ price }}KM</div>
           </div>
-          <div class="text-div"><b>Proizvođač:</b> {{ username }}</div>
-
-          <div class="text-div"><b>Kategorija:</b> {{ category }}</div>
+          <div class="text-div">
+            <b style="font-family: cursive">Proizvođač:</b> {{ username }}
+          </div>
+          <div class="text-div">
+            <b style="font-family: cursive">Lokacija:</b> {{ location }}
+          </div>
+          <div class="text-div">
+            <b style="font-family: cursive">Kategorija:</b> {{ category }}
+          </div>
 
           <!-- <div class="text-div">Stanje: {{ state }}</div> -->
 
-          <div class="text-div"><b>Tagovi:</b></div>
+          <div class="text-div">
+            <b style="font-family: cursive">Tagovi:</b>
+          </div>
           <div class="tags">
             <div class="tag" v-for="tag in tags" :key="tag">{{ tag }}</div>
           </div>
@@ -77,6 +96,7 @@ export default {
       username: "",
       name: "",
       category: "",
+      location: "",
       description: "",
       state: null,
       price: null,
@@ -95,6 +115,7 @@ export default {
     this.name = response.name;
     this.username = response.user.email;
     this.category = response.category.name;
+    this.location = response.user.location;
     this.description = response.description;
     this.state = response.state;
     this.price = response.price;
@@ -152,6 +173,7 @@ export default {
   padding: 1rem;
   margin-bottom: 0.5rem;
   display: flex;
+  font-family: cursive;
 }
 .button-div {
   display: flex;
@@ -170,6 +192,7 @@ button {
   margin-right: 0.5rem;
   cursor: pointer;
   border: none;
+  font-family: cursive;
 }
 button:hover {
   transform: scale(1.01);
@@ -204,11 +227,13 @@ button:hover {
 }
 .tag {
   padding: 0.5rem 1rem;
-  border: 1px solid #e1e8ee;
+  font-family: cursive;
+
   border-radius: 10px;
   margin-left: 0.5rem;
   background-color: rgb(213, 210, 210);
   font-size: 1rem;
+  background: white;
 }
 .tags {
   display: flex;

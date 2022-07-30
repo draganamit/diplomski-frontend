@@ -229,6 +229,7 @@ export default {
   padding: 0.4rem;
   padding-left: 0;
   margin-top: 1rem;
+  font-family: cursive;
 }
 .input {
   text-align: left;
@@ -277,6 +278,7 @@ input:focus {
   border-radius: 5px;
   margin-top: 0.5rem;
   cursor: pointer;
+  font-family: cursive;
 }
 .btnPrijaviSe > button:hover {
   background-color: rgb(193 73 28);

@@ -90,6 +90,7 @@ export default {
   border: 1px solid transparent;
   border-radius: 5px;
   cursor: pointer;
+  font-family: cursive;
 }
 button:hover {
   transform: scale(1.01);

@@ -114,9 +114,15 @@
             <div class="add-image">
               <i
                 class="icon-camera"
-                style="padding: 0.5rem 0rem; color: dodgerblu"
+                style="
+                  padding: 0.5rem 0rem;
+                  color: dodgerblu;
+                  padding-bottom: 0;
+                "
               ></i>
-              <p style="width: 100%; margin: 0">Dodaj sliku proizvoda</p>
+              <p style="width: 100%; margin: 0; font-family: cursive">
+                Dodaj sliku proizvoda
+              </p>
               <input
                 type="file"
                 style="
@@ -361,6 +367,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: left;
+  font-family: cursive;
 }
 input {
   width: 100%;
@@ -401,6 +408,9 @@ select:focus {
   border-bottom-right-radius: 0.2rem;
   border-bottom-left-radius: 0.2rem;
   cursor: pointer;
+  font-family: cursive;
+  font-weight: bold;
+  font-style: italic;
 }
 .btn-add:hover {
   background-color: rgb(16 161 30);
@@ -432,10 +442,12 @@ select:focus {
   background-color: rgb(19 187 35);
   color: rgb(241, 241, 226);
   border: transparent;
-  padding: 0.6rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1rem;
-  /* height: 100%; */
   cursor: pointer;
+  font-family: cursive;
+  font-weight: bold;
+  font-style: italic;
 }
 .button-add-tag:hover {
   background-color: rgb(16 161 30);
@@ -463,7 +475,7 @@ select:focus {
   align-content: center;
   justify-content: center;
   border: 1px solid gainsboro;
-  width: 10rem;
+  width: 10.5rem;
   height: 9rem;
   font-size: 1rem;
   color: dodgerblue;

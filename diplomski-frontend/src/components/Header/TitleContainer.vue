@@ -161,21 +161,34 @@ export default {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
   border: none;
-
-  padding: 0.5rem 1rem;
+  /* padding: 0.5rem 1rem; */
   margin-right: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   width: 8rem;
   cursor: pointer;
+  padding: 0.5rem;
+  font-family: cursive;
+  /* font-size: 1.2rem; */
+
+  font-weight: bold;
+  font-style: italic;
+  border-radius: 5px;
 }
 .btnRegistracija {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
   border: none;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  /* padding: 0.5rem 1rem; */
+  font-size: 1.1rem;
   width: 8rem;
   cursor: pointer;
+  padding: 0.5rem;
+  font-family: cursive;
+  /* font-size: 1.2rem; */
+
+  font-weight: bold;
+  font-style: italic;
+  border-radius: 5px;
 }
 
 .container {

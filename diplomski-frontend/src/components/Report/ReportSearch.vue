@@ -190,6 +190,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
+  font-family: cursive;
 }
 
 .input-container {
@@ -256,10 +257,9 @@ button {
   border-radius: 5px;
   font-size: 1rem;
   margin-left: auto;
-
   font-size: 1rem;
   cursor: pointer;
-
+  font-family: cursive;
   margin-left: auto;
 }
 button:hover {

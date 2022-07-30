@@ -15,10 +15,23 @@
       ></UpdateCategory>
     </div>
     <div class="add">
-      <!-- <div>Kategorije</div> -->
       <div class="button-add">
         <button @click="openUpdateCategory()">Dodaj kategoriju</button>
       </div>
+    </div>
+    <div
+      style="
+        font-weight: bold;
+        font-style: italic;
+        font-family: cursive;
+        color: rgb(170, 52, 9);
+        font-size: 1.5rem;
+        padding: 1rem;
+        text-align: start;
+        margin-left: 2rem;
+      "
+    >
+      Kategorije:
     </div>
     <div class="all-category">
       <CategoryBase
@@ -112,12 +125,14 @@ button {
   background-color: rgb(230, 91, 40);
   color: rgb(241, 241, 226);
   border: none;
-  padding: 1rem 1rem;
+  padding: 1rem 0.5rem;
   margin-right: 0.5rem;
   font-size: 1rem;
   width: 10rem;
   border-radius: 0.5rem;
   cursor: pointer;
+  font-family: cursive;
+  font-size: 1.1rem;
 }
 button:hover {
   transform: scale(1.01);

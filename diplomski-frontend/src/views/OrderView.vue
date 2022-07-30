@@ -48,7 +48,7 @@
       ></OrderBase>
 
       <div v-if="!ordersByUser.length" class="no-order">Nema narudžbi</div>
-      <div class="pagination">
+      <div v-if="ordersByUser.length" class="pagination">
         <div class="page" @click="prevPageByUser()">&#60;</div>
         <div
           class="page"
@@ -92,7 +92,7 @@
         :note="order.sellerNote"
       ></OrderBase>
       <div v-if="!ordersForUser.length" class="no-order">Nema narudžbi</div>
-      <div class="pagination">
+      <div v-if="ordersForUser.length" class="pagination">
         <div class="page" @click="prevPageForUser()">&#60;</div>
         <div
           class="page"
@@ -229,16 +229,17 @@ export default {
   align-items: center;
   font-size: 1.5rem;
   padding: 1rem;
+  color: rgb(170, 52, 9);
+  font-family: cursive;
+  font-weight: bold;
 }
 .order-form {
   position: absolute;
   left: 0;
   right: 0;
   background-color: white;
-
   border-radius: 5px;
   width: 40%;
-
   margin: auto;
   z-index: 2;
   top: 1rem;
@@ -258,11 +259,15 @@ export default {
   background: blanchedalmond;
   padding: 0.5rem;
   color: red;
+  justify-content: center;
+  font-family: cursive;
+  font-weight: bold;
 }
 .pagination {
   display: flex;
   justify-content: center;
   align-content: center;
+  margin-top: 0.5rem;
 }
 .page {
   border: 1px solid #e1e8ee;

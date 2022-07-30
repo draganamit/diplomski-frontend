@@ -384,6 +384,9 @@ export default {
   padding: 0 1rem;
   font-weight: 700;
   font-size: 1.3rem;
+  font-style: italic;
+  font-family: cursive;
+  color: rgb(170, 52, 9);
 }
 
 .order-div {
@@ -438,11 +441,12 @@ export default {
   text-align: start;
 }
 .form-text {
-  width: 7rem;
+  width: 8rem;
   padding: 0 0.5rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  font-family: cursive;
 }
 .from-input {
   display: flex;
@@ -528,5 +532,8 @@ b {
   text-align: left;
   color: red;
   background: transparent;
+}
+button {
+  font-family: cursive;
 }
 </style>
