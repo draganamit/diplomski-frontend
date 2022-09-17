@@ -9,7 +9,7 @@
           <th>Proizvod</th>
           <th>Kategorija</th>
           <th>Kupac</th>
-          <th>Proizvođač</th>
+          <th>Prodavac</th>
           <th>Količina</th>
           <th>Cijena</th>
           <th>Datum kupovine</th>

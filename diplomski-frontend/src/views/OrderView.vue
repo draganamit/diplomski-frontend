@@ -29,7 +29,7 @@
     >
       <div class="user-order">Vaše narudžbe:</div>
       <OrderBase
-        :typeUser="'Proizvođač:'"
+        :typeUser="'Prodavac:'"
         v-for="order in ordersByUser"
         :key="order.id"
         :productName="order.product.name"

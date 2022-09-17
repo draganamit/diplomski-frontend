@@ -49,7 +49,7 @@
             <div style="color: red; font-weight: bold">{{ price }}KM</div>
           </div>
           <div class="text-div">
-            <b style="font-family: cursive">Proizvođač:</b> {{ username }}
+            <b style="font-family: cursive">Prodavac:</b> {{ username }}
           </div>
           <div class="text-div">
             <b style="font-family: cursive">Lokacija:</b> {{ location }}

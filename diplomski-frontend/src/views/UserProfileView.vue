@@ -14,6 +14,13 @@
       @remove="confirmRemove()"
       :textQuestion="'Da li ste sugurni da želite da deaktivirate nalog?'"
     ></DeleteModal>
+
+    <DeleteModal
+      v-if="remove"
+      @close="closeWindow()"
+      @remove="removeProduct()"
+      :textQuestion="'Da li ste sugurni da želite da obrišete proizvod?'"
+    ></DeleteModal>
     <div class="user-information">
       <div class="user-div">
         <div
@@ -76,11 +83,22 @@
       <div>Proizvodi:</div>
     </div>
     <div class="show-products">
-      <ProductContainer></ProductContainer>
+      <ProductContainer
+        @openUpdate="openUpdateProduct"
+        @openRemove="openRemoveProduct"
+      ></ProductContainer>
     </div>
 
+    <div v-if="updateProduct" class="update-product" style="height: 80%">
+      <UpdateProduct
+        @closed="closeWindow()"
+        @save="closeGetProduct()"
+        :textButton="idProduct ? 'Sačuvaj izmjene' : 'Dodaj proizvod'"
+        :idProduct="idProduct"
+      ></UpdateProduct>
+    </div>
     <div
-      v-if="update || updatePassword || deactivate"
+      v-if="update || updatePassword || deactivate || updateProduct || remove"
       class="mask"
       @click.self="away()"
     ></div>
@@ -92,6 +110,7 @@ import ProductContainer from "@/components/Products/ProductContainer.vue";
 import UpdateUser from "@/components/UpdateUser.vue";
 import UpdatePassword from "@/components/UpdatePassword.vue";
 import DeleteModal from "@/components/DeleteModal.vue";
+import UpdateProduct from "@/components/UpdateProduct.vue";
 
 import { mapActions, mapState, mapMutations } from "vuex";
 
@@ -101,6 +120,7 @@ export default {
     UpdateUser,
     UpdatePassword,
     DeleteModal,
+    UpdateProduct,
   },
 
   data() {
@@ -108,10 +128,19 @@ export default {
       update: false,
       updatePassword: false,
       deactivate: false,
+      remove: false,
+      id: null, //id Producta za brisanje
+      updateProduct: false,
+      idProduct: null,
     };
   },
   methods: {
-    ...mapActions(["getUserById", "blockUser"]),
+    ...mapActions([
+      "getUserById",
+      "blockUser",
+      "deleteProduct",
+      "GetProductsForIndex",
+    ]),
     ...mapMutations(["setAuthAxiosHeader", "setUser", "setSearchModel"]),
 
     openUpdate() {
@@ -124,6 +153,8 @@ export default {
       this.update = false;
       this.updatePassword = false;
       this.deactivate = false;
+      this.remove = false;
+      this.updateProduct = false;
     },
     async save() {
       this.update = false;
@@ -142,6 +173,27 @@ export default {
       this.setAuthAxiosHeader("setAuthAxiosHeader", null);
       window.location = "/";
     },
+    closeWindow() {
+      this.updateProduct = false;
+      this.remove = false;
+    },
+    async removeProduct() {
+      await this.deleteProduct(this.id);
+      this.remove = false;
+      await this.GetProductsForIndex(this.searchModel);
+    },
+    openRemoveProduct(id) {
+      this.id = id;
+      this.remove = true;
+    },
+    async closeGetProduct() {
+      this.updateProduct = false;
+      await this.GetProductsForIndex(this.searchModel);
+    },
+    openUpdateProduct(productId = null) {
+      this.idProduct = productId;
+      this.updateProduct = true;
+    },
   },
   async created() {
     await this.getUserById(Number(this.$route.query.userId));
@@ -154,7 +206,7 @@ export default {
   computed: {
     ...mapState({
       userById: (state) => state.users.userById,
-
+      searchModel: (state) => state.products.searchModel,
       fullName(state) {
         return state.users.userById.name + " " + state.users.userById.surname;
       },
@@ -229,12 +281,10 @@ button {
   font-weight: bold;
 }
 .button-update-user:hover {
-  /* background-color: rgb(193 73 28); */
   background: #b6861f;
 }
 .button-update-password {
   width: 100%;
-  /* background-color: rgb(183 28 11); */
   cursor: pointer;
   background-color: rgb(230, 91, 40);
   font-weight: bold;
@@ -251,5 +301,18 @@ button {
 }
 .button-deactivate:hover {
   background: #db0202;
+}
+
+.update-product {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: white;
+  border-radius: 0.5rem;
+  width: 50%;
+  margin: auto;
+  z-index: 2;
 }
 </style>
