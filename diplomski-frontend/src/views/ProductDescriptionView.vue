@@ -49,7 +49,10 @@
             <div style="color: red; font-weight: bold">{{ price }}KM</div>
           </div>
           <div class="text-div">
-            <b style="font-family: cursive">Prodavac:</b> {{ username }}
+            <b style="font-family: cursive">Prodavac:</b>
+            <div style="cursor: pointer" @click="setIdUser(userProduct)">
+              {{ username }}
+            </div>
           </div>
           <div class="text-div">
             <b style="font-family: cursive">Lokacija:</b> {{ location }}
@@ -127,6 +130,16 @@ export default {
   },
   methods: {
     ...mapActions(["getProductById"]),
+    setIdUser(id) {
+      this.$router
+        .push({
+          name: "userprofile",
+          query: {
+            userId: id,
+          },
+        })
+        .catch();
+    },
     openOrderWindov() {
       this.order = true;
     },

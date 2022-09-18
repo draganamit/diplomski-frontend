@@ -12,7 +12,11 @@
       v-if="deactivate"
       @close="away()"
       @remove="confirmRemove()"
-      :textQuestion="'Da li ste sugurni da želite da deaktivirate nalog?'"
+      :textQuestion="
+        userById.isDeleted
+          ? 'Da li ste sugurni da želite da aktivirate nalog?'
+          : 'Da li ste sugurni da želite da deaktivirate nalog?'
+      "
     ></DeleteModal>
 
     <DeleteModal
@@ -67,14 +71,26 @@
             {{ userById.location }}
           </div>
         </div>
-        <button class="button-update-user" @click="openUpdate()">
+        <button
+          v-if="user.type == 0 || user.id == userById.id"
+          class="button-update-user"
+          @click="openUpdate()"
+        >
           Azuriraj lične podatke
         </button>
-        <button class="button-update-password" @click="openUpdatePassword()">
+        <button
+          v-if="user.type == 0 || user.id == userById.id"
+          class="button-update-password"
+          @click="openUpdatePassword()"
+        >
           Promijeni lozinku
         </button>
-        <button class="button-deactivate" @click="deleteUser()">
-          Deaktiviraj profil
+        <button
+          v-if="user.type == 0 || user.id == userById.id"
+          :class="userById.isDeleted ? 'button-activate' : 'button-deactivate'"
+          @click="deleteUser()"
+        >
+          {{ userById.isDeleted ? "Aktiviraj nalog" : "Deaktiviraj nalog" }}
         </button>
       </div>
     </div>
@@ -140,6 +156,7 @@ export default {
       "blockUser",
       "deleteProduct",
       "GetProductsForIndex",
+      "getUserByUser",
     ]),
     ...mapMutations(["setAuthAxiosHeader", "setUser", "setSearchModel"]),
 
@@ -159,6 +176,7 @@ export default {
     async save() {
       this.update = false;
       await this.getUserById(Number(this.$route.query.userId));
+      await this.getUserByUser();
     },
     savePassword() {
       this.updatePassword = false;
@@ -168,10 +186,14 @@ export default {
     },
     async confirmRemove() {
       await this.blockUser(Number(this.$route.query.userId));
-      localStorage.removeItem("token");
-      this.setUser(null);
-      this.setAuthAxiosHeader("setAuthAxiosHeader", null);
-      window.location = "/";
+      if (this.user.id == Number(this.$route.query.userId)) {
+        localStorage.removeItem("token");
+        this.setUser(null);
+        this.setAuthAxiosHeader("setAuthAxiosHeader", null);
+        window.location = "/";
+      }
+      this.deactivate = false;
+      await this.getUserById(Number(this.$route.query.userId));
     },
     closeWindow() {
       this.updateProduct = false;
@@ -210,6 +232,7 @@ export default {
       fullName(state) {
         return state.users.userById.name + " " + state.users.userById.surname;
       },
+      user: (state) => state.users.user,
     }),
   },
 };
@@ -302,7 +325,16 @@ button {
 .button-deactivate:hover {
   background: #db0202;
 }
-
+.button-activate {
+  width: 100%;
+  background-color: rgb(135 132 132);
+  cursor: pointer;
+  background: rgb(8, 196, 33);
+  font-weight: bold;
+}
+.button-activate:hover {
+  background: #04a817;
+}
 .update-product {
   position: absolute;
   left: 0;

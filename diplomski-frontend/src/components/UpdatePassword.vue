@@ -101,18 +101,22 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
       model: {
         oldPassword: "",
         newPassword: "",
+        userId: null,
       },
       confirmPassword: "",
       incorrectPassword: false,
       showError: false,
     };
+  },
+  created() {
+    this.model.userId = this.userById.id;
   },
   methods: {
     ...mapActions(["updatePassword"]),
@@ -133,6 +137,11 @@ export default {
 
       this.$emit("save");
     },
+  },
+  computed: {
+    ...mapState({
+      userById: (state) => state.users.userById,
+    }),
   },
 };
 </script>

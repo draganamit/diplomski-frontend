@@ -103,7 +103,7 @@ export default {
   color: rgb(241, 241, 226);
   padding: 0.5rem;
   margin-right: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: bold;
   font-style: italic;
   border-radius: 5px;

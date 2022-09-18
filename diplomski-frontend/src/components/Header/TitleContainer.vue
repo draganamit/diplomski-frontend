@@ -1,22 +1,30 @@
 <template>
   <div style="display: flex; align-items: center">
     <div class="title_line">
-      <div
-        class="title"
-        @click="goToHome()"
-        style="margin-left: 5rem; cursor: pointer"
-      >
-        <!-- Naslov -->
-
-        <img src="@/assets/logo2d.png" alt="" />
+      <div class="title" @click="goToHome()" style="cursor: pointer">
+        <img src="@/assets/logodp.png" alt="" />
       </div>
+      <h1
+        style="
+          font-size: 2.2rem;
+          font-weight: bold;
+          font-style: italic;
+          font-family: cursive;
+          color: rgb(170, 52, 9);
+          text-shadow: 1px 1px 1px #e65b28;
+          letter-spacing: 0.77mm;
+          margin: 0 auto;
+        "
+      >
+        {{ Title }}
+      </h1>
       <div class="buttons" v-if="!user">
         <button class="btnPrijava" @click="loginOpen()">Prijavi se</button>
         <button class="btnRegistracija" @click="registrationOpen()">
           Registruj se
         </button>
       </div>
-      <div style="display: flex; margin-left: auto" v-if="user">
+      <div style="display: flex" v-if="user">
         <UserName @logout="LogOut()"></UserName>
       </div>
     </div>
@@ -106,8 +114,37 @@ export default {
   computed: {
     ...mapState({
       user: (state) => state.users.user,
+      userById: (state) => state.users.userById,
       searchModel: (state) => state.products.searchModel,
     }),
+    Title() {
+      switch (this.$route.name) {
+        case "home":
+          return "Dobro došli ";
+        case "users":
+          return "Korisnici";
+        case "category":
+          return "Kategorije";
+        case "report":
+          return "Izvještaj";
+        case "productdescription":
+          return "Detalji proizvoda";
+        case "orderproduct":
+          return "Narudžbe";
+        case "product":
+          return "Proizvodi";
+        case "userprofile":
+          if (this.user && this.userById) {
+            if (this.user.id == this.userById.id) {
+              return "Vaš nalog";
+            } else {
+              return `Nalog: ${this.userById.name} ${this.userById.surname}`;
+            }
+          } else return "";
+        default:
+          return "";
+      }
+    },
   },
 };
 </script>
