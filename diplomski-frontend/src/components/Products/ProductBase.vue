@@ -11,7 +11,9 @@
         <div style="text-align: start; padding-right: 0" class="name">
           {{ name }}
         </div>
-        <div style="padding-left: 0" class="price">{{ price }} KM</div>
+        <div style="padding-left: 0" class="price">
+          {{ Number(price).toFixed(2) }} KM
+        </div>
       </div>
       <div
         style="

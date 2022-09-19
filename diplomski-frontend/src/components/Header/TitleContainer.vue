@@ -6,13 +6,13 @@
       </div>
       <h1
         style="
-          font-size: 2.2rem;
+          font-size: 2.3rem;
           font-weight: bold;
           font-style: italic;
           font-family: cursive;
           color: rgb(170, 52, 9);
           text-shadow: 1px 1px 1px #e65b28;
-          letter-spacing: 0.77mm;
+          letter-spacing: 1.77mm;
           margin: 0 auto;
         "
       >

@@ -46,7 +46,9 @@
           </div>
           <div class="text-div">
             <b style="font-family: cursive">Cijena:</b>
-            <div style="color: red; font-weight: bold">{{ price }}KM</div>
+            <div style="color: red; font-weight: bold">
+              {{ Number(price).toFixed(2) }} KM
+            </div>
           </div>
           <div class="text-div">
             <b style="font-family: cursive">Prodavac:</b>

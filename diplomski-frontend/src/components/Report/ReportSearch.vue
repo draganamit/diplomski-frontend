@@ -36,10 +36,19 @@
     <div class="input-container">
       <b> Datum </b>
       <div class="date-container">
-        <span> od </span>
-        <input type="date" v-model="reportSearchModel.dateFrom" />
-        <span> do </span>
-        <input type="date" v-model="reportSearchModel.dateTo" />
+        <date-picker
+          placeholder="od"
+          v-model="reportSearchModel.dateFrom"
+          format="DD.MM.YYYY"
+        >
+        </date-picker>
+
+        <date-picker
+          placeholder="od"
+          v-model="reportSearchModel.dateTo"
+          format="DD.MM.YYYY"
+        >
+        </date-picker>
       </div>
     </div>
 
@@ -86,8 +95,10 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-
+import DatePicker from "vue2-datepicker";
+import "vue2-datepicker/index.css";
 export default {
+  components: { DatePicker },
   data() {
     return {
       reportSearchModel: {
@@ -183,6 +194,11 @@ export default {
 };
 </script>
 
+<style>
+.mx-datepicker > .mx-input-wrapper > input {
+  border: none;
+}
+</style>
 <style scoped>
 .container {
   padding: 1rem;
@@ -208,6 +224,7 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
+  gap: 5px;
 }
 .date-container > span {
   margin: 0 0.5rem;

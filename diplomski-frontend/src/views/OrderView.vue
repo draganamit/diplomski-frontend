@@ -25,6 +25,7 @@
         background: blanchedalmond;
         padding-right: 2rem;
         height: fit-content;
+        border-radius: 30px;
       "
     >
       <div class="user-order">Vaše narudžbe:</div>
@@ -69,6 +70,7 @@
         background: blanchedalmond;
         padding-right: 2rem;
         height: fit-content;
+        border-radius: 30px;
       "
     >
       <div class="user-order">Narudžbe:</div>

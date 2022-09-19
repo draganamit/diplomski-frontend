@@ -6,7 +6,7 @@ import store from './store'
 import { ValidationProvider, ValidationObserver } from "vee-validate";
 
 
-
+import 'vue2-datepicker/locale/sr';
 import "@/assets/icons/style.css"
 
 

@@ -15,7 +15,9 @@
           <div class="product-information">
             <div class="text">
               <b>Cijena:</b>
-              <div style="color: red; font-weight: bold">{{ price }}KM</div>
+              <div style="color: red; font-weight: bold">
+                {{ Number(price).toFixed(2) }} KM
+              </div>
             </div>
 
             <div class="text" v-if="forConfirm">
@@ -24,7 +26,7 @@
             <div class="text" v-if="forConfirm">
               <b>Ukupna cijena:</b>
               <div style="color: red; font-weight: bold">
-                {{ sumConfirm }}KM
+                {{ Number(sumConfirm).toFixed(2) }} KM
               </div>
             </div>
           </div>
@@ -194,7 +196,9 @@
           <div class="sum">
             <div class="text">
               <b>Ukupno:</b>
-              <div style="color: red; font-weight: bold">{{ sum }}KM</div>
+              <div style="color: red; font-weight: bold">
+                {{ Number(sum).toFixed(2) }} KM
+              </div>
             </div>
           </div>
           <div class="order-button" style="margin-left: auto">
