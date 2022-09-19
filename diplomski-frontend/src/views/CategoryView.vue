@@ -19,7 +19,7 @@
         <button @click="openUpdateCategory()">Dodaj kategoriju</button>
       </div>
     </div>
-    <div
+    <!-- <div
       style="
         font-weight: bold;
         font-style: italic;
@@ -32,7 +32,7 @@
       "
     >
       Kategorije:
-    </div>
+    </div> -->
     <div class="all-category">
       <CategoryBase
         v-for="(category, key) in categories"

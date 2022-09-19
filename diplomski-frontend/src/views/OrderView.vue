@@ -153,7 +153,7 @@ export default {
     },
     async removeOrder(id) {
       await this.deleteOrder(id);
-      await this.getAllOrdersByUser();
+      await this.getAllOrdersByUser(this.pageModelByUser);
     },
 
     async prevPageByUser() {

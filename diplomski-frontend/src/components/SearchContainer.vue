@@ -2,7 +2,7 @@
   <div class="contaner">
     <input
       type="text"
-      placeholder="Ukucaj proizvod"
+      placeholder="Pretraži proizvode"
       v-model="model.name"
       @keyup.enter="getProduct()"
     />

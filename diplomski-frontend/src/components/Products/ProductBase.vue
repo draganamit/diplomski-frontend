@@ -111,12 +111,15 @@ export default {
   padding-bottom: 0.5rem;
   position: relative;
   cursor: pointer;
+  border-radius: 10px;
 }
 .container-product:hover {
-  /* background: #f4d9cb; */
+  /*box-shadow: inset 0px 0px 9px 0px #e7905a8c;*/
+  box-shadow: 0px 0px 9px 0px #e7905a8c;
 }
 .image {
   height: 8rem;
+  margin-top: 5px;
 }
 
 .image > img {

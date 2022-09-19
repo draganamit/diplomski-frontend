@@ -12,7 +12,7 @@
         <button @click="openUpdateProduct()">Dodaj proizvod</button>
       </div>
     </div>
-    <div
+    <!-- <div
       style="
         font-weight: bold;
         font-style: italic;
@@ -25,7 +25,7 @@
       "
     >
       Proizvodi:
-    </div>
+    </div> -->
     <div class="show-products">
       <ProductContainer
         @openUpdate="openUpdateProduct"

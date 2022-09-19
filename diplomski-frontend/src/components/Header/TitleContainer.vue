@@ -2,7 +2,7 @@
   <div style="display: flex; align-items: center">
     <div class="title_line">
       <div class="title" @click="goToHome()" style="cursor: pointer">
-        <img src="@/assets/logodp.png" alt="" />
+        <img src="@/assets/dplogo1.png" alt="" />
       </div>
       <h1
         style="
@@ -120,7 +120,7 @@ export default {
     Title() {
       switch (this.$route.name) {
         case "home":
-          return "Dobro došli ";
+          return " ";
         case "users":
           return "Korisnici";
         case "category":

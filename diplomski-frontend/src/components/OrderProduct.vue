@@ -210,7 +210,11 @@
             </button>
           </div>
           <div class="order-button">
-            <button @click="changeConfrim()" type="button" class="btnOrder">
+            <button
+              @click="changeConfrim()"
+              type="button"
+              :class="blockConfirm ? 'block-confirm' : 'btnOrder'"
+            >
               Potvrdi
             </button>
           </div>
@@ -302,6 +306,15 @@ export default {
       },
       showError: false,
       remove: false,
+      pageModelForUser: {
+        pageNum: 1,
+        pageSize: 4,
+      },
+      pageModelByUser: {
+        pageNum: 1,
+        pageSize: 4,
+      },
+      blockConfirm: false,
     };
   },
   computed: {
@@ -314,12 +327,21 @@ export default {
     ...mapState({
       user: (state) => state.users.user,
     }),
+    ordersByUser: (state) => state.orders.ordersByUser,
+    ordersForUser: (state) => state.orders.ordersForUser,
   },
   async created() {
     await this.getUserByUser();
   },
   methods: {
-    ...mapActions(["getUserByUser", "addOrder", "setConfirm", "refuseOrder"]),
+    ...mapActions([
+      "getUserByUser",
+      "addOrder",
+      "setConfirm",
+      "refuseOrder",
+      "getAllOrdersByUser",
+      "getAllOrdersForUser",
+    ]),
     closeWindowOrder() {
       this.$emit("closed");
     },
@@ -344,6 +366,8 @@ export default {
       if (this.orderId) {
         this.modelConfirm.confirm = true;
         await this.setConfirm(this.modelConfirm);
+        await this.getAllOrdersByUser(this.pageModelByUser);
+        await this.getAllOrdersForUser(this.pageModelForUser);
         this.$emit("save");
       }
     },
@@ -351,8 +375,11 @@ export default {
       if (this.remove == true) {
         await this.refuseOrder(this.modelRefuse);
 
+        await this.getAllOrdersByUser(this.pageModelByUser);
+        await this.getAllOrdersForUser(this.pageModelForUser);
         this.$emit("save");
       }
+      this.blockConfirm = true;
       this.remove = true;
     },
   },
@@ -535,5 +562,18 @@ b {
 }
 button {
   font-family: cursive;
+}
+.block-confirm {
+  /*color: rgb(241, 241, 226);*/
+  padding: 1rem 1rem;
+  font-size: 1rem;
+  width: 10rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  border: none;
+  background: #b7b7b7;
+  color: #8f8b8b;
+  pointer-events: none;
 }
 </style>

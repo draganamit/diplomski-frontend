@@ -44,6 +44,10 @@ const actions ={
     {
         await rootState.authAxios.put("Order/SetRefuseOrder",newRefuse);
     },
+    async deleteOrder({rootState}, id)
+    {
+        await rootState.baseAxios.delete("Order/"+id);
+    },
     async searchOrders({rootState, commit}, reportSearchModel)
     {
         const response = await rootState.baseAxios.post("Order/GetOrdersForIndex", reportSearchModel);
