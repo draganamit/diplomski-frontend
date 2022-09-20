@@ -110,7 +110,7 @@ export default {
   background-color: white;
   display: flex;
   flex-direction: column;
-  padding-bottom: 0.5rem;
+  padding-bottom: 1rem;
   position: relative;
   cursor: pointer;
   border-radius: 10px;
