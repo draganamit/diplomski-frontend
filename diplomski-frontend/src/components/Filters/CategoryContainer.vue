@@ -1,6 +1,8 @@
 <template>
   <div class="container">
-    <div class="header">Kategorije</div>
+    <div class="header">
+      <div style="width: 100%">Kategorije</div>
+    </div>
     <div
       @click="getProductByCategory(null)"
       style="padding: 0.4rem"
@@ -55,14 +57,6 @@ export default {
     getProductByCategory(id) {
       this.model.categoryId = id;
       this.$emit("search");
-      // let query = Object.assign({}, this.$route.query);
-      // query.categoryId = id;
-      // console.log("postavljamo query:", query);
-      // this.$router
-      //   .push({
-      //     query: query,
-      //   })
-      //   .catch();
     },
   },
 };
@@ -72,8 +66,6 @@ export default {
 .container {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid gray; */
-  /* margin: 0.5rem 0; */
 }
 .header {
   background-color: rgb(230, 91, 40);
@@ -81,6 +73,7 @@ export default {
   padding: 0.5rem;
   font-weight: bold;
   font-style: italic;
+  display: flex;
 }
 .category {
   cursor: pointer;
@@ -92,15 +85,20 @@ export default {
   transition: all 0.3s linear;
 }
 .category:hover > div {
-  /* background: rgb(231, 144, 90); */
-  /* color: white; */
-  /* transform: scale(1.2); */
   color: rgb(230, 91, 40);
   font-weight: bold;
 }
 .selected {
-  /* background: rgb(231, 179, 90); */
   background: rgb(231, 144, 90);
   color: white;
+}
+.close-menu {
+  display: none;
+  cursor: pointer;
+}
+@media (max-width: 1024px) {
+  .close-menu {
+    display: block;
+  }
 }
 </style>

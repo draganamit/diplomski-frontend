@@ -14,12 +14,12 @@
         :productUserId="product.user.id"
         :productOnState="product.state == 0 ? false : true"
       ></ProductBase>
-      <div
-        v-if="!products.length"
-        :class="$route.path == '/userprofile' ? 'no-product' : 'no-product-new'"
-      >
-        Nema proizvoda na stanju.
-      </div>
+    </div>
+    <div
+      v-if="!products.length"
+      :class="$route.path == '/userprofile' ? 'no-product' : 'no-product-new'"
+    >
+      Nema proizvoda na stanju.
     </div>
     <div class="pagination" v-if="products.length && pageCount != 0">
       <!-- <div class="pagination" v-if="products.length && $route.fullPath != '/'"> -->
@@ -140,12 +140,13 @@ export default {
   margin: 0.5rem 1rem;
   padding: 0.5rem;
   display: grid;
-  gap: 3rem 3rem;
+  gap: 3rem;
   grid-template-columns: repeat(4, 1fr);
 }
-@media (max-width: 1100px) {
+@media (max-width: 1280px) {
   .content-products {
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 }
 @media (max-width: 900px) {
@@ -188,28 +189,26 @@ export default {
 }
 .no-product {
   color: red;
-
   width: 80%;
-  position: absolute;
+  /* position: absolute; */
   font-family: monospace;
   font-style: italic;
   font-weight: bold;
   font-size: 1.6rem;
-
   padding: 1rem;
-  margin-left: 7rem;
+  margin: 0 auto;
 }
+
 .no-product-new {
   color: red;
-
-  width: 60%;
-  position: absolute;
+  padding: 0;
+  left: 0;
+  right: 0;
+  /* position: absolute; */
   font-family: monospace;
   font-style: italic;
   font-weight: bold;
   font-size: 1.6rem;
-  margin-top: 3rem;
-  padding: 1rem;
-  margin-left: 7rem;
+  margin: 3rem auto;
 }
 </style>

@@ -111,6 +111,31 @@ export default {
   padding: 3rem 20rem;
   flex-direction: column;
 }
+@media (max-width: 1536px) {
+  .container-category {
+    padding: 3rem 15rem;
+  }
+}
+@media (max-width: 1280px) {
+  .container-category {
+    padding: 3rem 10rem;
+  }
+}
+@media (max-width: 1024px) {
+  .container-category {
+    padding: 3rem 7rem;
+  }
+}
+@media (max-width: 768px) {
+  .container-category {
+    padding: 3rem 5rem;
+  }
+}
+@media (max-width: 640px) {
+  .container-category {
+    padding: 3rem 3rem;
+  }
+}
 .add {
   display: flex;
   align-items: center;

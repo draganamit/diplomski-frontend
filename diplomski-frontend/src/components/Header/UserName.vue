@@ -90,6 +90,7 @@ export default {
   cursor: pointer;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .namesurname:hover {
   transform: scale(1.01);

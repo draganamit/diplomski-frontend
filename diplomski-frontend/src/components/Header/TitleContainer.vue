@@ -24,7 +24,7 @@
           Registruj se
         </button>
       </div>
-      <div style="display: flex" v-if="user">
+      <div style="display: flex; margin-left: auto" v-if="user">
         <UserName @logout="LogOut()"></UserName>
       </div>
     </div>
@@ -158,22 +158,7 @@ export default {
   background: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
-.prijava {
-  position: absolute;
-  left: 0;
-  right: 0;
-  background-color: white;
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 20%;
-  margin: auto;
-  z-index: 2;
-}
-@media (max-width: 1024px) {
-  .prijava {
-    width: 80%;
-  }
-}
+
 .top-1 {
   top: 1rem;
 }
@@ -188,6 +173,11 @@ export default {
   box-shadow: 5px 6px 5px 0px rgb(0 0 0 / 75%);
   -webkit-box-shadow: 1px 1px 5px 0px rgb(0 0 0 / 20%);
   -moz-box-shadow: 5px 6px 5px 0px rgba(0, 0, 0, 0.75);
+}
+@media (max-width: 1140px) {
+  .title_line {
+    padding: 0.5rem 3rem;
+  }
 }
 .buttons {
   margin-left: auto;
@@ -301,5 +291,10 @@ button:hover {
   bottom: 0;
   display: flex;
   align-items: center;
+}
+@media (max-width: 900px) {
+  h1 {
+    display: none;
+  }
 }
 </style>

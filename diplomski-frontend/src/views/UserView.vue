@@ -115,6 +115,31 @@ export default {
   padding: 3rem 12rem;
   flex-direction: column;
 }
+@media (max-width: 1536px) {
+  .user-container {
+    padding: 3rem 10rem;
+  }
+}
+@media (max-width: 1280px) {
+  .user-container {
+    padding: 3rem 8rem;
+  }
+}
+@media (max-width: 1024px) {
+  .user-container {
+    padding: 3rem 5rem;
+  }
+}
+@media (max-width: 768px) {
+  .user-container {
+    padding: 3rem 3rem;
+  }
+}
+@media (max-width: 640px) {
+  .user-container {
+    padding: 3rem 1rem;
+  }
+}
 .users-title {
   display: flex;
   align-items: center;

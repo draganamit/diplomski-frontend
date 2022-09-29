@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="filters">
+    <div class="filters" :class="showMenu ? 'absolute-menu' : ''">
       <CategoryContainer
         v-model="model"
         @search="$emit('search')"
@@ -21,6 +21,8 @@
 import CategoryContainer from "./CategoryContainer.vue";
 import PriceContainer from "./PriceContainer.vue";
 import LocationContainer from "./LocationContainer.vue";
+import { mapState } from "vuex";
+
 export default {
   components: { CategoryContainer, PriceContainer, LocationContainer },
 
@@ -31,6 +33,9 @@ export default {
     },
   },
   computed: {
+    ...mapState({
+      showMenu: (state) => state.showMenu,
+    }),
     model: {
       get() {
         return this.value;
@@ -48,8 +53,17 @@ export default {
   display: flex;
   flex-direction: column;
   width: 25rem;
-  /* border: 1px solid grey; */
-  /* padding: 0.5rem; */
   background-color: blanchedalmond;
+}
+@media (max-width: 1024px) {
+  .filters {
+    display: none;
+  }
+}
+.absolute-menu {
+  position: absolute;
+  top: 4rem;
+  display: block;
+  z-index: 10;
 }
 </style>

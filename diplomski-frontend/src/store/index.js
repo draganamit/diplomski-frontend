@@ -27,11 +27,13 @@ const baseAxios = axios.create ({
 export default new Vuex.Store({
   state: {
     authAxios:authAxios,
-    baseAxios:baseAxios
+    baseAxios:baseAxios,
+    showMenu: false
   },
   mutations:
   {
-    setAuthAxiosHeader: (state, header) => state.authAxios.defaults.headers["Authorization"] = header
+    setAuthAxiosHeader: (state, header) => state.authAxios.defaults.headers["Authorization"] = header,
+    toggleManu: (state) => state.showMenu = !state.showMenu,
   },
   modules: {
       users,

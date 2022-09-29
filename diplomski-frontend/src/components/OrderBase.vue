@@ -1,51 +1,56 @@
 <template>
   <div class="order-base">
-    <div style="display: flex; flex-direction: column; align-items: flex-start">
-      <div class="text-order-product">
-        <b>{{ productName }}</b>
-      </div>
-      <div class="text-order-product"><b>Količina:</b> {{ quantity }}</div>
-      <div class="text-order-product">
-        <b>{{ typeUser }} </b> {{ userName }}
-      </div>
+    <div style="display: flex">
       <div
-        v-if="note != null && note != '' && !confirmable"
-        style="color: red; position: absolute; bottom: 0"
-        class="text-order-product"
+        style="display: flex; flex-direction: column; align-items: flex-start"
       >
-        Napomena: {{ note }}
-      </div>
-    </div>
-    <div class="order-state" style="flex-direction: column">
-      <div
-        style="margin-bottom: 0.2rem"
-        class="state"
-        :class="
-          confirmable
-            ? isConfirm
-              ? 'green'
-              : note == null
-              ? 'yellow'
-              : 'red'
-            : isConfirm
-            ? 'green'
-            : note == null
-            ? 'grey'
-            : 'red'
-        "
-        @click.stop="confirmOpen()"
-      >
-        {{ textButton }}
+        <div class="text-order-product">
+          <b>{{ productName }}</b>
+        </div>
+        <div class="text-order-product"><b>Količina:</b> {{ quantity }}</div>
+        <div class="text-order-product">
+          <b>{{ typeUser }} </b> {{ userName }}
+        </div>
       </div>
 
-      <div
-        style="cursor: pointer"
-        class="state"
-        v-if="!isConfirm && !confirmable && note == null"
-        @click.stop="remove()"
-      >
-        Opozovi
+      <div class="order-state" style="flex-direction: column">
+        <div
+          style="margin-bottom: 0.2rem"
+          class="state"
+          :class="
+            confirmable
+              ? isConfirm
+                ? 'green'
+                : note == null
+                ? 'yellow'
+                : 'red'
+              : isConfirm
+              ? 'green'
+              : note == null
+              ? 'grey'
+              : 'red'
+          "
+          @click.stop="confirmOpen()"
+        >
+          {{ textButton }}
+        </div>
+
+        <div
+          style="cursor: pointer"
+          class="state"
+          v-if="!isConfirm && !confirmable && note == null"
+          @click.stop="remove()"
+        >
+          Opozovi
+        </div>
       </div>
+    </div>
+    <div
+      v-if="note != null && note != '' && !confirmable"
+      style="color: red; bottom: 0"
+      class="text-order-product"
+    >
+      Napomena: {{ note }}
     </div>
   </div>
 </template>
@@ -100,6 +105,7 @@ export default {
 <style scoped>
 .order-base {
   display: flex;
+  flex-direction: column;
   padding: 1rem 0.5rem;
   font-family: cursive;
   border-radius: 1rem;
@@ -113,6 +119,7 @@ export default {
 .text-order-product {
   padding: 0.5rem 2rem;
   font-size: 1.2rem;
+  text-align: left;
 }
 .order-state {
   display: flex;

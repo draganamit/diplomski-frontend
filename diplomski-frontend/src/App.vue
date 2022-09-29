@@ -42,6 +42,26 @@ nav a.router-link-exact-active {
 body {
   margin: 0;
 }
+@media (max-width: 1536px) {
+  body {
+    font-size: 15px;
+  }
+}
+@media (max-width: 1280px) {
+  body {
+    font-size: 14px;
+  }
+}
+@media (max-width: 1024px) {
+  body {
+    font-size: 13px;
+  }
+}
+@media (max-width: 768px) {
+  body {
+    font-size: 12px;
+  }
+}
 
 input {
   box-sizing: border-box;

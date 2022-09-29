@@ -1,5 +1,9 @@
 <template>
-  <div class="contaner">
+  <div
+    class="contaner"
+    :class="{ 'menu-trasnalte': showMenu, 'menu-translate-out': !showMenu }"
+  >
+    <i class="menu icon-menu" @click="toggleManu"></i>
     <input
       type="text"
       placeholder="Pretraži proizvode"
@@ -11,6 +15,8 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
+
 export default {
   props: {
     value: {
@@ -24,6 +30,9 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      showMenu: (state) => state.showMenu,
+    }),
     model: {
       get() {
         return this.value;
@@ -34,16 +43,9 @@ export default {
     },
   },
   methods: {
+    ...mapMutations(["toggleManu"]),
     getProduct() {
       this.$emit("search");
-
-      // let query = Object.assign({}, this.$route.query);
-      // query.name = this.nameProduct;
-      // this.$router
-      //   .push({
-      //     query: query,
-      //   })
-      //   .catch();
     },
   },
 };
@@ -55,8 +57,41 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 1px solid grey; */
   height: 4.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+@media (max-width: 1024px) {
+  .contaner {
+    justify-content: space-between;
+  }
+}
+.menu {
+  padding: 0.7rem 1rem;
+  /* background: white; */
+  display: none;
+  cursor: pointer;
+
+  background: rgb(230, 91, 40);
+  color: white;
+  /* transform: translateX(-2rem); */
+}
+.menu-trasnalte {
+  transform: translateX(-2rem);
+  transition: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+.menu-trasnalte-out {
+  transform: translateX(0.1rem);
+  transition: all;
+  transition-duration: 300ms;
+  transition-timing-function: linear;
+}
+@media (max-width: 1024px) {
+  .menu {
+    display: block;
+  }
 }
 input {
   padding: 0.7rem 1rem;
@@ -87,4 +122,9 @@ button:hover {
   transform: scale(1.01);
   background-color: rgb(193 73 28);
 }
+/* @media (min-width: 640px) { ... }
+md	768px	@media (min-width: 768px) { ... }
+lg	1024px	@media (min-width: 1024px) { ... }
+xl	1280px	@media (min-width: 1280px) { ... }
+2xl	1536px	@media (min-width: 1536px) { ... }| */
 </style>

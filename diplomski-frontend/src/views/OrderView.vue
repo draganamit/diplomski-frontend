@@ -223,8 +223,25 @@ export default {
 <style scoped>
 .order {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   padding: 3rem 6rem;
   gap: 5rem;
+}
+@media (max-width: 1024px) {
+  .order {
+    padding: 3rem 4rem;
+  }
+}
+@media (max-width: 800px) {
+  .order {
+    padding: 3rem 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .order {
+    padding: 3rem 1rem;
+  }
 }
 .user-order {
   display: flex;
@@ -242,6 +259,7 @@ export default {
   background-color: white;
   border-radius: 5px;
   width: 40%;
+  min-width: 450px;
   margin: auto;
   z-index: 2;
   top: 1rem;

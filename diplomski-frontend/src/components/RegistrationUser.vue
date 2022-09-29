@@ -195,7 +195,7 @@ export default {
   background-color: white;
   border: 1px solid black;
   border-radius: 5px;
-  width: 20%;
+  width: 400px;
   margin: auto;
   z-index: 2;
 }

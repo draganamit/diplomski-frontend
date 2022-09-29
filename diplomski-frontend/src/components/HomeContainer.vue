@@ -65,6 +65,7 @@ export default {
 
 <style scoped>
 .main {
+  position: relative;
   display: flex;
   width: 100%;
   background: #ffebcde3;
