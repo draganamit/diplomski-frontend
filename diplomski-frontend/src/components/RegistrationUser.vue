@@ -1,6 +1,6 @@
 <template>
   <ValidationObserver ref="observer">
-    <div class="prijava top-1">
+    <div style="border: none" class="prijava top-1">
       <div class="cls">
         <div @click="closeWindowRegistration()">X</div>
       </div>

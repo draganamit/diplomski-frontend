@@ -23,7 +23,7 @@ extend("required", {
 });
 extend("confirmed", {
   ...confirmed,
-  message: "Lozinka i Potvrdjena lozinka nisu iste"
+  message: "Lozinka i Potvrdjena lozinka moraju biti jednake"
 });
 extend("email", {
   ...email,

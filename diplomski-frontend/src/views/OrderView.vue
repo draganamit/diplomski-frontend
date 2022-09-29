@@ -1,5 +1,5 @@
 <template>
-  <div class="oreder">
+  <div class="order">
     <div v-if="order" class="order-form">
       <OrderProduct
         @closed="away()"
@@ -19,7 +19,6 @@
     </div>
     <div
       style="
-        margin-right: 5rem;
         width: 40rem;
         padding: 1rem;
         background: blanchedalmond;
@@ -222,9 +221,10 @@ export default {
 </script>
 
 <style scoped>
-.oreder {
+.order {
   display: flex;
   padding: 3rem 6rem;
+  gap: 5rem;
 }
 .user-order {
   display: flex;

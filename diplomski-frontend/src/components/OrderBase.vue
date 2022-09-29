@@ -10,7 +10,7 @@
       </div>
       <div
         v-if="note != null && note != '' && !confirmable"
-        style="color: red"
+        style="color: red; position: absolute; bottom: 0"
         class="text-order-product"
       >
         Napomena: {{ note }}
@@ -107,6 +107,8 @@ export default {
   margin-top: 0.8rem;
   width: 100%;
   justify-content: space-between;
+  position: relative;
+  padding-bottom: 2rem;
 }
 .text-order-product {
   padding: 0.5rem 2rem;
