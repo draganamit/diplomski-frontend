@@ -156,7 +156,7 @@
             </div>
 
             <div v-if="forOrder">
-              <div style="align-items: start" class="form-text">
+              <div style="align-items: center" class="form-text">
                 Napomena<br />(nije obavezno)
               </div>
               <textarea
@@ -165,10 +165,11 @@
                 name="Text1"
                 rows="3"
                 class="from-input"
+                style="width: 12.3rem"
               ></textarea>
             </div>
             <div v-if="forConfirm && buyerNote != '' && buyerNote != null">
-              <div style="align-items: start" class="form-text">
+              <div style="align-items: center" class="form-text">
                 Napomena<br />
               </div>
               <textarea
@@ -177,6 +178,7 @@
                 name="Text1"
                 rows="3"
                 class="from-input"
+                style="width: 12.3rem"
               ></textarea>
             </div>
             <div v-if="forConfirm && remove">

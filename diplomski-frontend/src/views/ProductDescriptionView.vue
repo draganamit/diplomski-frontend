@@ -11,7 +11,7 @@
         @save="away()"
       ></OrderProduct>
     </div>
-    <div style="display: flex; width: 100%">
+    <div class="description-content">
       <div class="image-div">
         <gallery
           :images="imagesArray"
@@ -160,9 +160,45 @@ export default {
 <style scoped>
 .description-div {
   display: flex;
-  /* border: 1px solid grey; */
   align-items: center;
   padding: 2rem 10rem;
+}
+@media (max-width: 1536px) {
+  .description-div {
+    padding: 2rem 8rem;
+  }
+}
+@media (max-width: 1280px) {
+  .description-div {
+    padding: 2rem 4rem;
+  }
+}
+@media (max-width: 1024px) {
+  .description-div {
+    padding: 2rem 6rem;
+  }
+}
+@media (max-width: 768px) {
+  .description-div {
+    padding: 2rem 5rem;
+  }
+}
+@media (max-width: 640px) {
+  .description-div {
+    padding: 2rem 3rem;
+  }
+}
+.description-content {
+  display: flex;
+
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 1024px) {
+  .description-content {
+    flex-wrap: wrap;
+  }
 }
 .image-div {
   float: left;
@@ -194,6 +230,7 @@ export default {
   display: flex;
   justify-content: flex-end;
   margin-left: auto;
+  margin-top: 0.5rem;
 }
 button {
   background-color: rgb(230, 91, 40);
@@ -225,7 +262,7 @@ button:hover {
   left: 0;
   right: 0;
   background-color: white;
-
+  min-width: 450px;
   border-radius: 5px;
   width: 40%;
   margin: auto;
@@ -263,5 +300,8 @@ button:hover {
 }
 b {
   margin-right: 0.5rem;
+}
+#blueimp-gallery {
+  width: 100%;
 }
 </style>

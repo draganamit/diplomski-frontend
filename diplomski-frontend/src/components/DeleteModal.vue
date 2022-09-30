@@ -39,7 +39,7 @@ export default {
   left: 0;
   right: 0;
   background-color: white;
-
+  min-width: 450px;
   border-radius: 0.5rem;
   width: 30%;
   margin: auto;

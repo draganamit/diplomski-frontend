@@ -14,7 +14,7 @@
       </select>
     </div>
 
-    <div class="input-container">
+    <div class="input-container col-span-category">
       <b>Kategorija</b>
       <select
         name="product"
@@ -33,7 +33,7 @@
       </select>
     </div>
 
-    <div class="input-container">
+    <div class="input-container col-span">
       <b> Datum </b>
       <div class="date-container">
         <date-picker
@@ -208,6 +208,27 @@ export default {
   gap: 1rem;
   font-family: cursive;
 }
+@media (max-width: 1290px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0;
+  }
+}
+@media (max-width: 1290px) {
+  .col-span {
+    grid-column: span 3 / span 3;
+  }
+}
+@media (max-width: 900px) {
+  .col-span-category {
+    grid-column: span 3 / span 3;
+  }
+}
 
 .input-container {
   display: flex;
@@ -224,7 +245,7 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 5px;
+  gap: 1rem;
 }
 .date-container > span {
   margin: 0 0.5rem;
@@ -235,7 +256,7 @@ b {
 .radio-container {
   display: flex;
   align-items: center;
-
+  padding-top: 0.3rem;
   margin: 0 1rem;
   gap: 2rem;
   margin-left: auto;

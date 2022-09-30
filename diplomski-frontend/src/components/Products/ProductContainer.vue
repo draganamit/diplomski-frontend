@@ -136,14 +136,13 @@ export default {
 </script>
 <style scoped>
 .content-products {
-  /* border: 1px solid grey; */
   margin: 0.5rem 1rem;
   padding: 0.5rem;
   display: grid;
   gap: 3rem;
   grid-template-columns: repeat(4, 1fr);
 }
-@media (max-width: 1280px) {
+@media (max-width: 1290px) {
   .content-products {
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;

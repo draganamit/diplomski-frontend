@@ -40,7 +40,7 @@
         >
           {{ fullName }}
         </div>
-        <div style="margin-left: 7rem">
+        <div style="display: flex; flex-direction: column; align-items: center">
           <div
             v-if="userById"
             style="
@@ -283,7 +283,7 @@ button {
   left: 0;
   right: 0;
   background-color: white;
-
+  min-width: 450px;
   border-radius: 0.5rem;
   width: 50%;
   margin: auto;
@@ -346,5 +346,6 @@ button {
   width: 50%;
   margin: auto;
   z-index: 2;
+  min-width: 450px;
 }
 </style>

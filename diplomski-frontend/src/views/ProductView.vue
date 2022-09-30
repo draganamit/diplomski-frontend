@@ -119,6 +119,22 @@ export default {
   padding: 2rem 10rem;
   flex-direction: column;
 }
+@media (max-width: 1536px) {
+  .container-product {
+    padding: 2rem 5rem;
+  }
+}
+@media (max-width: 1280px) {
+  .container-product {
+    padding: 2rem 3rem;
+  }
+}
+@media (max-width: 1024px) {
+  .description-div {
+    padding: 2rem 2rem;
+  }
+}
+
 .add {
   display: flex;
   align-items: center;
@@ -161,6 +177,7 @@ button:hover {
   width: 50%;
   margin: auto;
   z-index: 2;
+  min-width: 450px;
 }
 .mask {
   position: absolute;

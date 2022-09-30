@@ -428,7 +428,7 @@ select:focus {
 .tags {
   display: flex;
   align-content: center;
-
+  flex-wrap: wrap;
   padding: 1rem;
   font-size: 1.2rem;
 }
