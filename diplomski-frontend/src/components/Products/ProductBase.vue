@@ -1,6 +1,6 @@
 <template>
   <div class="container-product" @click.stop="setProductId()">
-    <div style="position: relative">
+    <div style="position: relative; bottom: 0.3rem; top: 0; height: 100%">
       <div class="product-state" v-if="!productOnState">
         <div style="color: #dfd9d9">Trenutno nema na stanju</div>
       </div>
@@ -17,7 +17,8 @@
       </div>
       <div
         style="
-          position: absolute;
+          display: flex;
+          align-items: center;
           padding: 0 0.5rem;
           font-family: cursive;
           color: #e65b28;
@@ -91,6 +92,7 @@ export default {
           name: "productdescription",
           query: {
             productId: this.id,
+            productOnState: this.productOnState,
           },
         })
         .catch();
@@ -106,17 +108,16 @@ export default {
 
 <style scoped>
 .container-product {
-  height: 13rem;
+  height: 14rem;
   background-color: white;
   display: flex;
   flex-direction: column;
-  padding-bottom: 1rem;
+  /*padding-bottom: 1rem;*/
   position: relative;
   cursor: pointer;
   border-radius: 10px;
 }
 .container-product:hover {
-  /*box-shadow: inset 0px 0px 9px 0px #e7905a8c;*/
   box-shadow: 0px 0px 9px 0px #e7905a8c;
 }
 .image {
@@ -156,7 +157,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-
+  border-radius: 10px;
   background: rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: center;

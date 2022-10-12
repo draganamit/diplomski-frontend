@@ -48,7 +48,7 @@
     <div
       v-if="note != null && note != '' && !confirmable"
       style="color: red; bottom: 0"
-      class="text-order-product"
+      class="text-order-product product-note"
     >
       Napomena: {{ note }}
     </div>
@@ -163,5 +163,17 @@ export default {
   pointer-events: none;
   color: white;
   background-color: #ff1717;
+}
+
+.product-note {
+  color: red;
+  bottom: 0px;
+  position: absolute;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  left: 0;
+  right: 0;
 }
 </style>

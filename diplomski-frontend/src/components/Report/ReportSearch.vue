@@ -14,7 +14,7 @@
       </select>
     </div>
 
-    <div class="input-container col-span-category">
+    <div class="input-container">
       <b>Kategorija</b>
       <select
         name="product"
@@ -33,7 +33,7 @@
       </select>
     </div>
 
-    <div class="input-container col-span">
+    <div class="input-container date-col-span">
       <b> Datum </b>
       <div class="date-container">
         <date-picker
@@ -61,11 +61,9 @@
         </option>
       </select>
     </div>
+    <div v-else name="empty_div"></div>
 
-    <div
-      class="radio-container"
-      :class="user && user.type == 0 ? 'col-span-2' : 'col-span-3'"
-    >
+    <div class="radio-container radio-col-span">
       <div class="input-container">
         <label for="sale">
           <input
@@ -200,6 +198,9 @@ export default {
 }
 </style>
 <style scoped>
+.mx-datepicker {
+  width: 100%;
+}
 .container {
   padding: 1rem;
   background: blanchedalmond;
@@ -208,25 +209,27 @@ export default {
   gap: 1rem;
   font-family: cursive;
 }
+.radio-col-span {
+  grid-column: span 2 / span 2;
+}
 @media (max-width: 1290px) {
   .container {
     grid-template-columns: repeat(2, 1fr);
   }
+  .date-col-span {
+    grid-column: span 2 / span 2;
+  }
+  .radio-col-span {
+    grid-column: span 1 / span 1;
+  }
 }
-@media (max-width: 900px) {
+@media (max-width: 1040px) {
   .container {
     grid-template-columns: repeat(1, 1fr);
     gap: 0;
   }
-}
-@media (max-width: 1290px) {
-  .col-span {
-    grid-column: span 3 / span 3;
-  }
-}
-@media (max-width: 900px) {
-  .col-span-category {
-    grid-column: span 3 / span 3;
+  .date-col-span {
+    grid-column: span 1 / span 1;
   }
 }
 
@@ -261,12 +264,7 @@ b {
   gap: 2rem;
   margin-left: auto;
 }
-.col-span-2 {
-  grid-column: span 2 / span 2;
-}
-.col-span-3 {
-  grid-column: span 3 / span 3;
-}
+
 input[type="radio"] {
   width: 1rem;
 }

@@ -180,6 +180,7 @@ button:hover {
   width: 50%;
   margin: auto;
   z-index: 2;
+  min-width: 450px;
 }
 .mask {
   position: absolute;

@@ -41,34 +41,36 @@
           {{ fullName }}
         </div>
         <div style="display: flex; flex-direction: column; align-items: center">
-          <div
-            v-if="userById"
-            style="
-              padding: 1rem;
-              font-size: 1.5rem;
-              color: #e65b28;
-              font-family: cursive;
-              padding-bottom: 0.5rem;
-              text-align: start;
-            "
-          >
-            <i class="icon-envelope"></i>
-            {{ userById.email }}
-          </div>
-          <div
-            v-if="userById"
-            style="
-              padding: 1rem;
-              font-size: 1.5rem;
-              color: #e65b28;
-              font-family: cursive;
-              padding-top: 0.5rem;
-              text-align: start;
-            "
-          >
-            <i class="icon-location"></i>
+          <div style="text-align: start">
+            <div
+              v-if="userById"
+              style="
+                padding: 1rem;
+                font-size: 1.5rem;
+                color: #e65b28;
+                font-family: cursive;
+                padding-bottom: 0.5rem;
+                text-align: start;
+              "
+            >
+              <i class="icon-envelope"></i>
+              {{ userById.email }}
+            </div>
+            <div
+              v-if="userById"
+              style="
+                padding: 1rem;
+                font-size: 1.5rem;
+                color: #e65b28;
+                font-family: cursive;
+                padding-top: 0.5rem;
+                text-align: start;
+              "
+            >
+              <i class="icon-location"></i>
 
-            {{ userById.location }}
+              {{ userById.location }}
+            </div>
           </div>
         </div>
         <button

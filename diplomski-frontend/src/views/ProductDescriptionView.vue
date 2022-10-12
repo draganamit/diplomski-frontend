@@ -74,7 +74,14 @@
         </div>
         <div class="button-div">
           <button
-            :class="user && userProduct != user.id ? 'button' : 'block-order'"
+            :class="
+              user &&
+              userProduct != user.id &&
+              ($route.query.productOnState == 'true' ||
+                $route.query.productOnState == true)
+                ? 'button'
+                : 'block-order'
+            "
             @click="openOrderWindov()"
           >
             Naruči
